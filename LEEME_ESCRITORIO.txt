@@ -1,0 +1,19 @@
+CoffeeAndtea - copia del escritorio
+===================================
+
+Esta carpeta es una copia completa del proyecto corregido.
+
+CÓMO ABRIR
+----------
+1. Haz doble clic en abrir.bat.
+2. Se abrirá el navegador en http://localhost:8080/ (o en el siguiente
+   puerto libre si el 8080 está ocupado).
+3. Mantén abierta la ventana negra mientras usas el sistema.
+4. Para detenerlo, cierra esa ventana o pulsa Ctrl+C.
+
+La base de datos es la misma CoffeeAndTea de PostgreSQL que usa el proyecto
+de C:\laragon\www\CoffeeAndtea. Los cambios que hagas en una copia se ven en
+la otra porque comparten la misma base.
+
+También puedes abrir el proyecto original desde Laragon en:
+http://coffeeandtea.test/
