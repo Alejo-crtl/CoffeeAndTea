@@ -1,0 +1,12 @@
+includes:
+    - vendor/phpstan/phpstan/conf/config.neon
+
+parameters:
+    level: 5
+    paths:
+        - app/php
+        - tests
+    excludePaths:
+        - app/php/lib/Parsedown.php
+        - app/php/lib/Parsedown-LICENSE.txt
+    reportUnmatchedIgnoredErrors: false

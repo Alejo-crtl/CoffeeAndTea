@@ -1,0 +1,19 @@
+# CoffeeAndtea - configuración de Apache para el docroot public/
+# Requiere AllowOverride All en el vhost.
+
+Options -Indexes
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+<FilesMatch "^\.">
+    Require all denied
+</FilesMatch>
+
+# Los archivos PHP se ejecutan; no se sirven como texto.
+<FilesMatch "\.(sql|md|log|env|ini|bak|dump)$">
+    Require all denied
+</FilesMatch>
