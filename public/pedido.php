@@ -49,7 +49,17 @@ if (!empty($pedido['fecha_creacion'])) {
     }
 }
 
-cabeceraHtml('Pedido ' . $pedido['codigo'] . ' | CoffeeAndtea', 'carrito');
+$usuarioPedido = usuarioActual();
+$seccionPedido = 'tienda';
+if ($usuarioPedido !== null && in_array($usuarioPedido['rol'], [ROL_ENCARGADO, ROL_ADMIN], true)) {
+    $seccionPedido = 'tienda';
+} elseif ($usuarioPedido !== null) {
+    $seccionPedido = 'cuenta';
+} elseif (pedidosInvitadoLeer() !== []) {
+    $seccionPedido = 'pedidos';
+}
+
+cabeceraHtml('Pedido ' . $pedido['codigo'] . ' | CoffeeAndtea', $seccionPedido);
 ?>
 
 <section class="pagina-cabecera confirmacion">
