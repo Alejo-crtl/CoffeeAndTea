@@ -45,6 +45,10 @@ test('un visitante puede pedir para recoger en tienda', async ({ page }) => {
     await expect(page).toHaveURL(/pedidos-invitado\.php/);
     await expect(page.getByRole('heading', { name: 'Pedidos recientes' })).toBeVisible();
     await expect(page.locator('table')).toContainText('CAF-');
+
+    await page.getByRole('link', { name: 'Ver detalle' }).first().click();
+    await expect(page).toHaveURL(/pedido\.php\?codigo=/);
+    await expect(page.locator('.menu a.activo')).toHaveText('Mis pedidos');
 });
 
 test('el checkout exige aceptar el tratamiento de datos', async ({ page }) => {
