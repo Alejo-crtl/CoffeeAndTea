@@ -21,12 +21,16 @@ test('un visitante puede pedir para recoger en tienda', async ({ page }) => {
 
     await page.goto('/carrito.php');
     await expect(page.getByRole('heading', { name: 'Carrito' })).toBeVisible();
-    await expect(page.locator('body')).toContainText('Estás comprando como invitado');
+    await expect(page.locator('body')).not.toContainText('Cancelación: 100%');
     await page.getByRole('link', { name: 'Continuar con el pedido' }).click();
 
+    await expect(page.locator('#dialogo-invitado')).toBeVisible();
+    await expect(page.locator('#dialogo-invitado')).toContainText('Estás comprando como invitado');
+    await page.getByRole('button', { name: 'Entendido, continuar' }).click();
+
     await expect(page).toHaveURL(/checkout\.php/);
-    await expect(page.locator('body')).toContainText('Estás comprando como invitado');
-    await expect(page.locator('body')).toContainText('Política de cancelación');
+    await expect(page.locator('body')).not.toContainText('Si cancelas antes de que');
+    await expect(page.locator('form a[href$="politica-cancelacion.php"]')).toBeVisible();
     await page.fill('#nombre', 'Cliente E2E ' + sufijo);
     await page.fill('#correo', `e2e.${sufijo}@example.com`);
     await page.fill('#telefono', '3001234567');
@@ -57,6 +61,7 @@ test('el checkout exige aceptar el tratamiento de datos', async ({ page }) => {
     await expect(page.locator('body')).toContainText('Producto agregado al carrito');
     await page.goto('/carrito.php');
     await page.getByRole('link', { name: 'Continuar con el pedido' }).click();
+    await page.getByRole('button', { name: 'Entendido, continuar' }).click();
 
     await page.fill('#nombre', 'Cliente sin consentimiento');
     await page.fill('#correo', 'sin.consentimiento@example.com');

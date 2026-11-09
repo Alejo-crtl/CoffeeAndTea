@@ -85,20 +85,6 @@ cabeceraHtml('Confirmar pedido | CoffeeAndtea', 'carrito');
     <a class="btn btn-secundario" href="<?= h(url('carrito.php')) ?>">Volver al carrito</a>
 </section>
 
-<?php if ($usuario === null): ?>
-    <?= avisoCompraInvitadoHtml() ?>
-<?php endif; ?>
-
-<div class="alerta-info" role="status">
-    <strong>Política de cancelación</strong>
-    <p>
-        Si cancelas antes de que el pedido entre a preparación, se reembolsa el
-        <strong>100%</strong> de lo pagado. Si el pedido ya está
-        <strong>en preparación o listo</strong> y lo cancelas, se reembolsa el
-        <strong>50%</strong>, porque los productos ya fueron preparados.
-    </p>
-</div>
-
 <?php avisosHtml(null, $errores); ?>
 
 <div class="layout-checkout">
@@ -143,7 +129,8 @@ cabeceraHtml('Confirmar pedido | CoffeeAndtea', 'carrito');
             <label class="check">
                 <input type="checkbox" name="acepta_cancelacion" value="1"<?= $valores['acepta_cancelacion'] ? ' checked' : '' ?> required>
                 <span>Acepto la política de cancelación: si el pedido ya está en preparación o listo,
-                    el reembolso será del 50% de lo pagado.</span>
+                    el reembolso será del 50% de lo pagado
+                    (<a href="<?= h(url('politica-cancelacion.php')) ?>" target="_blank" rel="noopener">ver política</a>).</span>
             </label>
             <button class="btn btn-primario" type="submit">Registrar pedido</button>
         </form>
