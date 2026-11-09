@@ -1,149 +1,152 @@
-CoffeeAndtea - Sistema de gestión por páginas
-=============================================
+COFFEEANDTEA - SISTEMA DE TIENDA Y GESTION
+==========================================
 
-QUÉ INCLUYE
------------
-El sistema tiene cuatro páginas independientes:
-
-1. Inicio    (index.php)     -> hero, resumen de la base y video institucional.
-2. Gestión   (gestion.php)   -> CRUD de categorías, clientes, productos,
-                                pedidos y detalles.
-3. Reportes  (reportes.php)  -> cinco reportes con procedimientos de PostgreSQL.
-4. Manual    (manual.php)    -> manual completo en Markdown, con índice.
-
-La navegación se hace con enlaces normales y siempre en la misma pestaña.
-No se abren ventanas ni pestañas nuevas.
-
-UBICACIÓN
----------
-El proyecto está publicado en:
-
-C:\laragon\www\CoffeeAndtea
-
-CÓMO ABRIR
-----------
-1. Haz doble clic en:
-
-   C:\laragon\www\CoffeeAndtea\abrir.bat
-
-   Si Apache ya está activo, se abre el navegador en
-   http://coffeeandtea.test/. Si no, el mismo archivo inicia un servidor
-   PHP de respaldo en http://localhost:8080/.
-
-2. También puedes abrirlo manualmente:
-   - Abre Laragon.
-   - Pulsa "Start All" si Apache o PostgreSQL no están iniciados.
-   - Abre en el navegador:
-
-     http://localhost/CoffeeAndtea/
-
-     O el vhost:
-
-     http://coffeeandtea.test/
-
-RESPALDO
---------
-Si Laragon no está disponible, ejecuta:
-
-   scripts\iniciar.bat
-
-Ese archivo llama a abrir.bat. Se abre http://localhost:8080/ y se detiene
-cerrando la ventana negra o presionando Ctrl+C.
-
-IMPORTANTE
-----------
-No abras los archivos .php con doble clic: necesitan ejecutarse desde Apache
-o desde el servidor de respaldo.
-
-El proyecto tiene una sola página de inicio (index.php) y tres páginas más:
-gestion.php, reportes.php y manual.php. No hay copias ni redirecciones
-antiguas dentro de php\lib\.
-
-Las fechas y horas se manejan en la zona America/Bogota (hora de Colombia).
-Si necesitas otra zona, define la variable de entorno APP_TIMEZONE antes de
-iniciar el servidor.
-
-ESTRUCTURA PRINCIPAL
---------------------
-abrir.bat                  Abre el sistema (Laragon o servidor de respaldo).
-index.php                  Página de inicio.
-gestion.php                CRUD de las cinco tablas.
-reportes.php               Reportes con procedimientos almacenados.
-manual.php                 Manual renderizado desde docs/manual.md.
-php\lib\bootstrap.php      Sesión, conexión, CSRF, flashes y utilidades.
-php\lib\conectarBD.php     Conexión PDO a PostgreSQL.
-php\lib\consultas.php      Conteos compartidos.
-php\lib\control_gestion.php   Validaciones y operaciones del CRUD.
-php\lib\control_reportes.php  Ejecución de reportes con refcursor.
-php\lib\manual_contenido.php  Renderizado del Markdown y su índice.
-php\vistas\plantilla.php   Cabecera, menú, toasts y pie.
-php\vistas\vista_inicio.php   Hero, resumen y video.
-php\vistas\vista_gestion.php  Formulario y listado de gestión.
-php\vistas\vista_reportes.php Pestañas y tablas de reportes.
-php\vistas\vista_video.php    Espacio reservado para el video.
-php\formularios\           Un formulario por tabla.
-php\tablas\                Un listado por tabla.
-css\app.css                Estilos de todas las páginas actuales.
-js\detalles.js             Filas dinámicas del formulario de detalles.
-docs\manual.md             Fuente editable del manual.
-media\favicon.svg          Icono del sitio.
-scripts\iniciar.bat        Alias de abrir.bat.
-scripts\router.php         Enrutador del servidor PHP de respaldo.
-
-GESTIÓN DE DATOS
-----------------
-Cada pestaña de gestion.php tiene un formulario y un listado con acciones
-Editar y Eliminar.
-
-Orden recomendado para registrar:
-1. Categoría
-2. Cliente
-3. Producto       (requiere una categoría)
-4. Pedido         (requiere un cliente)
-5. Detalle        (requiere un pedido y un producto)
-
-Reglas principales:
-- No se puede eliminar una categoría que tenga productos.
-- No se puede eliminar un cliente que tenga pedidos.
-- No se puede eliminar un producto que aparezca en detalles de pedido.
-- Al eliminar un pedido se eliminan también sus detalles, en una transacción.
-- El total del pedido se calcula automáticamente con los detalles.
-- Si un detalle cambia de pedido, se recalculan el pedido anterior y el nuevo.
-- En Detalles se agregan varios productos distintos en un solo envío. Se
-  guardan todos en una transacción y no se permite repetir un producto.
-
-Los avisos de éxito y error se muestran como notificaciones flotantes
-(toasts) en la esquina superior derecha.
-
-REPORTES
---------
-Se usan los procedimientos almacenados con refcursor:
-- sp_reporte_ventas_diarias
-- sp_reporte_top_productos
-- sp_reporte_clientes_vip
-- sp_reporte_bajo_stock
-- sp_reporte_ingresos_categoria
-
-El reporte de bajo stock permite indicar el límite; por defecto usa 30.
-"Ventas del día" solo muestra pedidos con estado PAGADO creados hoy.
-
-MANUAL
+QUE ES
 ------
-El contenido está en docs\manual.md. Para cambiarlo, edita ese archivo y
-recarga manual.php. La página genera automáticamente el índice a partir de
-los títulos. El botón "Imprimir manual" aplica estilos de impresión y el
-botón "Descargar .md" entrega el archivo fuente.
+Aplicacion web para una cafeteria. Los clientes piden en linea y recogen en
+tienda. El pago se hace en el mostrador en efectivo o con tarjeta. El personal
+cobra, controla caja, stock, pedidos, usuarios y reportes.
 
-La librería Parsedown está incluida en php\lib y se usa en modo seguro.
 
 REQUISITOS
 ----------
-- Laragon con Apache y PHP 8.3; el PHP debe tener las extensiones
-  pdo_pgsql, pgsql y mbstring habilitadas.
-- PostgreSQL en localhost:5432 con la base CoffeeAndTea.
-- La conexión y la contraseña están configuradas en php\lib\conectarBD.php.
-- El CRUD, el manual y el video funcionan sin conexión a internet.
-- El proyecto debe estar en C:\laragon\www\CoffeeAndtea.
+- PHP 8.3 con pdo_pgsql, pgsql, mbstring y openssl.
+- PostgreSQL 18 en 127.0.0.1:5432.
+- Apache/Nginx con el docroot en la carpeta public/, o php -S.
+- Navegador moderno.
 
-Nota: para probar sin afectar los datos existentes, crea registros temporales
-y elimínalos al terminar.
+
+INSTALACION RAPIDA
+------------------
+1. Copia .env.example a .env y edita la conexion:
+
+   Copy-Item .env.example .env
+   notepad .env
+
+2. Crea la base y carga el esquema:
+
+   $env:PGPASSWORD='tu_clave'
+   psql -U postgres -h 127.0.0.1 -d postgres -c "CREATE DATABASE coffeeandtea_qa;"
+   psql -U postgres -h 127.0.0.1 -d coffeeandtea_qa -f db\schema.sql
+
+3. Para datos de demostracion (solo desarrollo):
+
+   psql -U postgres -h 127.0.0.1 -d coffeeandtea_qa -f db\seed-demo.sql
+
+4. Arranca el servidor:
+
+   scripts\iniciar.bat
+
+   O manualmente:
+
+   php -S localhost:8000 -t public
+
+5. Abre http://localhost:8000/
+
+
+ADMINISTRADOR
+-------------
+Con datos demo:
+  Correo:      vegaperezkevinsantiago@gmail.com
+  Contrasena:  Admin123!
+
+En una instalacion limpia crea el administrador con:
+
+  php bin\crear-admin.php --nombre="Administrador" --correo="admin@tudominio.com"
+
+El script muestra una contrasena temporal una sola vez y obliga a cambiarla.
+
+
+ROLES
+-----
+Visitante  -> tienda, carrito, checkout y consulta de pedido.
+CLIENTE    -> lo anterior mas su cuenta e historial.
+ENCARGADO  -> pedidos, cobro, caja, stock y reportes. Sin carrito ni cuenta.
+ADMIN      -> todo lo de gestión y administración. Sin carrito ni cuenta.
+
+
+REGLAS IMPORTANTES
+------------------
+- Solo recogida en tienda. No hay domicilios.
+- El stock se descuenta al confirmar el pago, no al crear el pedido.
+- El precio del detalle queda congelado para pedidos anteriores.
+- El efectivo exige caja abierta.
+- Cancelar un pedido pagado exige reembolso y devuelve el stock.
+- Si el pedido ya está en preparación o listo, el reembolso es del 50%.
+- No se puede cancelar un pedido entregado.
+- No se puede desactivar al ultimo administrador activo.
+
+
+ESTRUCTURA
+----------
+public/              Document root. Solo esta carpeta se publica.
+app/php/lib/         Logica: auth, pedidos, caja, correo, auditoria.
+app/php/vistas/      Plantillas.
+bin/crear-admin.php  Alta del administrador inicial.
+db/schema.sql        Esquema completo.
+db/seed-demo.sql     Datos demo (no usar en produccion).
+db/migraciones/      Migracion desde CoffeeAndTea.
+docs/manual.md       Manual de usuario.
+qa/                  Plan, casos, RBAC e informe.
+tests/               Pruebas PHP y Playwright.
+storage/             Logs (se crea solo; no se entrega).
+
+
+MIGRACION
+---------
+Lee db\migraciones\README.md. La migracion conserva:
+6 categorias, 11 clientes, 15 productos, 12 pedidos y 22 detalles.
+Se prueba primero en una copia; nunca modifica CoffeeAndTea.
+
+
+CORREO
+------
+Desarrollo sin SMTP:
+  MAIL_DRIVER=log
+  Los correos quedan en storage\mail.log.
+
+Desarrollo con Mailpit:
+  MAIL_DRIVER=smtp
+  SMTP_HOST=127.0.0.1
+  SMTP_PORT=1025
+  SMTP_ENCRYPTION=none
+
+Produccion con Gmail:
+  MAIL_DRIVER=smtp
+  SMTP_HOST=smtp.gmail.com
+  SMTP_PORT=587
+  SMTP_ENCRYPTION=tls
+  SMTP_USER=tu_correo@gmail.com
+  SMTP_PASS=contrasena_de_aplicacion
+
+
+PRUEBAS
+-------
+PHP:
+  $env:DB_NAME='coffeeandtea_qa'
+  $env:DB_USER='postgres'
+  $env:DB_PASS='tu_clave'
+  php tests\run.php
+
+Playwright:
+  npm install
+  npx playwright install chromium
+  npx playwright test
+
+
+SEGURIDAD
+---------
+- No entregues el archivo .env.
+- No publiques la raiz del proyecto, solo public/.
+- Usa HTTPS y APP_COOKIE_SECURE=true en produccion.
+- Usa APP_ENV=production y APP_DEBUG=false.
+- Cambia las contrasenas demo.
+- Programa respaldos de la base.
+
+
+DOCUMENTACION
+-------------
+README.md                  Vision general e instalacion.
+docs/manual.md             Manual de usuario y operacion.
+docs/README_LARAGON.md     Instalacion con Laragon.
+qa/07-informe-resultados.md Resultados de las pruebas.

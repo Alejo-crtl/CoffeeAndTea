@@ -1,229 +1,231 @@
-# CoffeeAndtea - Guía de uso local
+# CoffeeAndtea — Guía de instalación con Laragon
 
-## Abrir el sistema
-
-La forma más rápida:
-
-1. Haz doble clic en `C:\laragon\www\CoffeeAndtea\abrir.bat`.
-2. Se abre el navegador en `http://coffeeandtea.test/` si Apache ya está activo.
-3. Si Apache no está activo, el mismo archivo inicia un servidor PHP en
-   `http://localhost:8080/`.
-
-También puedes abrirlo manualmente:
-
-1. Abre Laragon.
-2. Pulsa **Start All** si Apache o PostgreSQL no están iniciados.
-3. Entra a `http://coffeeandtea.test/` o `http://localhost/CoffeeAndtea/`.
+Esta guía deja el sistema funcionando en Windows con Laragon y PostgreSQL.
+El proyecto puede vivir en cualquier carpeta; lo importante es que el
+**document root** apunte a `public/`, no a la raíz del proyecto.
 
 ---
 
-## Estado actual
+## 1. Requisitos
 
-| Componente | Versión / Estado |
+| Componente | Versión usada |
 |---|---|
-| Laragon | 8.8.0 instalado en `C:\laragon` |
-| Apache | 2.4.68 |
-| PHP | 8.3.33 con `pdo_pgsql`, `pgsql` y `mbstring` habilitados |
-| PostgreSQL | 18 (servicio `postgresql-x64-18`, puerto 5432) |
-| Base de datos | `CoffeeAndTea` con datos reales del proyecto |
+| Laragon | 8.x |
+| Apache | 2.4.x |
+| PHP | 8.3 con `pdo_pgsql`, `pgsql`, `mbstring`, `openssl` |
+| PostgreSQL | 18 en `127.0.0.1:5432` |
+| Navegador | Chrome, Edge o Firefox actualizado |
 
-El vhost `coffeeandtea.test` ya apunta a `C:/laragon/www/CoffeeAndtea`.
+Comprueba las extensiones de PHP:
 
----
-
-## Base de datos
-
-La conexión está configurada en:
-
-```
-C:\laragon\www\CoffeeAndtea\php\lib\conectarBD.php
+```powershell
+php -m | Select-String 'pgsql|pdo|mbstring|openssl'
 ```
 
-Valores actuales:
-
-- Host: `localhost`
-- Puerto: `5432`
-- Base: `CoffeeAndTea`
-- Usuario: `postgres`
-- Contraseña: configurada en `conectarBD.php`
-
-También se pueden usar las variables de entorno `DB_HOST`, `DB_PORT`,
-`DB_NAME`, `DB_USER` y `DB_PASS`.
-
-La base ya contiene las cinco tablas, el trigger que recalcula el total de los
-pedidos y los cinco procedimientos de reportes.
-
 ---
 
-## Cómo arrancar y detener
+## 2. Ubicación del proyecto
 
-### Opción 1: abrir.bat (recomendada)
-
-- Doble clic en `abrir.bat`.
-- Si usa el servidor de respaldo, mantén la ventana negra abierta.
-- Para detenerlo, cierra esa ventana o pulsa `Ctrl+C`.
-
-### Opción 2: Laragon
-
-1. Abre `C:\laragon\laragon.exe`.
-2. Pulsa **Start All**.
-3. Para detenerlo, pulsa **Stop All**.
-
-PostgreSQL se ejecuta como servicio de Windows y queda disponible aunque
-cierres la ventana de Laragon.
-
----
-
-## Estructura del proyecto
+Copia la carpeta de la entrega, por ejemplo:
 
 ```text
-C:\laragon\www\CoffeeAndtea\
-├── abrir.bat                    # Abre el sistema en el navegador
-├── index.php                    # Inicio: hero, resumen y video
-├── gestion.php                  # CRUD de las cinco tablas
-├── reportes.php                 # Reportes con procedimientos de PostgreSQL
-├── manual.php                   # Manual renderizado desde docs/manual.md
-├── php\
-│   ├── lib\                     # Infraestructura y lógica
-│   │   ├── bootstrap.php        # Sesión, conexión, CSRF, flashes y helpers
-│   │   ├── conectarBD.php       # Conexión PDO a PostgreSQL
-│   │   ├── consultas.php        # Conteos compartidos
-│   │   ├── control_gestion.php  # Validaciones y operaciones del CRUD
-│   │   ├── control_reportes.php # Ejecución de reportes con refcursor
-│   │   ├── manual_contenido.php # Renderizado del Markdown y su índice
-│   │   ├── Parsedown.php        # Markdown -> HTML
-│   │   └── Parsedown-LICENSE.txt
-│   ├── vistas\                  # Presentación HTML
-│   ├── formularios\             # Un formulario por tabla
-│   └── tablas\                  # Un listado por tabla
-├── css\app.css                  # Estilos
-├── js\detalles.js               # Filas dinámicas del formulario de detalles
-├── docs\
-│   ├── manual.md                # Fuente del manual
-│   ├── LEEME.txt
-│   └── README_LARAGON.md
-├── media\                       # Logo y favicon
-└── scripts\
-    ├── iniciar.bat              # Alias de abrir.bat
-    └── router.php               # Enrutador del servidor PHP de respaldo
+C:\laragon\www\CoffeeAndtea_Entrega
 ```
 
----
-
-## Navegación
-
-| Sección | Página |
-|---|---|
-| Inicio | `index.php` |
-| Gestión | `gestion.php` |
-| Reportes | `reportes.php` |
-| Manual | `manual.php` |
-
-Los enlaces del menú navegan en la misma pestaña. El botón atrás y adelante del
-navegador funciona por página.
+La raíz contiene `public/`, `app/`, `db/`, `docs/`, `tests/`, etc.
+**No publiques la raíz completa**: el docroot debe ser `public/`.
 
 ---
 
-## Gestión de datos
+## 3. Configurar el document root
 
-Cada pestaña de `gestion.php` tiene un formulario y un listado con acciones
-**Editar** y **Eliminar**.
+### Opción A: vhost de Laragon
 
-Orden recomendado para registrar:
+1. Abre Laragon → **Menu → Apache → sites-enabled**.
+2. Crea o edita el archivo `coffeeandtea.test.conf`:
 
-1. Categoría
-2. Cliente
-3. Producto (requiere una categoría)
-4. Pedido (requiere un cliente)
-5. Detalle (requiere un pedido y un producto)
+```apache
+<VirtualHost *:80>
+    DocumentRoot "C:/laragon/www/CoffeeAndtea_Entrega/public"
+    ServerName coffeeandtea.test
+    <Directory "C:/laragon/www/CoffeeAndtea_Entrega/public">
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+```
 
-Reglas principales:
+3. Reinicia Apache.
+4. Abre `http://coffeeandtea.test/`.
 
-- No se puede eliminar una categoría que tenga productos.
-- No se puede eliminar un cliente que tenga pedidos.
-- No se puede eliminar un producto que aparezca en detalles de pedido.
-- Al eliminar un pedido se eliminan también sus detalles.
-- El total del pedido se calcula automáticamente con los detalles.
-- Si un detalle cambia de pedido, se recalculan el pedido anterior y el nuevo.
-- En Detalles se pueden agregar varios productos distintos en un solo envío.
-  Un producto no puede repetirse en el mismo pedido.
-
-Los avisos de éxito y error se muestran como notificaciones flotantes
-(toasts) en la esquina superior derecha.
-
----
-
-## Reportes
-
-Se usan los procedimientos almacenados con `refcursor`:
-
-- `sp_reporte_ventas_diarias`
-- `sp_reporte_top_productos`
-- `sp_reporte_clientes_vip`
-- `sp_reporte_bajo_stock`
-- `sp_reporte_ingresos_categoria`
-
-El reporte de bajo stock permite indicar el límite; por defecto usa 30.
-“Ventas del día” solo muestra pedidos con estado `PAGADO` creados hoy.
-
----
-
-## Manual
-
-El contenido está en `docs/manual.md`. Para cambiarlo, edita ese archivo y
-recarga `manual.php`. El índice se genera automáticamente a partir de los
-títulos. El botón **Imprimir manual** aplica estilos de impresión y el botón
-**Descargar .md** entrega el archivo fuente.
-
-Parsedown se usa en modo seguro.
-
----
-
-## Requisitos
-
-- Laragon con Apache y PHP 8.3; extensiones `pdo_pgsql`, `pgsql` y `mbstring`.
-- PostgreSQL en `localhost:5432` con la base `CoffeeAndTea`.
-- El proyecto en `C:\laragon\www\CoffeeAndtea`.
-- No abras los `.php` con doble clic: necesitan Apache o el servidor de
-  respaldo.
-
----
-
-## Verificación técnica
-
-### Sintaxis PHP
+### Opción B: servidor de PHP incluido
 
 ```powershell
-Get-ChildItem -Recurse -Filter *.php 'C:\laragon\www\CoffeeAndtea' |
-  ForEach-Object { & 'C:\laragon\bin\php\php-8.3.33-Win32-vs16-x64\php.exe' -l $_.FullName }
+cd C:\laragon\www\CoffeeAndtea_Entrega
+php -S localhost:8000 -t public
 ```
 
-### Extensiones activas
+Abre `http://localhost:8000/`.
 
-```powershell
-& 'C:\laragon\bin\php\php-8.3.33-Win32-vs16-x64\php.exe' -m |
-  Select-String 'pgsql|pdo|mbstring|openssl'
-```
+También puedes usar el acceso directo:
 
-### Base de datos
-
-```powershell
-$env:PGPASSWORD='MySQLcontra26'
-& 'C:\Program Files\PostgreSQL\18\bin\psql.exe' -U postgres -h 127.0.0.1 -p 5432 -d CoffeeAndTea `
-  -c "SELECT table_name FROM information_schema.tables WHERE table_schema='public' ORDER BY table_name;"
+```text
+scripts\iniciar.bat
 ```
 
 ---
 
-## Problemas conocidos
+## 4. Crear el archivo `.env`
 
-- **`coffeeandtea.test` no responde**: inicia Apache en Laragon o usa
-  `http://localhost/CoffeeAndtea/`. También puedes ejecutar `abrir.bat`.
-- **Error de conexión a la base**: verifica que el servicio
-  `postgresql-x64-18` esté iniciado y que la contraseña de
-  `php/lib/conectarBD.php` sea la correcta.
-- **Backdrop-filter en Chromium**: el desenfoque de la topbar puede no
-  renderizarse sin aceleración por hardware. No afecta la funcionalidad.
-- **Páginas en la raíz**: `index.php`, `gestion.php`, `reportes.php` y
-  `manual.php` son los puntos de entrada públicos y deben quedarse en la raíz
-  para conservar las URLs simples.
+Copia la plantilla y edita los valores:
+
+```powershell
+Copy-Item .env.example .env
+notepad .env
+```
+
+Ejemplo para desarrollo local:
+
+```ini
+APP_ENV=development
+APP_DEBUG=false
+APP_TIMEZONE=America/Bogota
+APP_BASE_URL=http://coffeeandtea.test/
+APP_SESSION_NAME=coffeeandtea
+APP_COOKIE_SECURE=false
+APP_COOKIE_SAMESITE=Lax
+
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_NAME=coffeeandtea_qa
+DB_USER=postgres
+DB_PASS=tu_clave
+
+MAIL_DRIVER=log
+```
+
+Para producción: `APP_ENV=production`, `APP_DEBUG=false`,
+`APP_COOKIE_SECURE=true` y `APP_BASE_URL` con `https://`.
+
+---
+
+## 5. Preparar la base de datos
+
+### Instalación nueva
+
+```powershell
+$env:PGPASSWORD='tu_clave'
+$psql='C:\Program Files\PostgreSQL\18\bin\psql.exe'
+
+& $psql -U postgres -h 127.0.0.1 -d postgres -c "CREATE DATABASE coffeeandtea_qa;"
+& $psql -U postgres -h 127.0.0.1 -d coffeeandtea_qa -v ON_ERROR_STOP=1 -f db\schema.sql
+```
+
+### Con datos de demostración
+
+```powershell
+& $psql -U postgres -h 127.0.0.1 -d coffeeandtea_qa -v ON_ERROR_STOP=1 -f db\seed-demo.sql
+```
+
+### Desde la base anterior
+
+Sigue [`db/migraciones/README.md`](../db/migraciones/README.md). La migración
+se prueba primero en una copia y nunca modifica `CoffeeAndTea`.
+
+### Script de QA
+
+```powershell
+$env:PGPASSWORD='tu_clave'
+powershell -ExecutionPolicy Bypass -File qa\scripts\preparar-bd.ps1
+```
+
+Este script **elimina y recrea** `coffeeandtea_qa`.
+
+---
+
+## 6. Crear el administrador
+
+Con datos demo ya existe un administrador. En una instalación limpia:
+
+```powershell
+php bin\crear-admin.php --nombre="Kevin Vega" --correo="admin@tudominio.com"
+```
+
+Guarda la contraseña temporal que muestra el script. Al entrar, el sistema
+obligará a cambiarla.
+
+---
+
+## 7. Verificar la instalación
+
+1. Abre `http://coffeeandtea.test/` o `http://localhost:8000/`.
+2. Comprueba que se ven categorías, productos, precios y el tiempo estimado.
+3. Entra a `login.php` con el administrador.
+4. Abre `gestion.php` y verifica las pestañas **Pedidos**, **Caja** y **Stock**.
+5. Abre `admin.php` y revisa usuarios, productos y configuración.
+6. Abre `reportes.php` y exporta un CSV.
+7. Abre `manual.php` para ver este manual dentro del sistema.
+
+---
+
+## 8. Correo en desarrollo
+
+### Mailpit
+
+Si tienes Mailpit en `127.0.0.1:1025`:
+
+```ini
+MAIL_DRIVER=smtp
+SMTP_HOST=127.0.0.1
+SMTP_PORT=1025
+SMTP_ENCRYPTION=none
+SMTP_FROM=noreply@coffeeandtea.local
+```
+
+Abre `http://localhost:8025` para ver los correos.
+
+### Modo log
+
+```ini
+MAIL_DRIVER=log
+```
+
+Los correos se escriben en `storage/mail.log`. Es útil para copiar el enlace de
+recuperación sin configurar SMTP.
+
+---
+
+## 9. Solución de problemas
+
+| Síntoma | Causa probable | Solución |
+|---|---|---|
+| 404 en todas las páginas | El docroot apunta a la raíz | Cámbialo a `public/`. |
+| “No fue posible conectar con la base” | `.env` incorrecto o PostgreSQL detenido | Revisa credenciales y el servicio. |
+| Página en blanco | `APP_DEBUG=false` oculta el error | Revisa `storage/php-error.log`. |
+| No llega el correo | `MAIL_DRIVER=log` o SMTP mal configurado | Revisa `storage/mail.log` o Mailpit. |
+| El administrador vuelve a `cuenta.php` | Rol o sesión desactualizada | Cierra sesión y vuelve a entrar. |
+| La tienda no recibe pedidos | `pagina_abierta=false` | Actívala en `admin.php?tab=configuracion`. |
+| Caja bloqueada | Ya hay una caja abierta | Ciérrala antes de abrir otra. |
+
+---
+
+## 10. Respaldos
+
+Antes de migrar o actualizar:
+
+```powershell
+& $psql -U postgres -h 127.0.0.1 -d CoffeeAndTea -Fc -f respaldo_coffeeandtea.dump
+```
+
+Restauración:
+
+```powershell
+& 'C:\Program Files\PostgreSQL\18\bin\pg_restore.exe' -U postgres -h 127.0.0.1 `
+  -d CoffeeAndTea --clean --if-exists respaldo_coffeeandtea.dump
+```
+
+Los respaldos no se incluyen en la entrega.
+
+---
+
+*Actualizado: 8 de noviembre de 2026.*

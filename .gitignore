@@ -1,0 +1,37 @@
+# Entorno
+.env
+.env.local
+.env.*.local
+
+# PHP / Composer
+/vendor/
+/composer.lock
+
+# Node / npm
+/node_modules/
+
+# Tests y resultados
+/tests/results/
+/tests/coverage/
+/qa/resultados/
+/evidencias/
+/test-results/
+/playwright-report/
+/.phpunit.cache/
+
+# Base de datos
+/db/*.sql.bak
+/db/*.dump
+
+# IDE y OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+*.log
+error_log*
+
+# Backups
+*.bak
+*.dump
+*.sql.gz

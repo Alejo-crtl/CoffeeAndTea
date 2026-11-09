@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="CoffeeAndtea">
+    <description>PSR-12 + PHPCompatibility</description>
+    <arg name="encoding" value="UTF-8"/>
+    <arg name="colors" value="1"/>
+
+    <file>app/php</file>
+    <file>tests</file>
+
+    <exclude-pattern>app/php/lib/Parsedown.php</exclude-pattern>
+
+    <rule ref="PSR12"/>
+    <rule ref="PHPCompatibility"/>
+</ruleset>
