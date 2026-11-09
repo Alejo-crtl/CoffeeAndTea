@@ -105,7 +105,7 @@ CoffeeAndTea reemplaza ese proceso con un flujo claro:
 ## Arquitectura
 
 - **Base de datos:** PostgreSQL 18, base `CoffeeAndTea`, 14 tablas en tercera
-  forma normal. El esquema final está en `CoffeeAndtea_Entrega/db/schema.sql`.
+  forma normal. El esquema final está en `db/schema.sql`.
 - **Backend:** PHP 8.3 con PDO, sesiones, CSRF, RBAC y SMTP.
 - **Docroot:** `public/`; la lógica vive en `app/php/lib/` y las vistas en
   `app/php/vistas/`.
@@ -166,7 +166,7 @@ dice qué pasó y qué hacer, no qué componente falló.
 - `01_Documentacion/SRS_CoffeeAndTea_v1.1.docx`
 - `03_Diagramas/Documentacion_MER_CoffeeAndTea_v1.1.docx`
 - `03_Diagramas/Diagrama_MER_CoffeeAndTea_v1.1.drawio`
-- `CoffeeAndtea_Entrega/docs/manual.md`
-- `CoffeeAndtea_Entrega/docs/manual-encargado.md`
-- `CoffeeAndtea_Entrega/docs/manual-admin.md`
-- `CoffeeAndtea_Entrega/qa/`
+- `docs/manual.md`
+- `docs/manual-encargado.md`
+- `docs/manual-admin.md`
+- `qa/`
