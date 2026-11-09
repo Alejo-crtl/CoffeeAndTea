@@ -1941,6 +1941,11 @@ label.checkbox input {
 }
 
 .texto-suave { color: #7b6a5c; font-size: 0.88rem; display: block; }
+.campo-enlace-manual {
+    display: block; width: 100%; margin-top: 8px; padding: 8px 10px;
+    border: 1px solid var(--borde-fuerte); border-radius: 8px;
+    background: #fffdf9; color: var(--marron-oscuro); font-size: 0.8rem;
+}
 .texto-verde { color: var(--verde) !important; }
 .texto-rojo { color: var(--rojo) !important; }
 
@@ -2076,6 +2081,24 @@ label.checkbox input {
 .filtro.activo span { background: rgba(255, 255, 255, 0.18); color: #fff; }
 
 .grid-productos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+
+.anexos-grid {
+    max-width: var(--ancho); margin: 20px auto 40px; padding: 0 24px;
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px;
+}
+.anexo-card {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+    padding: 22px; background: var(--superficie); border: 1px solid var(--borde);
+    border-radius: var(--radio); box-shadow: var(--sombra);
+}
+.anexo-card h2 { margin: 0; font-size: 1.1rem; color: var(--marron-oscuro); }
+.anexo-card p { margin: 0; }
+.anexo-card .btn { margin-top: auto; }
+.anexo-tipo {
+    display: inline-flex; padding: 4px 9px; border-radius: 999px;
+    background: var(--crema-2); color: var(--marron); font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+}
 .tarjeta-producto {
     display: flex; flex-direction: column; background: var(--superficie); border: 1px solid var(--borde);
     border-radius: var(--radio); overflow: hidden; box-shadow: var(--sombra-suave);
@@ -2286,6 +2309,7 @@ label.checkbox input {
     .hero { grid-template-columns: 1fr; padding: 30px 22px; }
     .hero-visual { display: none; }
     .grid-productos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .anexos-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .linea-tiempo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .layout-caja, .layout-reportes { grid-template-columns: 1fr; }
     .pedido-resumen-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -2295,6 +2319,7 @@ label.checkbox input {
 
 @media (max-width: 600px) {
     .grid-productos, .como-funciona ol { grid-template-columns: 1fr; }
+    .anexos-grid { grid-template-columns: 1fr; }
     .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .hero-datos { grid-template-columns: 1fr; gap: 8px; }
     .campo-doble { grid-template-columns: 1fr; }

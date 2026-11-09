@@ -9,9 +9,9 @@
 
 | Métrica | Valor |
 |---|---|
-| Casos planificados | 46 |
-| Ejecutados | 46 |
-| Aprobados | 46 |
+| Casos planificados | 49 |
+| Ejecutados | 49 |
+| Aprobados | 49 |
 | Fallidos | 0 |
 | Pendientes | 0 |
 | Defectos críticos abiertos | 0 |
@@ -23,7 +23,8 @@
 |---|---|---|
 | Autenticación y sesión | CP-001 a CP-008 | Aprobado. Login, registro, recuperación (log), bloqueo por fuerza bruta y cambio forzado verificados. |
 | RBAC | CP-009 a CP-011, CP-043 | Aprobado. Visitante → login; CLIENTE y ENCARGADO no acceden a administración; el personal interno no usa carrito ni cuenta. |
-| Tienda y carrito | CP-012 a CP-020, CP-044, CP-046 | Aprobado. Catálogo, stock, checkout, token público, precio histórico, pedidos recientes de invitado y tiempo estimado por producto. |
+| Tienda y carrito | CP-012 a CP-020, CP-044, CP-046, CP-047 | Aprobado. Catálogo, stock, checkout, token público, precio histórico, pedidos recientes, tiempo estimado y copiar enlace. |
+| Anexos y navegación | CP-048, CP-049 | Aprobado. Descarga de anexos y botones de regreso en las páginas. |
 | Pagos y caja | CP-021 a CP-024, CP-031 a CP-034 | Aprobado. Efectivo con cambio, tarjeta con referencia, caja obligatoria, cierre cuadrado y faltante de $2.000. |
 | Cancelaciones y estados | CP-025 a CP-030, CP-045 | Aprobado. Reembolso tarjeta/efectivo, devolución de stock, motivo obligatorio, transiciones válidas y reembolso del 50% en preparación. |
 | Administración | CP-035 a CP-040 | Aprobado. Stock, usuarios, contraseña temporal, CRUD de producto, protección del último admin y configuración. |
@@ -60,6 +61,12 @@
 - Cálculo: `ceil(13/2)=7`, buffer `ceil(7×0.15)=2`, cola `ceil(42/2)=21`; total **30 min**.
 - El pedido guardó **30** y coincidió con el cálculo esperado.
 
+### Anexos y navegación
+- `anexos.php` muestra los 6 documentos y el footer enlaza a **Anexos**.
+- Las 6 descargas responden 200 con `Content-Disposition: attachment`.
+- El botón **Copiar enlace** genera un enlace sin `nuevo=1` y muestra confirmación o alternativa manual.
+- Las páginas de acceso, privacidad, manual, reportes y detalle de gestión tienen botón de regreso.
+
 ### Seguridad
 - 8 intentos fallidos de login → bloqueo de 10 minutos.
 - Cliente y encargado reciben redirección al intentar abrir `admin.php`.
@@ -87,7 +94,7 @@ Ejecución sobre la base copia `coffeeandtea_migracion`, creada desde `db/schema
 | Suite | Comando | Resultado |
 |---|---|---|
 | PHP unitarias + integración | `php tests/run.php` | **12/12 aprobadas** |
-| Playwright E2E | `npx playwright test` | **10/10 aprobadas** |
+| Playwright E2E | `npx playwright test` | **12/12 aprobadas** |
 
 Las pruebas de integración crean y eliminan sus propios datos en `coffeeandtea_qa`.
 Las E2E cubren catálogo, carrito, checkout, confirmación, login por rol, RBAC,
@@ -114,6 +121,6 @@ de consentimiento.
 ## 7. Conclusión
 
 El sistema cumple los flujos críticos de tienda, cobro, caja, stock, cancelación,
-seguridad y migración de datos. Los **46 casos de prueba están aprobados** y las
+seguridad y migración de datos. Los **49 casos de prueba están aprobados** y las
 suites automatizadas pasan completas. La única dependencia externa pendiente es
 la contraseña de aplicación de Gmail para el envío real de correos.

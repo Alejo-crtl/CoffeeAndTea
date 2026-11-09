@@ -63,7 +63,7 @@ cabeceraHtml('Crear cuenta | CoffeeAndtea', 'login', false);
 
 <section class="auth-layout">
     <div class="auth-panel">
-        <a class="auth-volver" href="<?= h(url('index.php')) ?>">&larr; Volver a la tienda</a>
+        <a class="btn btn-fantasma" href="<?= h(url('index.php')) ?>">&larr; Volver a la tienda</a>
         <p class="eyebrow">Cuenta CoffeeAndtea</p>
         <h1>Crear cuenta</h1>
         <p class="texto-suave">Guarda tus datos y consulta tus pedidos cuando quieras.</p>

@@ -4,19 +4,26 @@ Rama: `feature/version-final-php`
 Base: `main`  
 Repositorio: `Alejo-crtl/CoffeeAndTea`
 
-Esta rama reemplaza la aplicación anterior por la versión final en PHP 8.3 y
-PostgreSQL 18, con documentación y pruebas incluidas.
+Esta rama contiene la versión final en PHP 8.3 y PostgreSQL 18, con
+documentación, anexos y pruebas.
 
 ## Contenido
 
-- `public/`: tienda, gestión, administración, reportes y manuales.
+- `public/`: tienda, gestión, administración, reportes, manuales y anexos.
 - `app/php/`: lógica de autenticación, pedidos, pagos, caja, stock y correo.
+- `anexos/`: PAC, SRS, MER, diagrama, script de base de datos y log de errores.
 - `bin/crear-admin.php`: alta del administrador inicial.
 - `db/`: esquema, datos demo y migraciones.
 - `docs/`: manuales por rol.
-- `documentacion/`: SRS, MER, diagrama, presentación y plan de QA en Word.
-- `qa/`: plan, casos, riesgos, RBAC e informe de resultados.
+- `qa/`: plan, casos, riesgos, RBAC e informe.
 - `tests/`: pruebas unitarias, integración y E2E.
+
+## Resultados
+
+- Casos QA: **49/49**.
+- Pruebas PHP: **12/12**.
+- Pruebas E2E: **12/12**.
+- Migración: 6 categorías, 11 clientes, 15 productos, 12 pedidos y 22 detalles.
 
 ## Instalación rápida
 
@@ -43,14 +50,7 @@ npx playwright install chromium
 npx playwright test
 ```
 
-## Resultados
+## Nota para el administrador
 
-- Casos QA: **46/46**.
-- Pruebas PHP: **12/12**.
-- Pruebas E2E: **10/10**.
-- Migración: 6 categorías, 11 clientes, 15 productos, 12 pedidos y 22 detalles.
-
-## Nota para el administrador del repositorio
-
-El merge debe hacerse desde `feature/version-final-php` hacia `main`. La rama
-elimina la app anterior y deja la versión final en la raíz del repositorio.
+El merge debe hacerse desde `feature/version-final-php` hacia `main`.
+La rama reemplaza la aplicación anterior y deja la versión final en la raíz.

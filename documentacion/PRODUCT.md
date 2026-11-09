@@ -115,7 +115,7 @@ CoffeeAndTea reemplaza ese proceso con un flujo claro:
 - **Pruebas:** runner PHP propio, PHPUnit opcional y Playwright E2E.
 - **Documentación:** SRS v1.1, MER v1.1, manuales por rol y QA.
 
-La carpeta `04_Web_CoffeeAndTea` corresponde al prototipo React de la versión
+La carpeta `_historico/Prototipo_React_v1.0` corresponde al prototipo React de la versión
 1.0 y se conserva como referencia histórica. La implementación final es la
 aplicación PHP de `CoffeeAndtea_Entrega`.
 

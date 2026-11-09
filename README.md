@@ -55,11 +55,10 @@ CoffeeAndtea_Entrega/
 │  ├─ manual.php            Manual renderizado desde docs/manual.md
 │  ├─ css/, js/, media/     Estilos, scripts e imágenes
 │  └─ ...
+├─ anexos/               PAC, SRS, MER, script BD y log de errores
 ├─ app/php/
 │  ├─ lib/                  Configuración, conexión, auth, pedidos, correo, etc.
 │  ├─ vistas/               Plantillas y componentes
-│  ├─ formularios/          Formularios heredados del CRUD
-│  └─ tablas/               Listados heredados del CRUD
 ├─ bin/crear-admin.php      Alta del administrador inicial por CLI
 ├─ db/
 │  ├─ schema.sql            Esquema completo + triggers + procedimientos
@@ -286,7 +285,7 @@ composer phpstan
 composer phpcs
 ```
 
-El pack completo de QA está en [`qa/`](qa/): plan, 46 casos, matriz de riesgos,
+El pack completo de QA está en [`qa/`](qa/): plan, 49 casos, matriz de riesgos,
 matriz RBAC, checklist de release e informe de resultados.
 
 ---

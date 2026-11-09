@@ -46,6 +46,12 @@ test('un visitante puede pedir para recoger en tienda', async ({ page }) => {
     await expect(page.locator('body')).toContainText('mostrador');
     await expect(page.locator('body')).toContainText('También guardamos este pedido');
 
+    const enlacePedido = await page.locator('#copiar-enlace').getAttribute('data-enlace');
+    expect(enlacePedido).toContain('/pedido.php?codigo=');
+    expect(enlacePedido).not.toContain('nuevo=1');
+    await page.getByRole('button', { name: 'Copiar enlace' }).click();
+    await expect(page.locator('#copiar-estado')).toContainText(/Enlace copiado|No se pudo copiar/);
+
     await page.getByRole('link', { name: 'Mis pedidos recientes' }).last().click();
     await expect(page).toHaveURL(/pedidos-invitado\.php/);
     await expect(page.getByRole('heading', { name: 'Pedidos recientes' })).toBeVisible();

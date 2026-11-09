@@ -4,9 +4,9 @@
 
 | Suite | Resultado |
 |---|---|
-| Casos de prueba QA | **46/46 aprobados** |
+| Casos de prueba QA | **49/49 aprobados** |
 | Pruebas PHP (unitarias + integración) | **12/12 aprobadas** |
-| Pruebas E2E Playwright | **10/10 aprobadas** |
+| Pruebas E2E Playwright | **12/12 aprobadas** |
 
 ## Evidencia
 

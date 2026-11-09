@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" agent="Python">
+  <diagram id="mer-v11" name="MER v1.1">
+    <mxGraphModel dx="2400" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2400" pageHeight="1600" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="titulo" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=20;fontStyle=1;fontColor=#5B3A22;" value="MER CoffeeAndtea v1.1 — PostgreSQL 18&lt;br&gt;14 tablas · 3 roles · pedidos, pagos, caja, stock y auditoría" vertex="1">
+          <mxGeometry height="70" width="1000" x="680" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="e_usuario" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=1;marginBottom=0;fillColor=#FFF8EC;strokeColor=#8B5E3C;" value="usuario" vertex="1">
+          <mxGeometry height="278" width="420" x="40" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="a_usuario_0" parent="e_usuario" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="id : SERIAL (PK)" vertex="1">
+          <mxGeometry height="24" width="420" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a_usuario_1" parent="e_usuario" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="nombre : VARCHAR(150)" vertex="1">
+          <mxGeometry height="24" width="420" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="a_usuario_2" parent="e_usuario" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="correo : VARCHAR(150) UNIQUE" vertex="1">
+          <mxGeometry height="24" width="420" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="a_usuario_3" parent="e_usuario" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="password_hash : VARCHAR(255)" vertex="1">
+          <mxGeometry height="24" width="420" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="a_usuario_4" parent="e_usuario" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="rol : VARCHAR(20) CHECK" vertex="1">
+          <mxGeometry height="24" width="420" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="a_usuario_5" parent="e_usuario" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="activo : BOOLEAN" vertex="1">
+          <mxGeometry height="24" width="420" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="a_usuario_6" parent="e_usuario" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="debe_cambiar_password : BOOLEAN" vertex="1">
+          <mxGeometry height="24" width="420" y="174" as="geometry" />
+        </mxCell>
+        <mxCell id="a_usuario_7" parent="e_usuario" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="session_version : INTEGER" vertex="1">
+          <mxGeometry height="24" width="420" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="a_usuario_8" parent="e_usuario" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="creado_en : TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="24" width="420" y="222" as="geometry" />
+        </mxCell>
+        <mxCell id="a_usuario_9" parent="e_usuario" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="ultimo_acceso : TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="24" width="420" y="246" as="geometry" />
+        </mxCell>
+        <mxCell id="e_password_reset" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=1;marginBottom=0;fillColor=#FFF8EC;strokeColor=#8B5E3C;" value="password_reset" vertex="1">
+          <mxGeometry height="206" width="420" x="40" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="a_password_reset_0" parent="e_password_reset" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="id : SERIAL (PK)" vertex="1">
+          <mxGeometry height="24" width="420" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a_password_reset_1" parent="e_password_reset" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="usuario_id : INTEGER (FK)" vertex="1">
+          <mxGeometry height="24" width="420" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="a_password_reset_2" parent="e_password_reset" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="token_hash : VARCHAR(255)" vertex="1">
+          <mxGeometry height="24" width="420" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="a_password_reset_3" parent="e_password_reset" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="expira_en : TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="24" width="420" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="a_password_reset_4" parent="e_password_reset" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="usado_en : TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="24" width="420" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="a_password_reset_5" parent="e_password_reset" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="creado_en : TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="24" width="420" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="a_password_reset_6" parent="e_password_reset" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="ip : VARCHAR(45)" vertex="1">
+          <mxGeometry height="24" width="420" y="174" as="geometry" />
+        </mxCell>
+        <mxCell id="e_auditoria" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=1;marginBottom=0;fillColor=#FFF8EC;strokeColor=#8B5E3C;" value="auditoria" vertex="1">
+          <mxGeometry height="230" width="420" x="40" y="980" as="geometry" />
+        </mxCell>
+        <mxCell id="a_auditoria_0" parent="e_auditoria" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="id : SERIAL (PK)" vertex="1">
+          <mxGeometry height="24" width="420" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a_auditoria_1" parent="e_auditoria" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="usuario_id : INTEGER (FK, NULL)" vertex="1">
+          <mxGeometry height="24" width="420" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="a_auditoria_2" parent="e_auditoria" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="accion : VARCHAR(50)" vertex="1">
+          <mxGeometry height="24" width="420" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="a_auditoria_3" parent="e_auditoria" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="tabla : VARCHAR(50)" vertex="1">
+          <mxGeometry height="24" width="420" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="a_auditoria_4" parent="e_auditoria" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="registro_id : INTEGER" vertex="1">
+          <mxGeometry height="24" width="420" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="a_auditoria_5" parent="e_auditoria" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="detalles : JSONB" vertex="1">
+          <mxGeometry height="24" width="420" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="a_auditoria_6" parent="e_auditoria" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="ip : VARCHAR(45)" vertex="1">
+          <mxGeometry height="24" width="420" y="174" as="geometry" />
+        </mxCell>
+        <mxCell id="a_auditoria_7" parent="e_auditoria" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="creado_en : TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="24" width="420" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="e_cliente" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=1;marginBottom=0;fillColor=#FFF8EC;strokeColor=#8B5E3C;" value="cliente" vertex="1">
+          <mxGeometry height="254" width="420" x="500" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="a_cliente_0" parent="e_cliente" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="id : SERIAL (PK)" vertex="1">
+          <mxGeometry height="24" width="420" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a_cliente_1" parent="e_cliente" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="nombre : VARCHAR(150)" vertex="1">
+          <mxGeometry height="24" width="420" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="a_cliente_2" parent="e_cliente" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="correo : VARCHAR(150) UNIQUE" vertex="1">
+          <mxGeometry height="24" width="420" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="a_cliente_3" parent="e_cliente" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="telefono : VARCHAR(30)" vertex="1">
+          <mxGeometry height="24" width="420" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="a_cliente_4" parent="e_cliente" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="consentimiento : BOOLEAN" vertex="1">
+          <mxGeometry height="24" width="420" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="a_cliente_5" parent="e_cliente" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="activo : BOOLEAN" vertex="1">
+          <mxGeometry height="24" width="420" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="a_cliente_6" parent="e_cliente" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="creado_en : TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="24" width="420" y="174" as="geometry" />
+        </mxCell>
+        <mxCell id="a_cliente_7" parent="e_cliente" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="usuario_id : INTEGER (FK, UNIQUE)" vertex="1">
+          <mxGeometry height="24" width="420" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="a_cliente_8" parent="e_cliente" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="reclamado_en : TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="24" width="420" y="222" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pedido" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=1;marginBottom=0;fillColor=#FFF8EC;strokeColor=#8B5E3C;" value="pedido" vertex="1">
+          <mxGeometry height="422" width="420" x="500" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_0" parent="e_pedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="id : SERIAL (PK)" vertex="1">
+          <mxGeometry height="24" width="420" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_1" parent="e_pedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="codigo : VARCHAR(12) UNIQUE" vertex="1">
+          <mxGeometry height="24" width="420" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_2" parent="e_pedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="token_publico : VARCHAR(64) UNIQUE" vertex="1">
+          <mxGeometry height="24" width="420" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_3" parent="e_pedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="cliente_id : INTEGER (FK)" vertex="1">
+          <mxGeometry height="24" width="420" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_4" parent="e_pedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="estado : VARCHAR(20) CHECK" vertex="1">
+          <mxGeometry height="24" width="420" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_5" parent="e_pedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="total : NUMERIC(12,2)" vertex="1">
+          <mxGeometry height="24" width="420" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_6" parent="e_pedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="observaciones : TEXT" vertex="1">
+          <mxGeometry height="24" width="420" y="174" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_7" parent="e_pedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="canal : VARCHAR(20)" vertex="1">
+          <mxGeometry height="24" width="420" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_8" parent="e_pedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="metodo_pago : VARCHAR(20)" vertex="1">
+          <mxGeometry height="24" width="420" y="222" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_9" parent="e_pedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="tiempo_estimado_min : INTEGER" vertex="1">
+          <mxGeometry height="24" width="420" y="246" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_10" parent="e_pedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="fecha_creacion : TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="24" width="420" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_11" parent="e_pedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="fecha_pago : TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="24" width="420" y="294" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_12" parent="e_pedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="fecha_cierre : TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="24" width="420" y="318" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_13" parent="e_pedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="motivo_cancelacion : TEXT" vertex="1">
+          <mxGeometry height="24" width="420" y="342" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_14" parent="e_pedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="cancelado_por : INTEGER (FK)" vertex="1">
+          <mxGeometry height="24" width="420" y="366" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_15" parent="e_pedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="fecha_cancelacion : TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="24" width="420" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="e_detallepedido" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=1;marginBottom=0;fillColor=#FFF8EC;strokeColor=#8B5E3C;" value="detallepedido" vertex="1">
+          <mxGeometry height="182" width="420" x="500" y="1120" as="geometry" />
+        </mxCell>
+        <mxCell id="a_detallepedido_0" parent="e_detallepedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="id : SERIAL (PK)" vertex="1">
+          <mxGeometry height="24" width="420" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a_detallepedido_1" parent="e_detallepedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="id_pedido : INTEGER (FK)" vertex="1">
+          <mxGeometry height="24" width="420" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="a_detallepedido_2" parent="e_detallepedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="id_producto : INTEGER (FK)" vertex="1">
+          <mxGeometry height="24" width="420" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="a_detallepedido_3" parent="e_detallepedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="cantidad : INTEGER" vertex="1">
+          <mxGeometry height="24" width="420" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="a_detallepedido_4" parent="e_detallepedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="precio_unitario : NUMERIC(12,2)" vertex="1">
+          <mxGeometry height="24" width="420" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="a_detallepedido_5" parent="e_detallepedido" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="UNIQUE(id_pedido, id_producto)" vertex="1">
+          <mxGeometry height="24" width="420" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="e_categoria" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=1;marginBottom=0;fillColor=#FFF8EC;strokeColor=#8B5E3C;" value="categoria" vertex="1">
+          <mxGeometry height="158" width="420" x="960" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="a_categoria_0" parent="e_categoria" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="id : SERIAL (PK)" vertex="1">
+          <mxGeometry height="24" width="420" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a_categoria_1" parent="e_categoria" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="nombre : VARCHAR(100) UNIQUE" vertex="1">
+          <mxGeometry height="24" width="420" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="a_categoria_2" parent="e_categoria" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="descripcion : TEXT" vertex="1">
+          <mxGeometry height="24" width="420" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="a_categoria_3" parent="e_categoria" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="activo : BOOLEAN" vertex="1">
+          <mxGeometry height="24" width="420" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="a_categoria_4" parent="e_categoria" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="creado_en : TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="24" width="420" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="e_producto" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=1;marginBottom=0;fillColor=#FFF8EC;strokeColor=#8B5E3C;" value="producto" vertex="1">
+          <mxGeometry height="350" width="420" x="960" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="a_producto_0" parent="e_producto" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="id : SERIAL (PK)" vertex="1">
+          <mxGeometry height="24" width="420" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a_producto_1" parent="e_producto" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="nombre : VARCHAR(150)" vertex="1">
+          <mxGeometry height="24" width="420" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="a_producto_2" parent="e_producto" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="descripcion : TEXT" vertex="1">
+          <mxGeometry height="24" width="420" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="a_producto_3" parent="e_producto" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="precio : NUMERIC(12,2)" vertex="1">
+          <mxGeometry height="24" width="420" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="a_producto_4" parent="e_producto" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="stock_actual : INTEGER" vertex="1">
+          <mxGeometry height="24" width="420" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="a_producto_5" parent="e_producto" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="stock_minimo : INTEGER" vertex="1">
+          <mxGeometry height="24" width="420" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="a_producto_6" parent="e_producto" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="categoria_id : INTEGER (FK)" vertex="1">
+          <mxGeometry height="24" width="420" y="174" as="geometry" />
+        </mxCell>
+        <mxCell id="a_producto_7" parent="e_producto" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="activo : BOOLEAN" vertex="1">
+          <mxGeometry height="24" width="420" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="a_producto_8" parent="e_producto" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="destacado : BOOLEAN" vertex="1">
+          <mxGeometry height="24" width="420" y="222" as="geometry" />
+        </mxCell>
+        <mxCell id="a_producto_9" parent="e_producto" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="imagen_url : VARCHAR(255)" vertex="1">
+          <mxGeometry height="24" width="420" y="246" as="geometry" />
+        </mxCell>
+        <mxCell id="a_producto_10" parent="e_producto" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="unidades_medida : VARCHAR(50)" vertex="1">
+          <mxGeometry height="24" width="420" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="a_producto_11" parent="e_producto" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="tiempo_preparacion_min : INTEGER" vertex="1">
+          <mxGeometry height="24" width="420" y="294" as="geometry" />
+        </mxCell>
+        <mxCell id="a_producto_12" parent="e_producto" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="creado_en : TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="24" width="420" y="318" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pedido_historial_estado" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=1;marginBottom=0;fillColor=#FFF8EC;strokeColor=#8B5E3C;" value="pedido_historial_estado" vertex="1">
+          <mxGeometry height="206" width="420" x="960" y="1080" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_historial_estado_0" parent="e_pedido_historial_estado" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="id : SERIAL (PK)" vertex="1">
+          <mxGeometry height="24" width="420" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_historial_estado_1" parent="e_pedido_historial_estado" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="pedido_id : INTEGER (FK)" vertex="1">
+          <mxGeometry height="24" width="420" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_historial_estado_2" parent="e_pedido_historial_estado" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="estado_anterior : VARCHAR(20)" vertex="1">
+          <mxGeometry height="24" width="420" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_historial_estado_3" parent="e_pedido_historial_estado" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="estado_nuevo : VARCHAR(20)" vertex="1">
+          <mxGeometry height="24" width="420" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_historial_estado_4" parent="e_pedido_historial_estado" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="cambiado_por : INTEGER (FK)" vertex="1">
+          <mxGeometry height="24" width="420" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_historial_estado_5" parent="e_pedido_historial_estado" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="cambiado_en : TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="24" width="420" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pedido_historial_estado_6" parent="e_pedido_historial_estado" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="motivo : TEXT" vertex="1">
+          <mxGeometry height="24" width="420" y="174" as="geometry" />
+        </mxCell>
+        <mxCell id="e_pago" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=1;marginBottom=0;fillColor=#FFF8EC;strokeColor=#8B5E3C;" value="pago" vertex="1">
+          <mxGeometry height="398" width="420" x="1420" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pago_0" parent="e_pago" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="id : SERIAL (PK)" vertex="1">
+          <mxGeometry height="24" width="420" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pago_1" parent="e_pago" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="pedido_id : INTEGER (FK)" vertex="1">
+          <mxGeometry height="24" width="420" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pago_2" parent="e_pago" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="monto : NUMERIC(12,2)" vertex="1">
+          <mxGeometry height="24" width="420" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pago_3" parent="e_pago" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="metodo : VARCHAR(20)" vertex="1">
+          <mxGeometry height="24" width="420" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pago_4" parent="e_pago" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="referencia : VARCHAR(100)" vertex="1">
+          <mxGeometry height="24" width="420" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pago_5" parent="e_pago" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="recibido : NUMERIC(12,2)" vertex="1">
+          <mxGeometry height="24" width="420" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pago_6" parent="e_pago" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="cambio : NUMERIC(12,2)" vertex="1">
+          <mxGeometry height="24" width="420" y="174" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pago_7" parent="e_pago" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="estado : VARCHAR(20)" vertex="1">
+          <mxGeometry height="24" width="420" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pago_8" parent="e_pago" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="creado_por : INTEGER (FK)" vertex="1">
+          <mxGeometry height="24" width="420" y="222" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pago_9" parent="e_pago" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="creado_en : TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="24" width="420" y="246" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pago_10" parent="e_pago" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="reembolsado_por : INTEGER (FK)" vertex="1">
+          <mxGeometry height="24" width="420" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pago_11" parent="e_pago" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="reembolsado_en : TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="24" width="420" y="294" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pago_12" parent="e_pago" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="motivo_reembolso : TEXT" vertex="1">
+          <mxGeometry height="24" width="420" y="318" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pago_13" parent="e_pago" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="referencia_reembolso : VARCHAR(100)" vertex="1">
+          <mxGeometry height="24" width="420" y="342" as="geometry" />
+        </mxCell>
+        <mxCell id="a_pago_14" parent="e_pago" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="monto_reembolsado : NUMERIC(12,2)" vertex="1">
+          <mxGeometry height="24" width="420" y="366" as="geometry" />
+        </mxCell>
+        <mxCell id="e_caja_sesion" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=1;marginBottom=0;fillColor=#FFF8EC;strokeColor=#8B5E3C;" value="caja_sesion" vertex="1">
+          <mxGeometry height="278" width="420" x="1420" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="a_caja_sesion_0" parent="e_caja_sesion" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="id : SERIAL (PK)" vertex="1">
+          <mxGeometry height="24" width="420" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a_caja_sesion_1" parent="e_caja_sesion" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="abierto_por : INTEGER (FK)" vertex="1">
+          <mxGeometry height="24" width="420" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="a_caja_sesion_2" parent="e_caja_sesion" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="fecha_apertura : TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="24" width="420" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="a_caja_sesion_3" parent="e_caja_sesion" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="base_inicial : NUMERIC(12,2)" vertex="1">
+          <mxGeometry height="24" width="420" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="a_caja_sesion_4" parent="e_caja_sesion" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="efectivo_contado : NUMERIC(12,2)" vertex="1">
+          <mxGeometry height="24" width="420" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="a_caja_sesion_5" parent="e_caja_sesion" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="diferencia : NUMERIC(12,2)" vertex="1">
+          <mxGeometry height="24" width="420" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="a_caja_sesion_6" parent="e_caja_sesion" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="cerrado_por : INTEGER (FK)" vertex="1">
+          <mxGeometry height="24" width="420" y="174" as="geometry" />
+        </mxCell>
+        <mxCell id="a_caja_sesion_7" parent="e_caja_sesion" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="fecha_cierre : TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="24" width="420" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="a_caja_sesion_8" parent="e_caja_sesion" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="estado : VARCHAR(20)" vertex="1">
+          <mxGeometry height="24" width="420" y="222" as="geometry" />
+        </mxCell>
+        <mxCell id="a_caja_sesion_9" parent="e_caja_sesion" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="UNIQUE parcial: una ABIERTA" vertex="1">
+          <mxGeometry height="24" width="420" y="246" as="geometry" />
+        </mxCell>
+        <mxCell id="e_movimiento_caja" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=1;marginBottom=0;fillColor=#FFF8EC;strokeColor=#8B5E3C;" value="movimiento_caja" vertex="1">
+          <mxGeometry height="254" width="420" x="1420" y="980" as="geometry" />
+        </mxCell>
+        <mxCell id="a_movimiento_caja_0" parent="e_movimiento_caja" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="id : SERIAL (PK)" vertex="1">
+          <mxGeometry height="24" width="420" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a_movimiento_caja_1" parent="e_movimiento_caja" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="caja_sesion_id : INTEGER (FK)" vertex="1">
+          <mxGeometry height="24" width="420" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="a_movimiento_caja_2" parent="e_movimiento_caja" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="tipo : VARCHAR(20)" vertex="1">
+          <mxGeometry height="24" width="420" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="a_movimiento_caja_3" parent="e_movimiento_caja" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="monto : NUMERIC(12,2)" vertex="1">
+          <mxGeometry height="24" width="420" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="a_movimiento_caja_4" parent="e_movimiento_caja" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="concepto : VARCHAR(255)" vertex="1">
+          <mxGeometry height="24" width="420" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="a_movimiento_caja_5" parent="e_movimiento_caja" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="related_type : VARCHAR(50)" vertex="1">
+          <mxGeometry height="24" width="420" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="a_movimiento_caja_6" parent="e_movimiento_caja" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="related_id : INTEGER" vertex="1">
+          <mxGeometry height="24" width="420" y="174" as="geometry" />
+        </mxCell>
+        <mxCell id="a_movimiento_caja_7" parent="e_movimiento_caja" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="creado_por : INTEGER (FK)" vertex="1">
+          <mxGeometry height="24" width="420" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="a_movimiento_caja_8" parent="e_movimiento_caja" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="creado_en : TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="24" width="420" y="222" as="geometry" />
+        </mxCell>
+        <mxCell id="e_movimiento_stock" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=1;marginBottom=0;fillColor=#FFF8EC;strokeColor=#8B5E3C;" value="movimiento_stock" vertex="1">
+          <mxGeometry height="206" width="420" x="1420" y="1280" as="geometry" />
+        </mxCell>
+        <mxCell id="a_movimiento_stock_0" parent="e_movimiento_stock" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="id : SERIAL (PK)" vertex="1">
+          <mxGeometry height="24" width="420" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a_movimiento_stock_1" parent="e_movimiento_stock" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="producto_id : INTEGER (FK)" vertex="1">
+          <mxGeometry height="24" width="420" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="a_movimiento_stock_2" parent="e_movimiento_stock" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="tipo : VARCHAR(20)" vertex="1">
+          <mxGeometry height="24" width="420" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="a_movimiento_stock_3" parent="e_movimiento_stock" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="cantidad : INTEGER" vertex="1">
+          <mxGeometry height="24" width="420" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="a_movimiento_stock_4" parent="e_movimiento_stock" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="referencia : VARCHAR(100)" vertex="1">
+          <mxGeometry height="24" width="420" y="126" as="geometry" />
+        </mxCell>
+        <mxCell id="a_movimiento_stock_5" parent="e_movimiento_stock" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="creado_por : INTEGER (FK)" vertex="1">
+          <mxGeometry height="24" width="420" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="a_movimiento_stock_6" parent="e_movimiento_stock" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="creado_en : TIMESTAMPTZ" vertex="1">
+          <mxGeometry height="24" width="420" y="174" as="geometry" />
+        </mxCell>
+        <mxCell id="e_config_sistema" parent="1" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;collapsible=1;marginBottom=0;fillColor=#FFF8EC;strokeColor=#8B5E3C;" value="config_sistema" vertex="1">
+          <mxGeometry height="134" width="420" x="1880" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="a_config_sistema_0" parent="e_config_sistema" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="id : SERIAL (PK)" vertex="1">
+          <mxGeometry height="24" width="420" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="a_config_sistema_1" parent="e_config_sistema" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="clave : VARCHAR(50) UNIQUE" vertex="1">
+          <mxGeometry height="24" width="420" y="54" as="geometry" />
+        </mxCell>
+        <mxCell id="a_config_sistema_2" parent="e_config_sistema" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="valor : TEXT" vertex="1">
+          <mxGeometry height="24" width="420" y="78" as="geometry" />
+        </mxCell>
+        <mxCell id="a_config_sistema_3" parent="e_config_sistema" style="text;html=1;align=left;verticalAlign=middle;spacingLeft=8;fontFamily=Courier New;fontSize=11;" value="descripcion : TEXT" vertex="1">
+          <mxGeometry height="24" width="420" y="102" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_0" edge="1" parent="1" source="e_usuario" target="e_password_reset" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;endArrow=ERmany;startArrow=ERone;endFill=0;startFill=0;fontSize=10;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label_0" connectable="0" parent="edge_0" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontStyle=1;" value="1 : N" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_1" edge="1" parent="1" source="e_usuario" target="e_cliente" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;endArrow=ERmany;startArrow=ERone;endFill=0;startFill=0;fontSize=10;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label_1" connectable="0" parent="edge_1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontStyle=1;" value="1 : 0..1" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_2" edge="1" parent="1" source="e_usuario" target="e_auditoria" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;endArrow=ERmany;startArrow=ERone;endFill=0;startFill=0;fontSize=10;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label_2" connectable="0" parent="edge_2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontStyle=1;" value="1 : N" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_3" edge="1" parent="1" source="e_usuario" target="e_pago" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;endArrow=ERmany;startArrow=ERone;endFill=0;startFill=0;fontSize=10;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label_3" connectable="0" parent="edge_3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontStyle=1;" value="1 : N" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_4" edge="1" parent="1" source="e_usuario" target="e_caja_sesion" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;endArrow=ERmany;startArrow=ERone;endFill=0;startFill=0;fontSize=10;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label_4" connectable="0" parent="edge_4" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontStyle=1;" value="1 : N" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_5" edge="1" parent="1" source="e_usuario" target="e_movimiento_stock" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;endArrow=ERmany;startArrow=ERone;endFill=0;startFill=0;fontSize=10;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label_5" connectable="0" parent="edge_5" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontStyle=1;" value="1 : N" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_6" edge="1" parent="1" source="e_cliente" target="e_pedido" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;endArrow=ERmany;startArrow=ERone;endFill=0;startFill=0;fontSize=10;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label_6" connectable="0" parent="edge_6" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontStyle=1;" value="1 : N" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_7" edge="1" parent="1" source="e_categoria" target="e_producto" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;endArrow=ERmany;startArrow=ERone;endFill=0;startFill=0;fontSize=10;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label_7" connectable="0" parent="edge_7" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontStyle=1;" value="1 : N" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_8" edge="1" parent="1" source="e_pedido" target="e_detallepedido" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;endArrow=ERmany;startArrow=ERone;endFill=0;startFill=0;fontSize=10;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label_8" connectable="0" parent="edge_8" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontStyle=1;" value="1 : N" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_9" edge="1" parent="1" source="e_producto" target="e_detallepedido" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;endArrow=ERmany;startArrow=ERone;endFill=0;startFill=0;fontSize=10;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label_9" connectable="0" parent="edge_9" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontStyle=1;" value="1 : N" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_10" edge="1" parent="1" source="e_pedido" target="e_pedido_historial_estado" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;endArrow=ERmany;startArrow=ERone;endFill=0;startFill=0;fontSize=10;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label_10" connectable="0" parent="edge_10" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontStyle=1;" value="1 : N" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_11" edge="1" parent="1" source="e_pedido" target="e_pago" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;endArrow=ERmany;startArrow=ERone;endFill=0;startFill=0;fontSize=10;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label_11" connectable="0" parent="edge_11" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontStyle=1;" value="1 : N" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_12" edge="1" parent="1" source="e_caja_sesion" target="e_movimiento_caja" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;endArrow=ERmany;startArrow=ERone;endFill=0;startFill=0;fontSize=10;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label_12" connectable="0" parent="edge_12" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontStyle=1;" value="1 : N" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge_13" edge="1" parent="1" source="e_producto" target="e_movimiento_stock" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=1.5;endArrow=ERmany;startArrow=ERone;endFill=0;startFill=0;fontSize=10;">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="label_13" connectable="0" parent="edge_13" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;fontStyle=1;" value="1 : N" vertex="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

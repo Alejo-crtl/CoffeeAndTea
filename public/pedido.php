@@ -95,17 +95,14 @@ cabeceraHtml('Pedido ' . $pedido['codigo'] . ' | CoffeeAndtea', $seccionPedido);
     <div class="aviso-banda aviso-exito" role="status">
         <p><strong>Guarda este enlace.</strong> Lo necesitas para consultar el estado de tu pedido.</p>
         <?php if (usuarioActual() === null): ?>
-            <p>
-                También guardamos este pedido en este navegador.
-                Puedes verlo cuando quieras en
-                <a href="<?= h(url('pedidos-invitado.php')) ?>">Mis pedidos recientes</a>.
-            </p>
+            <p>También guardamos este pedido en este navegador.</p>
         <?php endif; ?>
         <p>
-            <button type="button" class="btn btn-pequeno btn-secundario"
-                    onclick="navigator.clipboard?.writeText(window.location.href)">
+            <button type="button" class="btn btn-pequeno btn-secundario" id="copiar-enlace"
+                    data-enlace="<?= h(url('pedido.php?codigo=' . urlencode((string) $pedido['codigo']) . '&token=' . urlencode((string) $pedido['token_publico']))) ?>">
                 Copiar enlace
             </button>
+            <span id="copiar-estado" class="texto-suave" aria-live="polite"></span>
             <?php if (usuarioActual() === null): ?>
                 <a class="btn btn-pequeno btn-secundario" href="<?= h(url('pedidos-invitado.php')) ?>">
                     Mis pedidos recientes
@@ -113,6 +110,63 @@ cabeceraHtml('Pedido ' . $pedido['codigo'] . ' | CoffeeAndtea', $seccionPedido);
             <?php endif; ?>
         </p>
     </div>
+    <script>
+        (function () {
+            var boton = document.getElementById('copiar-enlace');
+            var estado = document.getElementById('copiar-estado');
+            if (!boton || !estado) {
+                return;
+            }
+
+            function mostrarEnlaceManual(texto) {
+                estado.textContent = 'No se pudo copiar automáticamente. Selecciona el enlace: ';
+                var campo = document.createElement('input');
+                campo.type = 'text';
+                campo.value = texto;
+                campo.readOnly = true;
+                campo.className = 'campo-enlace-manual';
+                estado.appendChild(campo);
+                campo.focus();
+                campo.select();
+            }
+
+            function copiarConRespaldo(texto) {
+                var campo = document.createElement('textarea');
+                campo.value = texto;
+                campo.setAttribute('readonly', 'readonly');
+                campo.style.position = 'fixed';
+                campo.style.opacity = '0';
+                document.body.appendChild(campo);
+                campo.select();
+                var copiado = false;
+                try {
+                    copiado = document.execCommand('copy');
+                } catch (error) {
+                    copiado = false;
+                }
+                campo.remove();
+                if (copiado) {
+                    estado.textContent = 'Enlace copiado.';
+                } else {
+                    mostrarEnlaceManual(texto);
+                }
+            }
+
+            boton.addEventListener('click', function () {
+                var texto = boton.dataset.enlace || window.location.href;
+                estado.textContent = '';
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(texto).then(function () {
+                        estado.textContent = 'Enlace copiado.';
+                    }).catch(function () {
+                        copiarConRespaldo(texto);
+                    });
+                    return;
+                }
+                copiarConRespaldo(texto);
+            });
+        })();
+    </script>
 <?php endif; ?>
 
 <?php if ($cancelado): ?>
@@ -234,6 +288,8 @@ cabeceraHtml('Pedido ' . $pedido['codigo'] . ' | CoffeeAndtea', $seccionPedido);
         <a class="btn btn-secundario btn-bloque" href="<?= h(url('index.php')) ?>">Volver a la tienda</a>
         <?php if ($usuario !== null): ?>
             <a class="btn btn-fantasma btn-bloque" href="<?= h(url('cuenta.php')) ?>">Ir a mi cuenta</a>
+        <?php elseif (pedidosInvitadoLeer() !== []): ?>
+            <a class="btn btn-fantasma btn-bloque" href="<?= h(url('pedidos-invitado.php')) ?>">Mis pedidos recientes</a>
         <?php endif; ?>
     </aside>
 </div>

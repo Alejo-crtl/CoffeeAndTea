@@ -57,6 +57,7 @@ CoffeeAndtea_Entrega/
 │  ├─ descargar-manual.php  Descarga del manual en Markdown
 │  ├─ css/, js/, media/     Recursos estáticos
 │  └─ .htaccess             Endurecimiento de Apache
+├─ anexos/               PAC, SRS, MER, script BD y log de errores
 ├─ app/php/
 │  ├─ lib/
 │  │  ├─ config.php         Carga de .env
@@ -70,8 +71,6 @@ CoffeeAndtea_Entrega/
 │  │  ├─ auditoria.php      Registro de eventos
 │  │  └─ manual_rol.php     Selección del manual por rol
 │  ├─ vistas/               Plantillas y componentes
-│  ├─ formularios/          Formularios heredados del CRUD
-│  └─ tablas/               Listados heredados del CRUD
 ├─ bin/crear-admin.php      Alta del administrador inicial
 ├─ db/
 │  ├─ schema.sql            Esquema, triggers y procedimientos
@@ -492,7 +491,7 @@ composer phpcs
 
 El pack de QA está en `qa/`:
 
-- `qa/03-casos-prueba.csv`: 46 casos.
+- `qa/03-casos-prueba.csv`: 49 casos.
 - `qa/07-informe-resultados.md`: resultados.
 - `qa/08-matriz-rbac.md`: permisos por rol.
 - `qa/scripts/preparar-bd.ps1`: recrea la base QA.

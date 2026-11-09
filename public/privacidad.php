@@ -19,6 +19,7 @@ cabeceraHtml('Privacidad | CoffeeAndtea', 'privacidad');
         <h1>Privacidad y tratamiento de datos</h1>
         <p>Última actualización: <?= h(date('d/m/Y')) ?>.</p>
     </div>
+    <a class="btn btn-secundario" href="<?= h(url('index.php')) ?>">Volver a la tienda</a>
 </section>
 
 <div class="panel prosa">
