@@ -55,9 +55,10 @@
 - Pedido cancelado antes de preparación: reembolso del **100%**.
 
 ### Tiempo estimado
-- Pedido de 2 cafés de 4 min y 1 croissant de 3 min, capacidad 2, cola 6 min: **10 min**.
-- Cálculo: `ceil(11/2)=6`, buffer 15% `=1`, cola `ceil(6/2)=3`; total `6+1+3=10`.
-- Sin tiempos de producto se usa el tiempo de respaldo configurado.
+- Pedido de prueba: 2 Café Express (5 min) + 1 Croissant (3 min).
+- Cola activa al momento: 42 min de trabajo; capacidad 2; buffer 15%.
+- Cálculo: `ceil(13/2)=7`, buffer `ceil(7×0.15)=2`, cola `ceil(42/2)=21`; total **30 min**.
+- El pedido guardó **30** y coincidió con el cálculo esperado.
 
 ### Seguridad
 - 8 intentos fallidos de login → bloqueo de 10 minutos.
