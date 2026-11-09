@@ -94,6 +94,11 @@ cabeceraHtml('CoffeeAndtea | Pide y recoge en tienda', 'tienda');
             <span class="hero-vapor"></span>
             <span class="hero-vapor"></span>
             <span class="hero-vapor"></span>
+            <div class="hero-taza-logo">
+                <img src="<?= h(url('media/logo-cafe-sabroso.png')) ?>"
+                     alt="Café Sabroso: el sabor que enamora y conquista tu alma"
+                     width="600" height="547" loading="eager" decoding="async">
+            </div>
             <span class="hero-plato"></span>
         </div>
         <p class="hero-nota">Hecho al momento</p>
