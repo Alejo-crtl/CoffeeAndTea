@@ -16,6 +16,13 @@ test('la página de anexos lista y descarga los documentos', async ({ page, requ
         expect(respuesta.status()).toBe(200);
         expect(respuesta.headers()['content-disposition']).toContain('attachment');
     }
+
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto('/anexos.php');
+    const desborde = await page.evaluate(
+        () => document.documentElement.scrollWidth - document.documentElement.clientWidth
+    );
+    expect(desborde).toBeLessThanOrEqual(1);
 });
 
 test('el footer enlaza a anexos desde la tienda', async ({ page }) => {

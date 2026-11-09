@@ -2083,17 +2083,19 @@ label.checkbox input {
 .grid-productos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
 
 .anexos-grid {
-    max-width: var(--ancho); margin: 20px auto 40px; padding: 0 24px;
+    width: 100%; max-width: var(--ancho); margin: 20px auto 40px; padding: 0 24px;
     display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px;
 }
 .anexo-card {
     display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
     padding: 22px; background: var(--superficie); border: 1px solid var(--borde);
     border-radius: var(--radio); box-shadow: var(--sombra);
+    min-width: 0; max-width: 100%; overflow-wrap: anywhere;
 }
-.anexo-card h2 { margin: 0; font-size: 1.1rem; color: var(--marron-oscuro); }
-.anexo-card p { margin: 0; }
-.anexo-card .btn { margin-top: auto; }
+.anexo-card h2 { margin: 0; font-size: 1.1rem; color: var(--marron-oscuro); overflow-wrap: anywhere; }
+.anexo-card p { margin: 0; overflow-wrap: anywhere; }
+.anexo-card .btn { margin-top: auto; max-width: 100%; }
+.anexo-card .texto-suave { word-break: break-word; overflow-wrap: anywhere; }
 .anexo-tipo {
     display: inline-flex; padding: 4px 9px; border-radius: 999px;
     background: var(--crema-2); color: var(--marron); font-size: 0.72rem; font-weight: 700;
@@ -2319,7 +2321,7 @@ label.checkbox input {
 
 @media (max-width: 600px) {
     .grid-productos, .como-funciona ol { grid-template-columns: 1fr; }
-    .anexos-grid { grid-template-columns: 1fr; }
+    .anexos-grid { grid-template-columns: 1fr; padding: 0 16px; }
     .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .hero-datos { grid-template-columns: 1fr; gap: 8px; }
     .campo-doble { grid-template-columns: 1fr; }
