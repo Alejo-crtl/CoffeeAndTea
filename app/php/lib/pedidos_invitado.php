@@ -107,7 +107,6 @@ function pedidosInvitadoOlvidar(): void
 function avisoCompraInvitadoHtml(): string
 {
     return '<div class="alerta-info" role="status">'
-        . '<strong>Estás comprando como invitado.</strong>'
         . '<p>Guardaremos este pedido en este navegador para que puedas consultarlo. '
         . 'Si cambias de dispositivo o borras los datos del navegador, necesitarás el enlace de confirmación.</p>'
         . '<p>Para conservar tu historial permanentemente, '

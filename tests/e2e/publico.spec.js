@@ -25,7 +25,8 @@ test('un visitante puede pedir para recoger en tienda', async ({ page }) => {
     await page.getByRole('link', { name: 'Continuar con el pedido' }).click();
 
     await expect(page.locator('#dialogo-invitado')).toBeVisible();
-    await expect(page.locator('#dialogo-invitado')).toContainText('Estás comprando como invitado');
+    await expect(page.locator('#dialogo-invitado')).toContainText('Guardaremos este pedido');
+    await expect(page.getByRole('button', { name: 'Crear cuenta' })).toHaveCount(0);
     await page.getByRole('button', { name: 'Entendido, continuar' }).click();
 
     await expect(page).toHaveURL(/checkout\.php/);

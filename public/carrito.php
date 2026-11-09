@@ -147,14 +147,12 @@ cabeceraHtml('Carrito | CoffeeAndtea', 'carrito');
     </div>
 
     <?php if (usuarioActual() === null): ?>
-        <dialog id="dialogo-invitado" class="dialogo-aviso" aria-labelledby="dialogo-invitado-titulo">
+        <dialog id="dialogo-invitado" class="dialogo-aviso" aria-label="Aviso antes de continuar">
             <div class="dialogo-contenido">
                 <p class="eyebrow">Antes de continuar</p>
-                <h2 id="dialogo-invitado-titulo">Compra como invitado</h2>
                 <?= avisoCompraInvitadoHtml() ?>
                 <div class="dialogo-acciones">
                     <button type="button" class="btn btn-primario" id="continuar-invitado">Entendido, continuar</button>
-                    <a class="btn btn-secundario" href="<?= h(url('registro.php')) ?>">Crear cuenta</a>
                     <button type="button" class="btn btn-fantasma" id="cerrar-invitado">Volver al carrito</button>
                 </div>
             </div>

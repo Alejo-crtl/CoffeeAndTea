@@ -705,7 +705,9 @@ button,
 }
 
 .dialogo-aviso {
-    width: min(560px, calc(100% - 32px));
+    width: min(680px, calc(100% - 32px));
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
     border: 1px solid var(--borde);
     border-radius: 18px;
     padding: 0;
@@ -719,7 +721,7 @@ button,
     backdrop-filter: blur(3px);
 }
 
-.dialogo-contenido { padding: 24px; }
+.dialogo-contenido { padding: 28px 32px; }
 .dialogo-contenido h2 { margin: 4px 0 10px; color: var(--marron-oscuro); }
 .dialogo-contenido .alerta-info { margin: 12px 0 18px; }
 .dialogo-acciones { display: flex; gap: 8px; flex-wrap: wrap; }
