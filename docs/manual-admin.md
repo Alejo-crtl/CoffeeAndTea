@@ -283,6 +283,7 @@ Campos:
 - Tiempo de preparación.
 - Activo.
 - Destacado.
+- Imagen del producto (JPG, PNG o WebP, máximo 2 MB).
 
 Reglas:
 
@@ -291,7 +292,10 @@ Reglas:
 - El stock mínimo alimenta las alertas de gestión.
 - El tiempo de preparación influye en el tiempo estimado del pedido.
 - Los pedidos históricos conservan el precio congelado.
-- Las imágenes de productos están en `public/media/productos` y se muestran en la tienda. La carga de archivos desde el panel aún no está habilitada.
+- Al subir una imagen se recorta y escala automáticamente a 960 × 540 px.
+- Para reemplazar la foto, selecciona otro archivo y guarda. El archivo anterior se elimina si ningún otro producto lo usa.
+- Para dejar el producto sin foto, marca **Quitar la imagen actual** y guarda. La tienda mostrará el espacio reservado.
+- Se rechazan archivos que no sean JPG, PNG o WebP, que superen los 2 MB o que no contengan una imagen válida.
 
 ---
 
@@ -491,7 +495,7 @@ composer phpcs
 
 El pack de QA está en `qa/`:
 
-- `qa/03-casos-prueba.csv`: 49 casos.
+- `qa/03-casos-prueba.csv`: 53 casos.
 - `qa/07-informe-resultados.md`: resultados.
 - `qa/08-matriz-rbac.md`: permisos por rol.
 - `qa/scripts/preparar-bd.ps1`: recrea la base QA.

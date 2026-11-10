@@ -13,7 +13,7 @@ stock, usuarios y reportes.
 ## 1. Funcionalidades
 
 ### Tienda pública
-- Catálogo por categorías con precio, stock y tiempo estimado de preparación.
+- Catálogo por categorías con imagen, precio, stock y tiempo estimado de preparación.
 - Carrito con validación de existencias.
 - Checkout como visitante o cliente registrado.
 - Confirmación con código de pedido, token público, estado y tiempo estimado.
@@ -32,7 +32,7 @@ stock, usuarios y reportes.
 ### Administración (`ADMIN`)
 - Usuarios y roles (`CLIENTE`, `ENCARGADO`, `ADMIN`).
 - Contraseñas temporales con cambio obligatorio y cierre de sesiones.
-- Productos, categorías y configuración de la tienda.
+- Productos, categorías, imágenes de producto y configuración de la tienda.
 - Reportes de ventas, productos, clientes, stock e ingresos por categoría.
 - Exportación CSV y consulta de auditoría.
 
@@ -285,7 +285,7 @@ composer phpstan
 composer phpcs
 ```
 
-El pack completo de QA está en [`qa/`](qa/): plan, 49 casos, matriz de riesgos,
+El pack completo de QA está en [`qa/`](qa/): plan, 53 casos, matriz de riesgos,
 matriz RBAC, checklist de release e informe de resultados.
 
 ---

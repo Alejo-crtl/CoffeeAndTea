@@ -1,0 +1,6 @@
+# Carpeta exclusiva de imágenes estáticas.
+# Nunca se ejecutan scripts desde aquí.
+<FilesMatch "\.(php|phtml|phar|cgi|pl|py|sh|html?)$">
+    Require all denied
+</FilesMatch>
+Options -Indexes

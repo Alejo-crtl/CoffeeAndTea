@@ -57,6 +57,7 @@ require_once __DIR__ . '/auditoria.php';
 require_once __DIR__ . '/auth.php';
 require_once __DIR__ . '/manual_rol.php';
 require_once __DIR__ . '/pedidos_invitado.php';
+require_once __DIR__ . '/imagenes.php';
 
 if (!isset($conn) || !($conn instanceof PDO)) {
     http_response_code(500);

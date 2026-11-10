@@ -31,6 +31,24 @@ final class HelpersTest extends CasoBase
         $this->assertSame('postre-dia', slugificar('Postre / día'));
     }
 
+    public function testRutaWebImagenProductoSoloAceptaLaCarpetaSegura(): void
+    {
+        $this->assertSame('media/productos/cafe-express.jpg', rutaWebImagenProducto('media/productos/cafe-express.jpg'));
+        $this->assertSame('media/productos/cafe-express.jpg', rutaWebImagenProducto('/media/productos/cafe-express.jpg'));
+        $this->assertSame('', rutaWebImagenProducto(''));
+        $this->assertSame('', rutaWebImagenProducto('../.env'));
+        $this->assertSame('', rutaWebImagenProducto('media/productos/../../.env'));
+        $this->assertSame('', rutaWebImagenProducto('https://ejemplo.com/foto.jpg'));
+        $this->assertSame('', rutaWebImagenProducto('media/productos/foto.php'));
+    }
+
+    public function testImagenProductoDisponibleVerificaElArchivo(): void
+    {
+        $this->assertTrue(imagenProductoDisponible('media/productos/cafe-express.jpg'));
+        $this->assertFalse(imagenProductoDisponible('media/productos/no-existe.jpg'));
+        $this->assertFalse(imagenProductoDisponible(''));
+    }
+
     public function testValidarPasswordExigeComplejidad(): void
     {
         $this->assertCount(0, validarPassword('Admin123!'));

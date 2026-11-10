@@ -2168,6 +2168,21 @@ label.checkbox input {
 .tabla tbody tr:hover { background: rgba(246, 239, 229, 0.55); }
 .tabla tfoot th { background: var(--crema); font-size: 1rem; }
 .tabla td strong + .texto-suave, .tabla td .texto-suave { margin-top: 2px; }
+.producto-tabla { display: flex; gap: 10px; align-items: center; min-width: 190px; }
+.producto-tabla > div { display: flex; flex-direction: column; }
+.miniatura-producto {
+    flex: 0 0 auto; width: 58px; height: 42px; border-radius: 8px; object-fit: cover;
+    border: 1px solid var(--borde); background: var(--crema-2);
+}
+.miniatura-vacia {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-family: Georgia, serif; font-size: 1.2rem; color: var(--marron-claro);
+}
+.vista-previa-imagen {
+    width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 10px;
+    border: 1px solid var(--borde); background: var(--crema-2); margin-bottom: 8px;
+}
+.vista-previa-imagen img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .tabla-carrito td { vertical-align: middle; }
 .form-cantidad { display: flex; gap: 6px; align-items: center; }
 .form-cantidad input { max-width: 70px; }
@@ -2231,6 +2246,7 @@ label.checkbox input {
 .campo-doble { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .check { display: flex; gap: 9px; align-items: flex-start; font-size: 0.88rem; }
 .check input { margin-top: 3px; }
+.campo .check input[type="checkbox"] { width: auto; padding: 0; }
 .check-inline { display: inline-flex; gap: 6px; align-items: center; }
 .campo-trampa { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .alerta-exito { background: var(--verde-suave); border: 1px solid #bfe3c9; color: #145c26; padding: 12px 14px; border-radius: 10px; margin: 0 0 14px; }

@@ -256,6 +256,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $tiempo = trim((string) ($_POST['tiempo_preparacion_min'] ?? ''));
                 $activo = isset($_POST['activo']);
                 $destacado = isset($_POST['destacado']);
+                $quitarImagen = isset($_POST['quitar_imagen']);
+                $archivoImagen = $_FILES['imagen'] ?? null;
+                $subeImagen = is_array($archivoImagen)
+                    && (int) ($archivoImagen['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE;
+                $imagenNueva = null;
+                if ($subeImagen) {
+                    $imagenNueva = guardarImagenProducto($archivoImagen);
+                }
+                $imagenAnteriorGuardada = '';
 
                 if (mb_strlen($nombre) < 2 || mb_strlen($nombre) > 150) {
                     throw new ReglaNegocioException('El nombre del producto debe tener entre 2 y 150 caracteres.');
@@ -290,18 +299,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $conn->beginTransaction();
                 try {
                     if ($id > 0) {
-                        $stmt = $conn->prepare('SELECT stock_actual FROM producto WHERE id = :id FOR UPDATE');
+                        $stmt = $conn->prepare('SELECT stock_actual, imagen_url FROM producto WHERE id = :id FOR UPDATE');
                         $stmt->execute([':id' => $id]);
-                        $stockAnterior = $stmt->fetchColumn();
-                        if ($stockAnterior === false) {
+                        $filaAnterior = $stmt->fetch(PDO::FETCH_ASSOC);
+                        if ($filaAnterior === false) {
                             throw new ReglaNegocioException('El producto no existe.');
+                        }
+                        $stockAnterior = (int) $filaAnterior['stock_actual'];
+                        $imagenAnteriorGuardada = (string) ($filaAnterior['imagen_url'] ?? '');
+                        if ($subeImagen) {
+                            $imagenFinal = $imagenNueva;
+                        } elseif ($quitarImagen) {
+                            $imagenFinal = null;
+                        } else {
+                            $imagenFinal = $imagenAnteriorGuardada !== '' ? $imagenAnteriorGuardada : null;
                         }
                         $stmt = $conn->prepare(
                             'UPDATE producto
                              SET nombre = :nombre, descripcion = :descripcion, precio = :precio,
                                  stock_actual = :stock, stock_minimo = :stock_minimo,
                                  categoria_id = :categoria_id, activo = :activo, destacado = :destacado,
-                                 tiempo_preparacion_min = :tiempo
+                                 tiempo_preparacion_min = :tiempo, imagen_url = :imagen_url
                              WHERE id = :id'
                         );
                         $stmt->execute([
@@ -314,6 +332,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             ':activo'       => boolSql($activo),
                             ':destacado'    => boolSql($destacado),
                             ':tiempo'       => $tiempoValor,
+                            ':imagen_url'   => $imagenFinal,
                             ':id'           => $id,
                         ]);
                         $diferencia = (int) $stock - (int) $stockAnterior;
@@ -338,9 +357,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $stmt = $conn->prepare(
                             'INSERT INTO producto
                                 (nombre, descripcion, precio, stock_actual, stock_minimo, categoria_id,
-                                 activo, destacado, unidades_medida, tiempo_preparacion_min)
+                                 activo, destacado, unidades_medida, tiempo_preparacion_min, imagen_url)
                              VALUES (:nombre, :descripcion, :precio, :stock, :stock_minimo, :categoria_id,
-                                     :activo, :destacado, \'unidades\', :tiempo)
+                                     :activo, :destacado, \'unidades\', :tiempo, :imagen_url)
                              RETURNING id'
                         );
                         $stmt->execute([
@@ -353,6 +372,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             ':activo'       => boolSql($activo),
                             ':destacado'    => boolSql($destacado),
                             ':tiempo'       => $tiempoValor,
+                            ':imagen_url'   => $imagenNueva,
                         ]);
                         $id = (int) $stmt->fetchColumn();
                         if ($stock > 0) {
@@ -374,7 +394,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if ($conn->inTransaction()) {
                         $conn->rollBack();
                     }
+                    if ($subeImagen && $imagenNueva !== null) {
+                        eliminarImagenProducto($imagenNueva);
+                    }
                     throw $e;
+                }
+                if ($imagenAnteriorGuardada !== ''
+                    && $imagenAnteriorGuardada !== ($imagenFinal ?? null)) {
+                    eliminarImagenProducto($imagenAnteriorGuardada, $conn, $id);
                 }
                 $destino = url('admin.php?tab=productos');
                 break;
@@ -593,14 +620,27 @@ cabeceraHtml('Administración | CoffeeAndtea', 'admin');
     <div class="layout-admin">
         <section class="panel">
             <h2>Productos (<?= count($productos) ?>)</h2>
-            <p class="texto-suave">Las imágenes se cargan desde <code>public/media/productos</code>. La carga de archivos desde el panel aún no está habilitada.</p>
+            <p class="texto-suave">Cada producto puede tener una imagen JPG, PNG o WebP de hasta 2 MB. Al subirla se recorta a 960 × 540 px para que todas las tarjetas se vean iguales.</p>
             <div class="tabla-scroll">
                 <table class="tabla">
                     <thead><tr><th>Producto</th><th>Categoría</th><th>Precio</th><th>Stock</th><th>Estado</th><th></th></tr></thead>
                     <tbody>
                         <?php foreach ($productos as $producto): ?>
                             <tr>
-                                <td><strong><?= h((string) $producto['nombre']) ?></strong><span class="texto-suave"><?= h((string) $producto['descripcion']) ?></span></td>
+                                <td>
+                                    <div class="producto-tabla">
+                                        <?php $imagenFila = trim((string) ($producto['imagen_url'] ?? '')); ?>
+                                        <?php if (imagenProductoDisponible($imagenFila)): ?>
+                                            <img class="miniatura-producto" src="<?= h(urlImagenProducto($imagenFila)) ?>" alt="" loading="lazy" decoding="async">
+                                        <?php else: ?>
+                                            <span class="miniatura-producto miniatura-vacia" aria-hidden="true"><?= h(mb_substr((string) $producto['nombre'], 0, 1)) ?></span>
+                                        <?php endif; ?>
+                                        <div>
+                                            <strong><?= h((string) $producto['nombre']) ?></strong>
+                                            <span class="texto-suave"><?= h((string) $producto['descripcion']) ?></span>
+                                        </div>
+                                    </div>
+                                </td>
                                 <td><?= h((string) $producto['categoria']) ?></td>
                                 <td><?= h(moneda((float) $producto['precio'])) ?></td>
                                 <td><?= (int) $producto['stock_actual'] ?> / mín. <?= (int) $producto['stock_minimo'] ?></td>
@@ -631,9 +671,11 @@ cabeceraHtml('Administración | CoffeeAndtea', 'admin');
                 'tiempo_preparacion_min' => (string) ($editarProducto['tiempo_preparacion_min'] ?? ''),
                 'activo'                => $editarProducto === null ? true : esVerdadero($editarProducto['activo']),
                 'destacado'             => $editarProducto !== null && esVerdadero($editarProducto['destacado']),
+                'imagen_url'            => (string) ($editarProducto['imagen_url'] ?? ''),
             ];
+            $imagenActualProducto = trim($valoresProducto['imagen_url']);
             ?>
-            <form method="post" action="<?= h(url('admin.php')) ?>" class="formulario">
+            <form method="post" action="<?= h(url('admin.php')) ?>" class="formulario" enctype="multipart/form-data">
                 <?= campoCsrf() ?>
                 <input type="hidden" name="accion" value="producto_guardar">
                 <input type="hidden" name="tab" value="productos">
@@ -645,6 +687,22 @@ cabeceraHtml('Administración | CoffeeAndtea', 'admin');
                 <div class="campo">
                     <label for="p-descripcion">Descripción</label>
                     <textarea id="p-descripcion" name="descripcion" rows="2" maxlength="1000"><?= h($valoresProducto['descripcion']) ?></textarea>
+                </div>
+                <div class="campo">
+                    <label for="p-imagen">Imagen del producto (JPG, PNG o WebP, máx. 2 MB)</label>
+                    <?php if (imagenProductoDisponible($imagenActualProducto)): ?>
+                        <div class="vista-previa-imagen">
+                            <img src="<?= h(urlImagenProducto($imagenActualProducto)) ?>" alt="Vista previa de <?= h($valoresProducto['nombre']) ?>">
+                        </div>
+                    <?php endif; ?>
+                    <input id="p-imagen" name="imagen" type="file" accept="image/jpeg,image/png,image/webp">
+                    <small><?= imagenProductoDisponible($imagenActualProducto) ? 'Sube otra imagen para reemplazar la actual.' : 'Se recorta automáticamente a 960 × 540 px.' ?></small>
+                    <?php if (imagenProductoDisponible($imagenActualProducto)): ?>
+                        <label class="check">
+                            <input type="checkbox" name="quitar_imagen" value="1">
+                            Quitar la imagen actual
+                        </label>
+                    <?php endif; ?>
                 </div>
                 <div class="campo-doble">
                     <div class="campo">

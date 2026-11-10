@@ -165,13 +165,12 @@ cabeceraHtml('CoffeeAndtea | Pide y recoge en tienda', 'tienda');
                 $agotado = $stock < 1;
                 $enCarrito = $cantidadesCarrito[(int) $producto['id']] ?? 0;
                 $imagen = trim((string) ($producto['imagen_url'] ?? ''));
-                $rutaImagen = $imagen !== '' ? APP_ROOT . '/public/' . ltrim($imagen, '/') : '';
-                $tieneImagen = $imagen !== '' && is_file($rutaImagen);
+                $tieneImagen = imagenProductoDisponible($imagen);
                 ?>
                 <article class="tarjeta-producto<?= $agotado ? ' agotado' : '' ?>">
                     <div class="producto-imagen<?= $tieneImagen ? ' con-foto' : '' ?>">
                         <?php if ($tieneImagen): ?>
-                            <img src="<?= h(url($imagen)) ?>" alt="<?= h((string) $producto['nombre']) ?>" loading="lazy" decoding="async">
+                            <img src="<?= h(urlImagenProducto($imagen)) ?>" alt="<?= h((string) $producto['nombre']) ?>" loading="lazy" decoding="async">
                         <?php else: ?>
                             <span aria-hidden="true"><?= h(mb_substr((string) $producto['nombre'], 0, 1)) ?></span>
                             <small>Foto próximamente</small>

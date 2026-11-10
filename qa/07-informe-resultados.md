@@ -1,6 +1,6 @@
 # Informe de resultados — CoffeeAndtea
 
-**Fecha de ejecución:** 2026-11-08  
+**Fecha de ejecución:** 2026-11-10  
 **Entorno:** Desarrollo, PostgreSQL 18, base `coffeeandtea_qa`, PHP 8.3.36  
 **Servidor:** `php -S 127.0.0.1:8001 -t public`  
 **Correo:** `MAIL_DRIVER=log` (sin envío real)
@@ -9,9 +9,9 @@
 
 | Métrica | Valor |
 |---|---|
-| Casos planificados | 49 |
-| Ejecutados | 49 |
-| Aprobados | 49 |
+| Casos planificados | 53 |
+| Ejecutados | 53 |
+| Aprobados | 53 |
 | Fallidos | 0 |
 | Pendientes | 0 |
 | Defectos críticos abiertos | 0 |
@@ -27,7 +27,7 @@
 | Anexos y navegación | CP-048, CP-049 | Aprobado. Descarga de anexos y botones de regreso en las páginas. |
 | Pagos y caja | CP-021 a CP-024, CP-031 a CP-034 | Aprobado. Efectivo con cambio, tarjeta con referencia, caja obligatoria, cierre cuadrado y faltante de $2.000. |
 | Cancelaciones y estados | CP-025 a CP-030, CP-045 | Aprobado. Reembolso tarjeta/efectivo, devolución de stock, motivo obligatorio, transiciones válidas y reembolso del 50% en preparación. |
-| Administración | CP-035 a CP-040 | Aprobado. Stock, usuarios, contraseña temporal, CRUD de producto, protección del último admin y configuración. |
+| Administración | CP-035 a CP-040, CP-050 a CP-053 | Aprobado. Stock, usuarios, contraseña temporal, CRUD de producto, imágenes de producto, protección del último admin y configuración. |
 | Reportes | CP-041 | Aprobado. Reportes 200 y CSV con `Content-Type: text/csv`. |
 | Migración | CP-042 | Aprobado. Migración ejecutada en base copia y conciliada con el origen. |
 
@@ -67,6 +67,15 @@
 - El botón **Copiar enlace** genera un enlace sin `nuevo=1` y muestra confirmación o alternativa manual.
 - Las páginas de acceso, privacidad, manual, reportes y detalle de gestión tienen botón de regreso.
 
+### Imágenes de producto
+- Se creó una categoría y un producto desde Administración; ambos aparecieron en la tienda y la categoría en los filtros del menú.
+- La imagen subida se guardó en `public/media/productos` y se mostró recortada a **960 × 540 px**.
+- Al reemplazar la imagen cambió la ruta y se eliminó el archivo anterior.
+- Al marcar **Quitar la imagen actual**, `producto.imagen_url` quedó vacío y la tienda mostró el espacio reservado.
+- Un archivo falso con extensión `.jpg` fue rechazado con el mensaje **Formato no permitido. Usa JPG, PNG o WebP.**
+- Al desactivar el producto, desapareció de la tienda.
+- Los productos, categorías y archivos temporales de la prueba se eliminaron al finalizar.
+
 ### Seguridad
 - 8 intentos fallidos de login → bloqueo de 10 minutos.
 - Cliente y encargado reciben redirección al intentar abrir `admin.php`.
@@ -93,13 +102,13 @@ Ejecución sobre la base copia `coffeeandtea_migracion`, creada desde `db/schema
 
 | Suite | Comando | Resultado |
 |---|---|---|
-| PHP unitarias + integración | `php tests/run.php` | **12/12 aprobadas** |
-| Playwright E2E | `npx playwright test` | **12/12 aprobadas** |
+| PHP unitarias + integración | `php tests/run.php` | **14/14 aprobadas** |
+| Playwright E2E | `npx playwright test` | **14/14 aprobadas** |
 
 Las pruebas de integración crean y eliminan sus propios datos en `coffeeandtea_qa`.
 Las E2E cubren catálogo, carrito, checkout, confirmación, login por rol, RBAC,
-restricciones del personal interno, pedidos recientes de invitado y validación
-de consentimiento.
+restricciones del personal interno, pedidos recientes de invitado, validación
+de consentimiento y gestión de imágenes de producto.
 
 ## 5. Defectos encontrados y corregidos
 
@@ -121,6 +130,6 @@ de consentimiento.
 ## 7. Conclusión
 
 El sistema cumple los flujos críticos de tienda, cobro, caja, stock, cancelación,
-seguridad y migración de datos. Los **49 casos de prueba están aprobados** y las
+seguridad y migración de datos. Los **53 casos de prueba están aprobados** y las
 suites automatizadas pasan completas. La única dependencia externa pendiente es
 la contraseña de aplicación de Gmail para el envío real de correos.

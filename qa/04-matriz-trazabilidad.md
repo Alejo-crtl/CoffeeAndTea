@@ -41,6 +41,7 @@ Requisito → implementación → prueba. Estados: **Aprobado**, **Pendiente**, 
 | RF-ADM-03 | CRUD de productos y categorías | `public/admin.php` | CP-038 | Aprobado |
 | RF-ADM-04 | Proteger el último administrador | `administradoresActivos()` | CP-039 | Aprobado |
 | RF-ADM-05 | Configuración de tienda | `config_sistema`, `admin.php` | CP-040 | Aprobado |
+| RF-ADM-06 | Gestión de imágenes de producto | `public/admin.php`, `app/php/lib/imagenes.php` | CP-050, CP-051, CP-052, CP-053 | Aprobado |
 | RF-REP-01 | Reportes y exportación CSV | `public/reportes.php` | CP-041 | Aprobado |
 | RF-MIG-01 | Migración fiel de datos | `db/migraciones/001_migracion_inicial.sql` | CP-042 | Aprobado |
 | RF-AUD-01 | Auditoría de acciones sensibles | `auditoria.php` | Transversal | Aprobado |

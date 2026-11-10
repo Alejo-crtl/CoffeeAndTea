@@ -12,15 +12,15 @@ function listaAnexos(): array
     return [
         'pac' => [
             'titulo'      => 'PAC — Plan de aseguramiento de calidad',
-            'descripcion' => 'Plan, riesgos, casos de prueba, trazabilidad, RBAC y resultados de calidad.',
-            'archivo'     => 'PAC_Plan_Aseguramiento_Calidad_Coffeeandtea_v1.0.docx',
+            'descripcion' => 'Plan, riesgos, casos de prueba, trazabilidad, RBAC y resultados de calidad v1.1.',
+            'archivo'     => 'PAC_Plan_Aseguramiento_Calidad_Coffeeandtea_v1.1.docx',
             'tipo'        => 'Word',
             'mime'        => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         ],
         'srs' => [
             'titulo'      => 'SRS — Especificación de requisitos',
-            'descripcion' => 'Requisitos funcionales y no funcionales del sistema final v1.1.',
-            'archivo'     => 'SRS_CoffeeAndTea_v1.1.docx',
+            'descripcion' => 'Requisitos funcionales y no funcionales del sistema final v1.2.',
+            'archivo'     => 'SRS_CoffeeAndTea_v1.2.docx',
             'tipo'        => 'Word',
             'mime'        => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         ],
