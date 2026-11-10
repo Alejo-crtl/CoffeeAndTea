@@ -114,3 +114,6 @@ SELECT setval('pago_id_seq', 4, true);
 SELECT setval('caja_sesion_id_seq', 1, true);
 SELECT setval('movimiento_caja_id_seq', 2, true);
 SELECT setval('pedido_historial_estado_id_seq', 11, true);
+
+-- El combo desayuno queda inactivo para conservar los pedidos historicos que lo referencian.
+UPDATE producto SET activo = FALSE, destacado = FALSE WHERE id = 10;
