@@ -45,3 +45,6 @@ CP-043;Personal interno sin carrito ni cuenta;RF-RBAC-04;Sesión ENCARGADO o ADM
 CP-044;Pedidos recientes de invitado;RF-TIE-07;Visitante con un pedido creado;Abrir pedidos-invitado.php;Muestra el pedido guardado en el navegador con enlace a su estado;Media;Sistema;Aprobado
 CP-045;Cancelación en preparación con reembolso del 50%;RF-CAN-05;Pedido pagado y en preparación;Cancelar con motivo y reembolso tarjeta;Devuelve stock, pago REEMBOLSADO con monto_reembolsado del 50% y auditoría;Alta;Integración;Aprobado
 CP-046;Tiempo estimado por producto y cola;RF-TIE-10;Productos con tiempo configurado;Crear un pedido con varios productos;Calcula trabajo, capacidad, buffer y cola;Alta;Integración;Aprobado
+CP-047;Copiar enlace del pedido;RF-TIE-11;Pedido registrado;Pulsar Copiar enlace;Muestra confirmación y el enlace no incluye nuevo=1;Media;Sistema;Aprobado
+CP-048;Página de anexos y descargas;RF-DOC-01;Sesión visitante;Abrir anexos.php y descargar los documentos;Muestra seis documentos y descarga con encabezados correctos;Media;Sistema;Aprobado
+CP-049;Navegación sin flechas del navegador;RF-UI-02;Todas las páginas;Recorrer las páginas y usar los botones de regreso;Cada página tiene una salida visible;Media;Sistema;Aprobado

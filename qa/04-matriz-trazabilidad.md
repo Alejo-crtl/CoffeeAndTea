@@ -21,6 +21,9 @@ Requisito → implementación → prueba. Estados: **Aprobado**, **Pendiente**, 
 | RF-TIE-06 | Consulta pública por código y token | `obtenerPedidoPublico()`, `pedido.php` | CP-019, CP-020 | Aprobado |
 | RF-TIE-07 | Historial de invitado en el navegador | `pedidos_invitado.php`, `pedidos-invitado.php` | CP-044 | Aprobado |
 | RF-TIE-10 | Tiempo estimado por producto, capacidad y cola | `calcularTiempoEstimado()`, `calcularTiempoPreparacion()` | CP-046 | Aprobado |
+| RF-TIE-11 | Copiar enlace limpio del pedido | `pedido.php`, botón Copiar enlace | CP-047 | Aprobado |
+| RF-DOC-01 | Página de anexos y descargas controladas | `anexos.php`, `descargar-anexo.php` | CP-048 | Aprobado |
+| RF-UI-02 | Navegación con botones en todas las páginas | `pieHtml()`, botones de regreso | CP-049 | Aprobado |
 | RF-CAJ-01 | Cobro en efectivo con cambio | `confirmarPago()` | CP-021, CP-024 | Aprobado |
 | RF-CAJ-02 | Cobro con tarjeta y referencia externa | `confirmarPago()` | CP-022 | Aprobado |
 | RF-CAJ-03 | Caja obligatoria para efectivo | `cajaAbierta()` | CP-023 | Aprobado |

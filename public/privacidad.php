@@ -19,6 +19,7 @@ cabeceraHtml('Privacidad | CoffeeAndtea', 'privacidad');
         <h1>Privacidad y tratamiento de datos</h1>
         <p>Última actualización: <?= h(date('d/m/Y')) ?>.</p>
     </div>
+    <a class="btn btn-secundario" href="<?= h(url('index.php')) ?>">Volver a la tienda</a>
 </section>
 
 <div class="panel prosa">
@@ -58,6 +59,10 @@ cabeceraHtml('Privacidad | CoffeeAndtea', 'privacidad');
     <h2>Cookies y sesión</h2>
     <p>Usamos una cookie de sesión necesaria para mantener tu carrito, tu inicio de sesión y la protección
         contra falsificación de peticiones (CSRF). No usamos cookies publicitarias ni rastreadores de terceros.</p>
+
+    <p>
+        <a class="btn btn-primario" href="<?= h(url('checkout.php')) ?>">Volver al pedido</a>
+    </p>
 </div>
 
 <?php pieHtml(); ?>

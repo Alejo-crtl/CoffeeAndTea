@@ -21,6 +21,8 @@ if ($reset === null) {
             <h1>Este enlace ya no sirve</h1>
             <p class="texto-suave">Puede haber vencido o haberse usado antes. Solicita uno nuevo.</p>
             <a class="btn btn-primario btn-bloque" href="<?= h(url('recuperar.php')) ?>">Solicitar otro enlace</a>
+            <a class="btn btn-fantasma btn-bloque" href="<?= h(url('login.php')) ?>">Volver a ingresar</a>
+            <a class="btn btn-fantasma btn-bloque" href="<?= h(url('index.php')) ?>">Volver a la tienda</a>
         </div>
     </section>
     <?php
@@ -71,6 +73,8 @@ cabeceraHtml('Nueva contraseña | CoffeeAndtea', 'login', false);
             </div>
             <button class="btn btn-primario btn-bloque" type="submit">Guardar contraseña</button>
         </form>
+        <a class="btn btn-fantasma btn-bloque" href="<?= h(url('login.php')) ?>">Volver a ingresar</a>
+        <a class="btn btn-fantasma btn-bloque" href="<?= h(url('index.php')) ?>">Volver a la tienda</a>
     </div>
 </section>
 

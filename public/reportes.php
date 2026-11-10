@@ -116,6 +116,7 @@ cabeceraHtml('Reportes | CoffeeAndtea', 'reportes');
         <h1>Reportes</h1>
         <p>Ventas, productos y caja. Los importes usan el precio histórico de cada pedido.</p>
     </div>
+    <a class="btn btn-secundario" href="<?= h(url('gestion.php')) ?>">Volver a gestión</a>
     <a class="btn btn-secundario" href="<?= h(url('reportes.php?export=ventas')) ?>">Exportar ventas de hoy (CSV)</a>
 </section>
 

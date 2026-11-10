@@ -75,10 +75,6 @@ cabeceraHtml('Carrito | CoffeeAndtea', 'carrito');
         <a class="btn btn-primario" href="<?= h(url('index.php')) ?>#menu">Ver el menú</a>
     </div>
 <?php else: ?>
-    <?php if (usuarioActual() === null): ?>
-        <?= avisoCompraInvitadoHtml() ?>
-    <?php endif; ?>
-
     <div class="layout-carrito">
         <section class="panel" aria-labelledby="carrito-titulo">
             <h2 id="carrito-titulo">Productos (<?= (int) $carrito['unidades'] ?>)</h2>
@@ -141,18 +137,46 @@ cabeceraHtml('Carrito | CoffeeAndtea', 'carrito');
                 <div class="total"><dt>Total</dt><dd><?= h(moneda($carrito['subtotal'])) ?></dd></div>
             </dl>
             <p class="texto-suave">El tiempo estimado se confirma al registrar el pedido.</p>
-            <p class="texto-suave">
-                Cancelación: 100% antes de preparación; 50% si el pedido ya está
-                en preparación o listo.
-            </p>
             <?php if ($tiendaAbierta): ?>
-                <a class="btn btn-primario btn-bloque" href="<?= h(url('checkout.php')) ?>">Continuar con el pedido</a>
+                <a id="continuar-pedido" class="btn btn-primario btn-bloque" href="<?= h(url('checkout.php')) ?>">Continuar con el pedido</a>
             <?php else: ?>
                 <button class="btn btn-primario btn-bloque" type="button" disabled>Checkout cerrado</button>
             <?php endif; ?>
             <p class="nota-pago">Pago en efectivo o tarjeta en el mostrador. No se cobra en línea.</p>
         </aside>
     </div>
+
+    <?php if (usuarioActual() === null): ?>
+        <dialog id="dialogo-invitado" class="dialogo-aviso" aria-label="Aviso antes de continuar">
+            <div class="dialogo-contenido">
+                <p class="eyebrow">Antes de continuar</p>
+                <?= avisoCompraInvitadoHtml() ?>
+                <div class="dialogo-acciones">
+                    <button type="button" class="btn btn-primario" id="continuar-invitado">Entendido, continuar</button>
+                    <button type="button" class="btn btn-fantasma" id="cerrar-invitado">Volver al carrito</button>
+                </div>
+            </div>
+        </dialog>
+        <script>
+            (function () {
+                var dialogo = document.getElementById('dialogo-invitado');
+                var enlace = document.getElementById('continuar-pedido');
+                if (!dialogo || !enlace || typeof dialogo.showModal !== 'function') {
+                    return;
+                }
+                enlace.addEventListener('click', function (evento) {
+                    evento.preventDefault();
+                    dialogo.showModal();
+                });
+                document.getElementById('continuar-invitado').addEventListener('click', function () {
+                    window.location.href = enlace.href;
+                });
+                document.getElementById('cerrar-invitado').addEventListener('click', function () {
+                    dialogo.close();
+                });
+            })();
+        </script>
+    <?php endif; ?>
 <?php endif; ?>
 
 <?php pieHtml(); ?>

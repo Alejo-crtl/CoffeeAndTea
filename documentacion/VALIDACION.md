@@ -4,17 +4,17 @@
 
 | Suite | Resultado |
 |---|---|
-| Casos de prueba QA | **46/46 aprobados** |
+| Casos de prueba QA | **49/49 aprobados** |
 | Pruebas PHP (unitarias + integración) | **12/12 aprobadas** |
-| Pruebas E2E Playwright | **10/10 aprobadas** |
+| Pruebas E2E Playwright | **12/12 aprobadas** |
 
 ## Evidencia
 
-- Plan, casos y matriz RBAC: `CoffeeAndtea_Entrega/qa/`
-- Informe detallado: `CoffeeAndtea_Entrega/qa/07-informe-resultados.md`
-- Script de preparación de base QA: `CoffeeAndtea_Entrega/qa/scripts/preparar-bd.ps1`
-- Pruebas PHP: `CoffeeAndtea_Entrega/tests/run.php`
-- Pruebas E2E: `CoffeeAndtea_Entrega/tests/e2e/`
+- Plan, casos y matriz RBAC: `../qa/`
+- Informe detallado: `../qa/07-informe-resultados.md`
+- Script de preparación de base QA: `../qa/scripts/preparar-bd.ps1`
+- Pruebas PHP: `../tests/run.php`
+- Pruebas E2E: `../tests/e2e/`
 
 ## Cobertura de los cambios v1.1
 

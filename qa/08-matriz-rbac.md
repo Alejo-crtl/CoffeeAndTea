@@ -20,6 +20,7 @@ El visitante es anónimo y **no** existe como rol en la base.
 | `pedido.php` (código + token) | ✅ | ✅ | ✅ | ✅ |
 | `login.php`, `registro.php`, `recuperar.php`, `restablecer.php` | ✅ | ❌ (redirige) | ❌ | ❌ |
 | `privacidad.php`, `manual.php` | ✅ | ✅ | ✅ | ✅ |
+| `anexos.php` y descargas | ✅ | ✅ | ✅ | ✅ |
 | `cuenta.php` | ❌ | ✅ | ❌ | ❌ |
 | `cambiar-password.php` | ❌ | ✅ | ✅ | ✅ |
 | `gestion.php` | ❌ | ❌ | ✅ | ✅ |

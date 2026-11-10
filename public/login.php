@@ -41,7 +41,7 @@ cabeceraHtml('Ingresar | CoffeeAndtea', 'login', false);
 
 <section class="auth-layout">
     <div class="auth-panel">
-        <a class="auth-volver" href="<?= h(url('index.php')) ?>">&larr; Volver a la tienda</a>
+        <a class="btn btn-fantasma" href="<?= h(url('index.php')) ?>">&larr; Volver a la tienda</a>
         <p class="eyebrow">Cuenta CoffeeAndtea</p>
         <h1>Ingresar</h1>
         <p class="texto-suave">Accede para ver tus pedidos o para gestionar la tienda.</p>

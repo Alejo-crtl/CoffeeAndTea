@@ -41,7 +41,10 @@ $montoReembolso = $pagoConfirmado !== null
                 <?php if (!empty($pedidoVer['cliente_telefono'])): ?> · <?= h((string) $pedidoVer['cliente_telefono']) ?><?php endif; ?>
             </p>
         </div>
-        <div class="pedido-estado"><?= badgeEstado($estado) ?></div>
+        <div class="pedido-estado">
+            <a class="btn btn-pequeno btn-secundario" href="<?= h(url('gestion.php?tab=pedidos')) ?>">Volver a pedidos</a>
+            <?= badgeEstado($estado) ?>
+        </div>
     </div>
 
     <div class="pedido-resumen-grid">

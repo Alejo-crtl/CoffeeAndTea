@@ -26,7 +26,7 @@ cabeceraHtml('Recuperar contraseña | CoffeeAndtea', 'login', false);
 
 <section class="auth-layout">
     <div class="auth-panel">
-        <a class="auth-volver" href="<?= h(url('login.php')) ?>">&larr; Volver a ingresar</a>
+        <a class="btn btn-fantasma" href="<?= h(url('login.php')) ?>">&larr; Volver a ingresar</a>
         <p class="eyebrow">Recuperar acceso</p>
         <h1>Olvidé mi contraseña</h1>
 

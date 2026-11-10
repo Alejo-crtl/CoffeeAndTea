@@ -77,7 +77,7 @@ cabeceraHtml('Cambiar contraseña | CoffeeAndtea', 'cuenta', false);
         </form>
 
         <?php if (!$forzado): ?>
-            <a class="auth-volver" href="<?= h(inicioPorRol()) ?>">Volver</a>
+            <a class="btn btn-fantasma btn-bloque" href="<?= h(inicioPorRol()) ?>">Volver</a>
         <?php endif; ?>
     </div>
 </section>
