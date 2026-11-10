@@ -8,7 +8,7 @@ require_once __DIR__ . '/../app/php/lib/bootstrap.php';
 
 $videoUrl = urlVideoPresentacion($conn);
 
-cabeceraHtml('Video | CoffeeAndtea', 'manual');
+cabeceraHtml('Video | CoffeeAndtea', 'video');
 ?>
 
 <section class="pagina-cabecera">
