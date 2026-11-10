@@ -407,6 +407,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 break;
 
             case 'config_guardar':
+                $urlVideo = null;
+                if (array_key_exists('video_presentacion_url', $_POST)) {
+                    $urlVideo = trim((string) $_POST['video_presentacion_url']);
+                    if ($urlVideo !== '' && normalizarUrlVideo($urlVideo) === null) {
+                        throw new ReglaNegocioException('El enlace del video debe ser de YouTube o Google Drive.');
+                    }
+                }
                 $permitidas = [
                     'nombre_tienda', 'tiempo_estimado_pedidos_min',
                     'capacidad_preparacion_simultanea', 'buffer_preparacion_porcentaje',
@@ -417,6 +424,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if (array_key_exists($clave, $_POST)) {
                         guardarConfigSistema($conn, $clave, trim((string) $_POST[$clave]));
                     }
+                }
+                if ($urlVideo !== null) {
+                    guardarConfigSistema($conn, 'video_presentacion_url', $urlVideo);
                 }
                 $abierta = isset($_POST['pagina_abierta']) ? 'true' : 'false';
                 guardarConfigSistema($conn, 'pagina_abierta', $abierta);
@@ -620,7 +630,7 @@ cabeceraHtml('Administración | CoffeeAndtea', 'admin');
     <div class="layout-admin">
         <section class="panel">
             <h2>Productos (<?= count($productos) ?>)</h2>
-            <p class="texto-suave">Cada producto puede tener una imagen JPG, PNG o WebP de hasta 2 MB. Al subirla se recorta a 960 × 540 px para que todas las tarjetas se vean iguales.</p>
+            <p class="texto-suave">Cada producto puede tener una imagen JPG, PNG o WebP de hasta 2 MB. Al subirla se ajusta sin recortar, con un máximo de 1400 px por lado, para que la foto completa se vea en la tarjeta.</p>
             <div class="tabla-scroll">
                 <table class="tabla">
                     <thead><tr><th>Producto</th><th>Categoría</th><th>Precio</th><th>Stock</th><th>Estado</th><th></th></tr></thead>
@@ -696,7 +706,7 @@ cabeceraHtml('Administración | CoffeeAndtea', 'admin');
                         </div>
                     <?php endif; ?>
                     <input id="p-imagen" name="imagen" type="file" accept="image/jpeg,image/png,image/webp">
-                    <small><?= imagenProductoDisponible($imagenActualProducto) ? 'Sube otra imagen para reemplazar la actual.' : 'Se recorta automáticamente a 960 × 540 px.' ?></small>
+                    <small><?= imagenProductoDisponible($imagenActualProducto) ? 'Sube otra imagen para reemplazar la actual.' : 'Se ajusta automáticamente sin recortar.' ?></small>
                     <?php if (imagenProductoDisponible($imagenActualProducto)): ?>
                         <label class="check">
                             <input type="checkbox" name="quitar_imagen" value="1">
@@ -853,6 +863,13 @@ cabeceraHtml('Administración | CoffeeAndtea', 'admin');
                     <input id="cfg-horario" name="horario_tienda" type="text" maxlength="150"
                            placeholder="Lun a sáb, 8:00 a 20:00"
                            value="<?= h($config['horario_tienda'] ?? '') ?>">
+                </div>
+                <div class="campo">
+                    <label for="cfg-video">Video de presentación (YouTube o Google Drive)</label>
+                    <input id="cfg-video" name="video_presentacion_url" type="url" maxlength="500"
+                           placeholder="https://youtu.be/..."
+                           value="<?= h($config['video_presentacion_url'] ?? '') ?>">
+                    <small>Si se deja vacío, la página de video muestra “Video próximamente”. En Drive, comparte el archivo como “Cualquier persona con el enlace”.</small>
                 </div>
                 <label class="check">
                     <input type="checkbox" name="pagina_abierta" value="1"

@@ -17,6 +17,7 @@ segura y trazable.
 - Descuento y devolución de stock.
 - Cancelaciones con reembolso y auditoría.
 - Administración de usuarios, productos, categorías, imágenes de producto y configuración.
+- Página de video de presentación con enlace de YouTube o Google Drive.
 - Reportes y exportación CSV.
 - Migración de datos desde la base original `CoffeeAndTea`.
 

@@ -19,9 +19,9 @@ Paquete de aseguramiento de calidad del sistema de tienda y gestión **CoffeeAnd
 
 ## Resultados actuales
 
-- **53/53 casos aprobados.**
-- **14/14 pruebas PHP** (`php tests\run.php`).
-- **14/14 pruebas E2E** (`npx playwright test`).
+- **55/55 casos aprobados.**
+- **15/15 pruebas PHP** (`php tests\run.php`).
+- **16/16 pruebas E2E** (`npx playwright test`).
 - Informe completo: `qa/07-informe-resultados.md`.
 
 ## Requisitos previos

@@ -37,4 +37,12 @@ test('la tienda muestra la imagen de cada tarjeta de producto', async ({ page })
 
     expect(total).toBeGreaterThan(0);
     expect(conImagen).toBe(total);
+
+    const proporcion = await page.locator('.tarjeta-producto .producto-imagen').first()
+        .evaluate((el) => getComputedStyle(el).aspectRatio.replace(/\s/g, ''));
+    expect(proporcion === '3/2' || proporcion === '1.5').toBeTruthy();
+
+    const ajuste = await page.locator('.tarjeta-producto .producto-imagen img').first()
+        .evaluate((el) => getComputedStyle(el).objectFit);
+    expect(ajuste).toBe('contain');
 });

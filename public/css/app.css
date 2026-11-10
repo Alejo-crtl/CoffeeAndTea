@@ -2086,6 +2086,39 @@ label.checkbox input {
     width: 100%; max-width: var(--ancho); margin: 20px auto 40px; padding: 0 24px;
     display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px;
 }
+.video-presentacion {
+    width: 100%; max-width: 1100px; margin: 20px auto 48px; padding: 0 24px;
+}
+.video-marco {
+    position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden;
+    border: 1px solid var(--borde); border-radius: var(--radio);
+    background: #2a1a10; box-shadow: var(--sombra);
+}
+.video-marco iframe { display: block; width: 100%; height: 100%; border: 0; }
+.video-placeholder {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 10px; padding: 28px; text-align: center;
+    color: #f8eee2;
+    background:
+        radial-gradient(circle at 28% 18%, rgba(217, 160, 91, 0.32), transparent 18rem),
+        linear-gradient(135deg, #3b2415, #6f4e37);
+}
+.video-placeholder-icono {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 64px; height: 64px; border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.38); background: rgba(255, 255, 255, 0.12);
+    font-size: 1.35rem; line-height: 1;
+}
+.video-placeholder h3 { margin: 0; color: #fff; font-size: 1.45rem; }
+.video-placeholder p { margin: 0; max-width: 520px; color: rgba(255, 255, 255, 0.78); font-size: 0.92rem; }
+.video-nota { margin: 12px 0 0; text-align: center; color: #8a7a6a; font-size: 0.82rem; }
+@media (max-width: 600px) {
+    .video-presentacion { padding: 0 16px; }
+    .video-placeholder { padding: 20px; }
+    .video-placeholder-icono { width: 52px; height: 52px; font-size: 1.1rem; }
+    .video-placeholder h3 { font-size: 1.2rem; }
+    .video-placeholder p { font-size: 0.84rem; }
+}
 .anexo-card {
     display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
     padding: 22px; background: var(--superficie); border: 1px solid var(--borde);
@@ -2109,7 +2142,9 @@ label.checkbox input {
 .tarjeta-producto:hover { transform: translateY(-3px); box-shadow: var(--sombra); }
 .tarjeta-producto.agotado { opacity: 0.72; }
 .producto-imagen {
-    height: 180px; min-height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    position: relative;
+    aspect-ratio: 3 / 2;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
     overflow: hidden;
     background:
         radial-gradient(circle at 26% 22%, rgba(217, 160, 91, 0.35), transparent 10rem),
@@ -2117,11 +2152,19 @@ label.checkbox input {
     border-bottom: 1px dashed var(--borde-fuerte);
     color: var(--marron-claro);
 }
-.producto-imagen.con-foto { background: #f4eadc; border-bottom-style: solid; }
-.producto-imagen img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.35s ease; }
+.producto-imagen.con-foto {
+    background: radial-gradient(circle at 50% 35%, #fffaf3, #f1e3d1);
+    border-bottom-style: solid;
+}
+.producto-imagen img {
+    position: relative; z-index: 1;
+    display: block; width: 100%; height: 100%; padding: 12px;
+    object-fit: contain; transition: transform 0.35s ease;
+    filter: drop-shadow(0 10px 16px rgba(59, 36, 21, 0.18));
+}
 @media (hover: hover) {
     .tarjeta-producto:hover .producto-imagen img,
-    .tarjeta-producto:focus-within .producto-imagen img { transform: scale(1.06); }
+    .tarjeta-producto:focus-within .producto-imagen img { transform: scale(1.03); }
 }
 .producto-imagen span { font-family: Georgia, serif; font-size: 3.2rem; line-height: 1; color: rgba(111, 78, 55, 0.35); }
 .producto-imagen small { font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(111, 78, 55, 0.45); }
@@ -2179,10 +2222,10 @@ label.checkbox input {
     font-family: Georgia, serif; font-size: 1.2rem; color: var(--marron-claro);
 }
 .vista-previa-imagen {
-    width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 10px;
-    border: 1px solid var(--borde); background: var(--crema-2); margin-bottom: 8px;
+    position: relative; width: 100%; aspect-ratio: 3 / 2; overflow: hidden; border-radius: 10px;
+    border: 1px solid var(--borde); background: radial-gradient(circle at 50% 35%, #fffaf3, #f1e3d1); margin-bottom: 8px;
 }
-.vista-previa-imagen img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.vista-previa-imagen img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; padding: 10px; object-fit: contain; filter: drop-shadow(0 8px 14px rgba(59, 36, 21, 0.16)); }
 .tabla-carrito td { vertical-align: middle; }
 .form-cantidad { display: flex; gap: 6px; align-items: center; }
 .form-cantidad input { max-width: 70px; }

@@ -3,7 +3,7 @@
  * Gestión de las imágenes de producto.
  *
  * - Valida el archivo subido (tipo real, tamaño y dimensiones).
- * - Normaliza la imagen a 960 × 540 px para que todas las tarjetas se vean igual.
+ * - Ajusta la imagen sin recortarla para que la foto completa se vea en la tarjeta.
  * - Guarda el archivo en public/media/productos y devuelve la ruta relativa
  *   que se almacena en producto.imagen_url.
  * - Borra el archivo anterior solo si ningún otro producto lo usa.
@@ -13,9 +13,8 @@ declare(strict_types=1);
 /** Tamaño máximo admitido para una imagen subida (2 MB). */
 const IMAGEN_PRODUCTO_MAX_BYTES = 2 * 1024 * 1024;
 
-/** Medidas finales de la imagen de tarjeta. */
-const IMAGEN_PRODUCTO_ANCHO = 960;
-const IMAGEN_PRODUCTO_ALTO = 540;
+/** Lado máximo al que se ajusta la imagen sin recortar. */
+const IMAGEN_PRODUCTO_MAX_LADO = 1400;
 
 /** Carpeta física donde viven las imágenes de producto. */
 function carpetaImagenesProductos(): string
@@ -146,7 +145,8 @@ function guardarImagenProducto(array $archivo): string
 }
 
 /**
- * Recorta y escala la imagen a 960 × 540 px y la guarda como JPEG.
+ * Ajusta la imagen a un máximo de 1400 px por lado, sin recortarla, y la
+ * guarda como JPEG. Conserva la proporción original.
  *
  * Requiere la extensión GD con soporte para JPEG, PNG y WebP.
  */
@@ -167,11 +167,11 @@ function normalizarImagenProducto(string $origen, string $destino): bool
 
     $anchoOrigen = imagesx($imagen);
     $altoOrigen = imagesy($imagen);
-    $escala = max(IMAGEN_PRODUCTO_ANCHO / $anchoOrigen, IMAGEN_PRODUCTO_ALTO / $altoOrigen);
-    $anchoDestino = (int) ceil($anchoOrigen * $escala);
-    $altoDestino = (int) ceil($altoOrigen * $escala);
+    $escala = min(1.0, IMAGEN_PRODUCTO_MAX_LADO / $anchoOrigen, IMAGEN_PRODUCTO_MAX_LADO / $altoOrigen);
+    $anchoDestino = max(1, (int) round($anchoOrigen * $escala));
+    $altoDestino = max(1, (int) round($altoOrigen * $escala));
 
-    $lienzo = imagecreatetruecolor(IMAGEN_PRODUCTO_ANCHO, IMAGEN_PRODUCTO_ALTO);
+    $lienzo = imagecreatetruecolor($anchoDestino, $altoDestino);
     if ($lienzo === false) {
         imagedestroy($imagen);
         return false;
@@ -179,15 +179,13 @@ function normalizarImagenProducto(string $origen, string $destino): bool
 
     // Fondo crema por si la imagen original tiene transparencia.
     $fondo = imagecolorallocate($lienzo, 244, 234, 220);
-    imagefilledrectangle($lienzo, 0, 0, IMAGEN_PRODUCTO_ANCHO, IMAGEN_PRODUCTO_ALTO, $fondo);
+    imagefilledrectangle($lienzo, 0, 0, $anchoDestino, $altoDestino, $fondo);
 
-    $x = (int) floor((IMAGEN_PRODUCTO_ANCHO - $anchoDestino) / 2);
-    $y = (int) floor((IMAGEN_PRODUCTO_ALTO - $altoDestino) / 2);
     imagecopyresampled(
         $lienzo,
         $imagen,
-        $x,
-        $y,
+        0,
+        0,
         0,
         0,
         $anchoDestino,
@@ -196,7 +194,7 @@ function normalizarImagenProducto(string $origen, string $destino): bool
         $altoOrigen
     );
 
-    $ok = imagejpeg($lienzo, $destino, 84);
+    $ok = imagejpeg($lienzo, $destino, 85);
     imagedestroy($lienzo);
     imagedestroy($imagen);
     return $ok;

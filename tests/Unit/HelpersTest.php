@@ -49,6 +49,21 @@ final class HelpersTest extends CasoBase
         $this->assertFalse(imagenProductoDisponible(''));
     }
 
+    public function testNormalizarUrlVideoAceptaYoutubeYDrive(): void
+    {
+        $youtube = 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?rel=0';
+        $drive = 'https://drive.google.com/file/d/ABC123456789/preview';
+
+        $this->assertSame($youtube, normalizarUrlVideo('https://youtu.be/dQw4w9WgXcQ'));
+        $this->assertSame($youtube, normalizarUrlVideo('https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=10s'));
+        $this->assertSame($youtube, normalizarUrlVideo('https://www.youtube.com/shorts/dQw4w9WgXcQ'));
+        $this->assertSame($drive, normalizarUrlVideo('https://drive.google.com/file/d/ABC123456789/view?usp=sharing'));
+        $this->assertSame($drive, normalizarUrlVideo('https://drive.google.com/open?id=ABC123456789'));
+        $this->assertNull(normalizarUrlVideo(''));
+        $this->assertNull(normalizarUrlVideo('https://vimeo.com/123456'));
+        $this->assertNull(normalizarUrlVideo('javascript:alert(1)'));
+    }
+
     public function testValidarPasswordExigeComplejidad(): void
     {
         $this->assertCount(0, validarPassword('Admin123!'));

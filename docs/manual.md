@@ -19,6 +19,7 @@ Como visitante o cliente puedes:
 - Crear una cuenta para consultar tus pedidos.
 - Consultar el estado de un pedido con su código y enlace.
 - Recuperar tu contraseña si la olvidas.
+- Ver el video de presentación del proyecto desde el enlace **Video** del pie de página.
 
 ---
 

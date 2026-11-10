@@ -40,6 +40,7 @@ Marcar cada punto antes de publicar o entregar una versión.
 - [ ] Correo de prueba recibido (Mailpit en desarrollo o Gmail en producción).
 - [ ] Reportes y CSV muestran cifras correctas.
 - [ ] Las imágenes de producto cargan y `media/productos` no ejecuta scripts.
+- [ ] El video de presentación está configurado o muestra “Video próximamente”.
 - [ ] Manual y ayuda actualizados.
 
 ## Entrega

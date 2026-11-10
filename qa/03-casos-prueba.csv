@@ -48,7 +48,9 @@ CP-046;Tiempo estimado por producto y cola;RF-TIE-10;Productos con tiempo config
 CP-047;Copiar enlace del pedido;RF-TIE-11;Pedido registrado;Pulsar Copiar enlace;Muestra confirmación y el enlace no incluye nuevo=1;Media;Sistema;Aprobado
 CP-048;Página de anexos y descargas;RF-DOC-01;Sesión visitante;Abrir anexos.php y descargar los documentos;Muestra seis documentos y descarga con encabezados correctos;Media;Sistema;Aprobado
 CP-049;Navegación sin flechas del navegador;RF-UI-02;Todas las páginas;Recorrer las páginas y usar los botones de regreso;Cada página tiene una salida visible;Media;Sistema;Aprobado
-CP-050;Subir imagen al crear producto;RF-ADM-06;Sesión ADMIN;Crear producto, seleccionar un JPG y guardar;El producto aparece en la tienda con la imagen recortada a 960 × 540 px;Alta;Sistema;Aprobado
+CP-050;Subir imagen al crear producto;RF-ADM-06;Sesión ADMIN;Crear producto, seleccionar un JPG y guardar;El producto aparece en la tienda con la imagen completa y sin recortes;Alta;Sistema;Aprobado
 CP-051;Reemplazar imagen de producto;RF-ADM-06;Producto con imagen;Editar, subir otro archivo y guardar;La vista previa y la tienda muestran la imagen nueva y el archivo anterior se elimina;Media;Sistema;Aprobado
 CP-052;Quitar imagen de producto;RF-ADM-06;Producto con imagen;Editar, marcar Quitar la imagen actual y guardar;El producto queda sin imagen y la tienda muestra el espacio reservado;Media;Sistema;Aprobado
 CP-053;Rechazar archivo de imagen inválido;RF-ADM-06;Sesión ADMIN;Subir un archivo que no sea JPG, PNG o WebP;El panel muestra un error y no reemplaza la imagen;Alta;Negativo;Aprobado
+CP-054;Video de presentación;RF-DOC-02;Sin URL configurada;Abrir el enlace Video del pie de página;Muestra “Video próximamente” y no desborda en móvil;Media;Sistema;Aprobado
+CP-055;Imagen de producto sin recortes;RF-ADM-06;Producto con imagen;Abrir la tienda en escritorio y móvil;La tarjeta mantiene proporción 3:2, la imagen se ve completa y el hover no la recorta;Media;Sistema;Aprobado
