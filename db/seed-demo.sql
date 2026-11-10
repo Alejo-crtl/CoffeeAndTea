@@ -40,7 +40,7 @@ VALUES
     (7, 'Pan de Queso', 'Pan de queso horneado', 3200, 35, 10, 3, true, false, 'unidades', 3),
     (8, 'Galleta Integral', 'Galleta de avena y pasas', 2200, 100, 20, 4, true, false, 'unidades', 2),
     (9, 'Torta de Chocolate', 'Porción de torta', 6000, 12, 3, 4, true, true, 'unidades', 4),
-    (10, 'Combo Desayuno', 'Café + croissant + jugo', 12000, 15, 5, 5, true, true, 'unidades', 12);
+    (10, 'Combo Café y Croissant', 'Café + croissant', 8000, 15, 5, 5, true, true, 'unidades', 8);
 
 INSERT INTO pedido
     (id, codigo, token_publico, cliente_id, estado, observaciones, canal, metodo_pago, tiempo_estimado_min,
@@ -115,5 +115,3 @@ SELECT setval('caja_sesion_id_seq', 1, true);
 SELECT setval('movimiento_caja_id_seq', 2, true);
 SELECT setval('pedido_historial_estado_id_seq', 11, true);
 
--- El combo desayuno queda inactivo para conservar los pedidos historicos que lo referencian.
-UPDATE producto SET activo = FALSE, destacado = FALSE WHERE id = 10;

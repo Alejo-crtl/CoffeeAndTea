@@ -31,7 +31,7 @@
 | María Gómez | `maria@example.com` | 3007654321 |
 | Cliente Demo | `cliente@coffeeandtea.local` | 3005551234 |
 
-## Productos (10, 9 activos)
+## Productos (10)
 
 | Producto | Precio | Stock | Categoría |
 |---|---:|---:|---|
@@ -44,7 +44,7 @@
 | Pan de Queso | 3.200 | 35 | Panadería |
 | Galleta Integral | 2.200 | 100 | Postres |
 | Torta de Chocolate | 6.000 | 12 | Postres |
-| Combo Desayuno | 12.000 | 15 | Desayunos (inactivo, solo histórico) |
+| Combo Café y Croissant | 8.000 | 15 | Desayunos |
 
 ## Pedidos demo (6)
 
