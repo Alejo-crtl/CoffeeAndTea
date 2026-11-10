@@ -31,6 +31,39 @@ final class HelpersTest extends CasoBase
         $this->assertSame('postre-dia', slugificar('Postre / día'));
     }
 
+    public function testRutaWebImagenProductoSoloAceptaLaCarpetaSegura(): void
+    {
+        $this->assertSame('media/productos/cafe-express.jpg', rutaWebImagenProducto('media/productos/cafe-express.jpg'));
+        $this->assertSame('media/productos/cafe-express.jpg', rutaWebImagenProducto('/media/productos/cafe-express.jpg'));
+        $this->assertSame('', rutaWebImagenProducto(''));
+        $this->assertSame('', rutaWebImagenProducto('../.env'));
+        $this->assertSame('', rutaWebImagenProducto('media/productos/../../.env'));
+        $this->assertSame('', rutaWebImagenProducto('https://ejemplo.com/foto.jpg'));
+        $this->assertSame('', rutaWebImagenProducto('media/productos/foto.php'));
+    }
+
+    public function testImagenProductoDisponibleVerificaElArchivo(): void
+    {
+        $this->assertTrue(imagenProductoDisponible('media/productos/cafe-express.jpg'));
+        $this->assertFalse(imagenProductoDisponible('media/productos/no-existe.jpg'));
+        $this->assertFalse(imagenProductoDisponible(''));
+    }
+
+    public function testNormalizarUrlVideoAceptaYoutubeYDrive(): void
+    {
+        $youtube = 'https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?rel=0';
+        $drive = 'https://drive.google.com/file/d/ABC123456789/preview';
+
+        $this->assertSame($youtube, normalizarUrlVideo('https://youtu.be/dQw4w9WgXcQ'));
+        $this->assertSame($youtube, normalizarUrlVideo('https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=10s'));
+        $this->assertSame($youtube, normalizarUrlVideo('https://www.youtube.com/shorts/dQw4w9WgXcQ'));
+        $this->assertSame($drive, normalizarUrlVideo('https://drive.google.com/file/d/ABC123456789/view?usp=sharing'));
+        $this->assertSame($drive, normalizarUrlVideo('https://drive.google.com/open?id=ABC123456789'));
+        $this->assertNull(normalizarUrlVideo(''));
+        $this->assertNull(normalizarUrlVideo('https://vimeo.com/123456'));
+        $this->assertNull(normalizarUrlVideo('javascript:alert(1)'));
+    }
+
     public function testValidarPasswordExigeComplejidad(): void
     {
         $this->assertCount(0, validarPassword('Admin123!'));

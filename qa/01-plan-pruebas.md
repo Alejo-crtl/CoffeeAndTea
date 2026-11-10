@@ -16,7 +16,8 @@ segura y trazable.
 - Cobro en mostrador (efectivo/tarjeta), caja y cierre diario.
 - Descuento y devolución de stock.
 - Cancelaciones con reembolso y auditoría.
-- Administración de usuarios, productos, categorías y configuración.
+- Administración de usuarios, productos, categorías, imágenes de producto y configuración.
+- Página de video de presentación con enlace de YouTube o Google Drive.
 - Reportes y exportación CSV.
 - Migración de datos desde la base original `CoffeeAndTea`.
 
@@ -24,7 +25,6 @@ segura y trazable.
 
 - Pasarela de pago en línea (no existe; el datáfono es externo).
 - Domicilios (solo recogida en tienda).
-- Carga de imágenes (espacio reservado, sin uploads).
 - Aplicación móvil nativa.
 - Infraestructura de servidor definitiva y dominio (se define después).
 

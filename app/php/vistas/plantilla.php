@@ -110,6 +110,7 @@ function pieHtml(): void
         . '<a href="' . h(url('privacidad.php')) . '">Privacidad</a> &middot; '
         . '<a href="' . h(url('politica-cancelacion.php')) . '">Cancelación</a> &middot; '
         . '<a href="' . h(url('anexos.php')) . '">Anexos</a> &middot; '
+        . '<a href="' . h(url('video.php')) . '">Video</a> &middot; '
         . date('Y') . "</p>\n";
     echo "    </footer>\n";
     echo '    <script src="' . h(url('js/tienda.js')) . "\"></script>\n";

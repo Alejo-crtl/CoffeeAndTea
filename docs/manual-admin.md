@@ -101,7 +101,7 @@ CoffeeAndtea_Entrega/
 | Componente | Requisito |
 |---|---|
 | PHP | 8.3 o superior |
-| Extensiones | `pdo_pgsql`, `pgsql`, `mbstring`, `openssl`, `session`, `json` |
+| Extensiones | `pdo_pgsql`, `pgsql`, `mbstring`, `openssl`, `session`, `json`, `fileinfo`, `gd` |
 | PostgreSQL | 14 o superior (probado con 18) |
 | Servidor web | Apache/Nginx con docroot en `public/` |
 | Composer | Opcional, para PHPUnit/PHPStan/PHPCS |
@@ -283,6 +283,7 @@ Campos:
 - Tiempo de preparación.
 - Activo.
 - Destacado.
+- Imagen del producto (JPG, PNG o WebP, máximo 2 MB).
 
 Reglas:
 
@@ -291,7 +292,11 @@ Reglas:
 - El stock mínimo alimenta las alertas de gestión.
 - El tiempo de preparación influye en el tiempo estimado del pedido.
 - Los pedidos históricos conservan el precio congelado.
-- Las imágenes están reservadas; todavía no se cargan archivos.
+- Al subir una imagen se ajusta automáticamente **sin recortarla**, con un máximo de 1400 px por lado.
+- La tarjeta muestra la foto completa con un fondo crema suave, en una proporción de 3:2.
+- Para reemplazar la foto, selecciona otro archivo y guarda. El archivo anterior se elimina si ningún otro producto lo usa.
+- Para dejar el producto sin foto, marca **Quitar la imagen actual** y guarda. La tienda mostrará el espacio reservado.
+- Se rechazan archivos que no sean JPG, PNG o WebP, que superen los 2 MB o que no contengan una imagen válida.
 
 ---
 
@@ -309,6 +314,7 @@ Reglas:
 | Teléfono | Contacto público. |
 | Correo de contacto | Se muestra en la tienda. |
 | Horario | Información de atención. |
+| Video de presentación | Enlace de YouTube o Google Drive; si está vacío, muestra “Video próximamente”. |
 | Recibir pedidos web | Si se desactiva, el checkout queda cerrado. |
 
 El tiempo estimado del pedido se calcula con los tiempos de preparación de cada
@@ -327,6 +333,20 @@ El admin puede variar el tiempo de cada producto y los parámetros generales en
 
 La configuración se guarda en `config_sistema`. Los cambios se aplican de
 inmediato.
+
+### Video de presentación
+
+El campo **Video de presentación** acepta:
+
+- YouTube: `https://youtu.be/...` o `https://www.youtube.com/watch?v=...`.
+- Google Drive: `https://drive.google.com/file/d/.../view`. El archivo debe estar
+  compartido como **“Cualquier persona con el enlace”**.
+
+Si el campo está vacío, `video.php` muestra **“Video próximamente”**. Si el enlace
+no pertenece a YouTube o Google Drive, el panel muestra un error y no lo guarda.
+
+Como respaldo, también se puede definir `APP_VIDEO_URL` en `.env`; la
+configuración guardada en la base de datos tiene prioridad.
 
 ### Correo saliente
 
@@ -491,7 +511,7 @@ composer phpcs
 
 El pack de QA está en `qa/`:
 
-- `qa/03-casos-prueba.csv`: 49 casos.
+- `qa/03-casos-prueba.csv`: 55 casos.
 - `qa/07-informe-resultados.md`: resultados.
 - `qa/08-matriz-rbac.md`: permisos por rol.
 - `qa/scripts/preparar-bd.ps1`: recrea la base QA.

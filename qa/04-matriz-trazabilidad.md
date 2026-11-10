@@ -23,6 +23,7 @@ Requisito → implementación → prueba. Estados: **Aprobado**, **Pendiente**, 
 | RF-TIE-10 | Tiempo estimado por producto, capacidad y cola | `calcularTiempoEstimado()`, `calcularTiempoPreparacion()` | CP-046 | Aprobado |
 | RF-TIE-11 | Copiar enlace limpio del pedido | `pedido.php`, botón Copiar enlace | CP-047 | Aprobado |
 | RF-DOC-01 | Página de anexos y descargas controladas | `anexos.php`, `descargar-anexo.php` | CP-048 | Aprobado |
+| RF-DOC-02 | Video de presentación embebido | `public/video.php`, `app/php/lib/video.php` | CP-054 | Aprobado |
 | RF-UI-02 | Navegación con botones en todas las páginas | `pieHtml()`, botones de regreso | CP-049 | Aprobado |
 | RF-CAJ-01 | Cobro en efectivo con cambio | `confirmarPago()` | CP-021, CP-024 | Aprobado |
 | RF-CAJ-02 | Cobro con tarjeta y referencia externa | `confirmarPago()` | CP-022 | Aprobado |
@@ -41,6 +42,7 @@ Requisito → implementación → prueba. Estados: **Aprobado**, **Pendiente**, 
 | RF-ADM-03 | CRUD de productos y categorías | `public/admin.php` | CP-038 | Aprobado |
 | RF-ADM-04 | Proteger el último administrador | `administradoresActivos()` | CP-039 | Aprobado |
 | RF-ADM-05 | Configuración de tienda | `config_sistema`, `admin.php` | CP-040 | Aprobado |
+| RF-ADM-06 | Gestión de imágenes de producto | `public/admin.php`, `app/php/lib/imagenes.php` | CP-050, CP-051, CP-052, CP-053, CP-055 | Aprobado |
 | RF-REP-01 | Reportes y exportación CSV | `public/reportes.php` | CP-041 | Aprobado |
 | RF-MIG-01 | Migración fiel de datos | `db/migraciones/001_migracion_inicial.sql` | CP-042 | Aprobado |
 | RF-AUD-01 | Auditoría de acciones sensibles | `auditoria.php` | Transversal | Aprobado |

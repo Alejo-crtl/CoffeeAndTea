@@ -44,7 +44,7 @@
 | Pan de Queso | 3.200 | 35 | Panadería |
 | Galleta Integral | 2.200 | 100 | Postres |
 | Torta de Chocolate | 6.000 | 12 | Postres |
-| Combo Desayuno | 12.000 | 15 | Desayunos |
+| Combo Café y Croissant | 8.000 | 15 | Desayunos |
 
 ## Pedidos demo (6)
 

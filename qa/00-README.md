@@ -19,14 +19,14 @@ Paquete de aseguramiento de calidad del sistema de tienda y gestión **CoffeeAnd
 
 ## Resultados actuales
 
-- **49/49 casos aprobados.**
-- **12/12 pruebas PHP** (`php tests\run.php`).
-- **12/12 pruebas E2E** (`npx playwright test`).
+- **55/55 casos aprobados.**
+- **15/15 pruebas PHP** (`php tests\run.php`).
+- **16/16 pruebas E2E** (`npx playwright test`).
 - Informe completo: `qa/07-informe-resultados.md`.
 
 ## Requisitos previos
 
-- PHP 8.3 con `pdo_pgsql`, `pgsql`, `mbstring`, `openssl`.
+- PHP 8.3 con `pdo_pgsql`, `pgsql`, `mbstring`, `openssl`, `fileinfo` y `gd`.
 - PostgreSQL 18 en `127.0.0.1:5432`.
 - PowerShell 5.1 o superior.
 - (Opcional) Node.js 20+ para las pruebas E2E con Playwright.

@@ -40,7 +40,7 @@ VALUES
     (7, 'Pan de Queso', 'Pan de queso horneado', 3200, 35, 10, 3, true, false, 'unidades', 3),
     (8, 'Galleta Integral', 'Galleta de avena y pasas', 2200, 100, 20, 4, true, false, 'unidades', 2),
     (9, 'Torta de Chocolate', 'Porción de torta', 6000, 12, 3, 4, true, true, 'unidades', 4),
-    (10, 'Combo Desayuno', 'Café + croissant + jugo', 12000, 15, 5, 5, true, true, 'unidades', 12);
+    (10, 'Combo Café y Croissant', 'Café + croissant', 8000, 15, 5, 5, true, true, 'unidades', 8);
 
 INSERT INTO pedido
     (id, codigo, token_publico, cliente_id, estado, observaciones, canal, metodo_pago, tiempo_estimado_min,
@@ -114,3 +114,20 @@ SELECT setval('pago_id_seq', 4, true);
 SELECT setval('caja_sesion_id_seq', 1, true);
 SELECT setval('movimiento_caja_id_seq', 2, true);
 SELECT setval('pedido_historial_estado_id_seq', 11, true);
+
+
+-- Imágenes de las tarjetas de producto
+UPDATE producto
+SET imagen_url = CASE id
+    WHEN 1 THEN 'media/productos/cafe-express.jpg'
+    WHEN 2 THEN 'media/productos/capuchino.jpg'
+    WHEN 3 THEN 'media/productos/te-negro.jpg'
+    WHEN 4 THEN 'media/productos/frappe-cafe.jpg'
+    WHEN 5 THEN 'media/productos/jugo-natural.jpg'
+    WHEN 6 THEN 'media/productos/croissant.jpg'
+    WHEN 7 THEN 'media/productos/pan-de-queso.jpg'
+    WHEN 8 THEN 'media/productos/galleta-integral.jpg'
+    WHEN 9 THEN 'media/productos/torta-chocolate.jpg'
+    WHEN 10 THEN 'media/productos/combo-cafe-croissant.jpg'
+END
+WHERE id BETWEEN 1 AND 10;

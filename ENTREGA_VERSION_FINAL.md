@@ -20,9 +20,9 @@ documentación, anexos y pruebas.
 
 ## Resultados
 
-- Casos QA: **49/49**.
-- Pruebas PHP: **12/12**.
-- Pruebas E2E: **12/12**.
+- Casos QA: **55/55**.
+- Pruebas PHP: **15/15**.
+- Pruebas E2E: **16/16**.
 - Migración: 6 categorías, 11 clientes, 15 productos, 12 pedidos y 22 detalles.
 
 ## Instalación rápida

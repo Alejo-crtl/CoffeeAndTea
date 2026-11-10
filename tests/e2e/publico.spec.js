@@ -9,6 +9,7 @@ test('la tienda muestra catálogo, stock y tiempo estimado', async ({ page }) =>
     await expect(page.locator('.hero-datos')).toContainText('Solo recogida');
     await expect(page.locator('.menu-tiempo')).toContainText('min');
     await expect(page.locator('.tarjeta-producto').first()).toBeVisible();
+    await expect(page.locator('.tarjeta-producto img').first()).toBeVisible();
     await expect(page.locator('.tarjeta-producto .producto-precio').first()).toContainText('$');
 });
 

@@ -25,3 +25,6 @@ Nivel = P × I. Prioridad: ≥6 alta, 3–5 media, 1–2 baja.
 | R-18 | Zona horaria incorrecta en fechas y cierres | 1 | 2 | 2 | `America/Bogota` en PHP y PostgreSQL | Desarrollo |
 | R-19 | Pedidos duplicados por doble clic | 2 | 2 | 4 | Token CSRF + redirección PRG tras confirmar | Desarrollo |
 | R-20 | Stock negativo por ajustes manuales | 1 | 3 | 3 | `CHECK (stock_actual >= 0)` y validación de entrada | Desarrollo |
+| R-21 | Subir un archivo malicioso como imagen de producto | 2 | 3 | 6 | Validación MIME real, límite de 2 MB, recorte con GD, nombre aleatorio y bloqueo de scripts en `media/productos`; CP-053 | Desarrollo |
+| R-22 | Archivos de imagen huérfanos al reemplazar o quitar la foto | 1 | 1 | 1 | Borrado posterior al commit y verificación de que otro producto no use la ruta; CP-051 y CP-052 | Desarrollo |
+| R-23 | Video de presentación no disponible por enlace externo | 2 | 1 | 2 | Página con aviso “Video próximamente”, validación del enlace y configuración desde el panel; CP-054 | Desarrollo |

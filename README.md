@@ -13,13 +13,14 @@ stock, usuarios y reportes.
 ## 1. Funcionalidades
 
 ### Tienda pública
-- Catálogo por categorías con precio, stock y tiempo estimado de preparación.
+- Catálogo por categorías con imagen, precio, stock y tiempo estimado de preparación.
 - Carrito con validación de existencias.
 - Checkout como visitante o cliente registrado.
 - Confirmación con código de pedido, token público, estado y tiempo estimado.
 - Consulta posterior del pedido con **código + token**.
 - Historial de pedidos recientes para invitados, guardado en el navegador.
 - Registro, inicio de sesión y recuperación de contraseña por correo.
+- Video de presentación del proyecto desde YouTube o Google Drive, con página propia.
 
 ### Gestión interna (`ENCARGADO` y `ADMIN`)
 - Lista de pedidos con filtros y detalle.
@@ -32,9 +33,16 @@ stock, usuarios y reportes.
 ### Administración (`ADMIN`)
 - Usuarios y roles (`CLIENTE`, `ENCARGADO`, `ADMIN`).
 - Contraseñas temporales con cambio obligatorio y cierre de sesiones.
-- Productos, categorías y configuración de la tienda.
+- Productos, categorías, imágenes de producto y configuración de la tienda.
 - Reportes de ventas, productos, clientes, stock e ingresos por categoría.
 - Exportación CSV y consulta de auditoría.
+
+### Video de presentación
+- Página pública `video.php`, enlazada desde el pie como **Video**.
+- Acepta enlaces de YouTube o Google Drive y los muestra embebidos.
+- El enlace se configura en **Administración → Configuración**.
+- Si no hay enlace, muestra **“Video próximamente”**.
+- También se puede definir con `APP_VIDEO_URL` en `.env` como respaldo.
 
 ---
 
@@ -53,6 +61,7 @@ CoffeeAndtea_Entrega/
 │  ├─ admin.php             Usuarios, productos, configuración y auditoría
 │  ├─ reportes.php          Reportes y CSV
 │  ├─ manual.php            Manual renderizado desde docs/manual.md
+│  ├─ video.php             Video de presentación del proyecto
 │  ├─ css/, js/, media/     Estilos, scripts e imágenes
 │  └─ ...
 ├─ anexos/               PAC, SRS, MER, script BD y log de errores
@@ -83,7 +92,7 @@ CoffeeAndtea_Entrega/
 | Componente | Versión / detalle |
 |---|---|
 | PHP | 8.3 o superior |
-| Extensiones PHP | `pdo_pgsql`, `pgsql`, `mbstring`, `openssl`, `session`, `json` |
+| Extensiones PHP | `pdo_pgsql`, `pgsql`, `mbstring`, `openssl`, `session`, `json`, `fileinfo`, `gd` |
 | PostgreSQL | 18 (funciona desde 14) |
 | Servidor web | Apache/Nginx con docroot en `public/`, o `php -S` |
 | Composer | Opcional, para PHPUnit/PHPStan/PHPCS |
@@ -111,6 +120,7 @@ DB_NAME=coffeeandtea_qa
 DB_USER=postgres
 DB_PASS=tu_clave
 MAIL_DRIVER=log
+APP_VIDEO_URL=
 ```
 
 > `.env` **nunca** se incluye en la entrega ni se sube a Git.
@@ -285,7 +295,7 @@ composer phpstan
 composer phpcs
 ```
 
-El pack completo de QA está en [`qa/`](qa/): plan, 49 casos, matriz de riesgos,
+El pack completo de QA está en [`qa/`](qa/): plan, 55 casos, matriz de riesgos,
 matriz RBAC, checklist de release e informe de resultados.
 
 ---
