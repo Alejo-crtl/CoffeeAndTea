@@ -114,6 +114,30 @@ $q$) AS t(
     creado_en timestamptz
 );
 
+-- Fotos para los productos migrados que tienen una imagen disponible.
+-- Los productos sin foto conservan imagen_url = NULL.
+UPDATE producto
+SET imagen_url = CASE lower(trim(nombre))
+    WHEN 'espresso'           THEN 'media/productos/espresso-sencillo.jpg'
+    WHEN 'americano'          THEN 'media/productos/cafe-express.jpg'
+    WHEN 'cappuccino'         THEN 'media/productos/capuchino.jpg'
+    WHEN 'latte'              THEN 'media/productos/capuchino.jpg'
+    WHEN 'té negro'           THEN 'media/productos/te-negro.jpg'
+    WHEN 'té verde'           THEN 'media/productos/te-verde.jpg'
+    WHEN 'frappé de moca'     THEN 'media/productos/frappe-cafe.jpg'
+    WHEN 'torta de chocolate' THEN 'media/productos/torta-chocolate.jpg'
+    WHEN 'croissant'          THEN 'media/productos/croissant.jpg'
+    WHEN 'sándwich de pollo'  THEN 'media/productos/sandwich-pollo.jpg'
+    WHEN 'ensalada césar'     THEN 'media/productos/ensalada-cesar.jpg'
+    ELSE imagen_url
+END
+WHERE imagen_url IS NULL
+  AND lower(trim(nombre)) IN (
+      'espresso', 'americano', 'cappuccino', 'latte', 'té negro', 'té verde',
+      'frappé de moca', 'torta de chocolate', 'croissant', 'sándwich de pollo',
+      'ensalada césar'
+  );
+
 -- ------------------------------------------------------------
 -- 4. Pedidos (12)
 --    ABIERTO -> PENDIENTE; PAGADO -> PAGADO; CANCELADO -> CANCELADO.

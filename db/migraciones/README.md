@@ -78,6 +78,10 @@ Resultado esperado: 6 / 11 / 15 / 12 / 22, cero descuadres y estados
 1. Ejecutar `php bin/crear-admin.php` para crear el administrador.
 2. Configurar la tienda en `admin.php?tab=configuracion`.
 3. Abrir la caja con la base inicial real.
+
+Si la base ya estaba migrada antes de agregar las imágenes, ejecuta
+`db/asignar-imagenes.sql` para asignar las fotos disponibles a los productos
+existentes. Los productos sin foto conservan el espacio reservado.
 4. Verificar el correo con `admin.php?tab=configuracion` antes de publicar.
 
 ---

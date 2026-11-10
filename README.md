@@ -72,6 +72,7 @@ CoffeeAndtea_Entrega/
 ├─ db/
 │  ├─ schema.sql            Esquema completo + triggers + procedimientos
 │  ├─ seed-demo.sql         Datos demo/QA (no usar en producción)
+│  ├─ asignar-imagenes.sql  Asigna fotos a productos existentes
 │  └─ migraciones/          Migración desde la base anterior
 ├─ docs/                    Manual, guía de Laragon y LEEME
 ├─ qa/                      Plan, casos, matriz RBAC e informe
@@ -314,6 +315,63 @@ matriz RBAC, checklist de release e informe de resultados.
 
 Para acceso público temporal sin dominio se puede usar Cloudflare Tunnel o
 Tailscale Funnel; la URL cambia si el túnel es temporal.
+
+### Las imágenes no aparecen al clonar
+
+1. Verifica que los archivos estén en el clon:
+
+   ```powershell
+   git ls-files public/media/productos
+   Get-ChildItem public\media\productos
+   ```
+
+   Si faltan, actualiza el repositorio con `git pull` y confirma que estás en
+   la rama `main`.
+
+2. Abre una imagen directamente en el navegador:
+
+   ```text
+   http://tu-url/media/productos/cafe-express.jpg
+   ```
+
+   - Si responde **200**, el archivo y el document root están bien.
+   - Si responde **404**, el document root debe apuntar a `public/` o faltan
+     permisos de lectura.
+
+3. Revisa la base de datos:
+
+   ```sql
+   SELECT id, nombre, imagen_url FROM producto ORDER BY id;
+   ```
+
+   Si `imagen_url` está vacío, carga `db/seed-demo.sql` en una base nueva o
+   ejecuta:
+
+   ```powershell
+   psql -U postgres -h 127.0.0.1 -d coffeeandtea_qa -v ON_ERROR_STOP=1 `
+        -f db\asignar-imagenes.sql
+   ```
+
+4. Revisa `.env`:
+
+   ```ini
+   APP_BASE_URL=http://localhost:8000/
+   DB_NAME=coffeeandtea_qa
+   ```
+
+   `APP_BASE_URL` debe coincidir con la URL desde la que abres la tienda. Si
+   dejaste `https://tu-dominio.example/`, las imágenes y los estilos apuntan a
+   otro dominio.
+
+5. En Linux, verifica permisos:
+
+   ```bash
+   chmod -R a+r public/media
+   ```
+
+Si usas la base migrada, la migración ya asigna fotos a los productos que
+tienen una imagen disponible. Si migraste antes de esta versión, ejecuta
+`db/asignar-imagenes.sql`.
 
 ---
 
