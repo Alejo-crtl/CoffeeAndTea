@@ -101,7 +101,7 @@ CoffeeAndtea_Entrega/
 | Componente | Requisito |
 |---|---|
 | PHP | 8.3 o superior |
-| Extensiones | `pdo_pgsql`, `pgsql`, `mbstring`, `openssl`, `session`, `json` |
+| Extensiones | `pdo_pgsql`, `pgsql`, `mbstring`, `openssl`, `session`, `json`, `fileinfo`, `gd` |
 | PostgreSQL | 14 o superior (probado con 18) |
 | Servidor web | Apache/Nginx con docroot en `public/` |
 | Composer | Opcional, para PHPUnit/PHPStan/PHPCS |

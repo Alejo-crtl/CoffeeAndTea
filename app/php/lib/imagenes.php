@@ -148,13 +148,12 @@ function guardarImagenProducto(array $archivo): string
 /**
  * Recorta y escala la imagen a 960 × 540 px y la guarda como JPEG.
  *
- * Si la extensión GD no está disponible, copia el archivo original siempre
- * que su formato coincida con la extensión esperada.
+ * Requiere la extensión GD con soporte para JPEG, PNG y WebP.
  */
 function normalizarImagenProducto(string $origen, string $destino): bool
 {
     if (!function_exists('imagecreatefromstring')) {
-        return @move_uploaded_file($origen, $destino);
+        return false;
     }
 
     $contenido = @file_get_contents($origen);

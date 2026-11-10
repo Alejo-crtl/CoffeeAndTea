@@ -26,7 +26,7 @@ Paquete de aseguramiento de calidad del sistema de tienda y gestión **CoffeeAnd
 
 ## Requisitos previos
 
-- PHP 8.3 con `pdo_pgsql`, `pgsql`, `mbstring`, `openssl`.
+- PHP 8.3 con `pdo_pgsql`, `pgsql`, `mbstring`, `openssl`, `fileinfo` y `gd`.
 - PostgreSQL 18 en `127.0.0.1:5432`.
 - PowerShell 5.1 o superior.
 - (Opcional) Node.js 20+ para las pruebas E2E con Playwright.

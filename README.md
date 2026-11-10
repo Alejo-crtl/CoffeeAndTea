@@ -83,7 +83,7 @@ CoffeeAndtea_Entrega/
 | Componente | Versión / detalle |
 |---|---|
 | PHP | 8.3 o superior |
-| Extensiones PHP | `pdo_pgsql`, `pgsql`, `mbstring`, `openssl`, `session`, `json` |
+| Extensiones PHP | `pdo_pgsql`, `pgsql`, `mbstring`, `openssl`, `session`, `json`, `fileinfo`, `gd` |
 | PostgreSQL | 18 (funciona desde 14) |
 | Servidor web | Apache/Nginx con docroot en `public/`, o `php -S` |
 | Composer | Opcional, para PHPUnit/PHPStan/PHPCS |
