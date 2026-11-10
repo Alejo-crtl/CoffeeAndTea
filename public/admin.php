@@ -593,7 +593,7 @@ cabeceraHtml('Administración | CoffeeAndtea', 'admin');
     <div class="layout-admin">
         <section class="panel">
             <h2>Productos (<?= count($productos) ?>)</h2>
-            <p class="texto-suave">Las fotos se agregarán más adelante; por ahora la tienda muestra un espacio reservado.</p>
+            <p class="texto-suave">Las imágenes se cargan desde <code>public/media/productos</code>. La carga de archivos desde el panel aún no está habilitada.</p>
             <div class="tabla-scroll">
                 <table class="tabla">
                     <thead><tr><th>Producto</th><th>Categoría</th><th>Precio</th><th>Stock</th><th>Estado</th><th></th></tr></thead>
