@@ -15,7 +15,7 @@ cabeceraHtml('Video | CoffeeAndtea', 'video');
     <div>
         <p class="eyebrow">Presentación del proyecto</p>
         <h1>Video de presentación</h1>
-        <p>Resumen audiovisual de CoffeeAndtea: la tienda, la operación diaria y la administración.</p>
+        <p>Resumen audiovisual de CoffeeAndtea.</p>
     </div>
     <a class="btn btn-secundario" href="<?= h(url('index.php')) ?>">Volver a la tienda</a>
 </section>
