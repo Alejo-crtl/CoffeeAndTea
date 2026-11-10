@@ -2109,13 +2109,16 @@ label.checkbox input {
 .tarjeta-producto:hover { transform: translateY(-3px); box-shadow: var(--sombra); }
 .tarjeta-producto.agotado { opacity: 0.72; }
 .producto-imagen {
-    min-height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    height: 180px; min-height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+    overflow: hidden;
     background:
         radial-gradient(circle at 26% 22%, rgba(217, 160, 91, 0.35), transparent 10rem),
         linear-gradient(135deg, var(--crema-2), #fbf4ea);
     border-bottom: 1px dashed var(--borde-fuerte);
     color: var(--marron-claro);
 }
+.producto-imagen.con-foto { background: #f4eadc; border-bottom-style: solid; }
+.producto-imagen img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .producto-imagen span { font-family: Georgia, serif; font-size: 3.2rem; line-height: 1; color: rgba(111, 78, 55, 0.35); }
 .producto-imagen small { font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(111, 78, 55, 0.45); }
 .producto-cuerpo { display: flex; flex-direction: column; gap: 9px; padding: 16px; flex: 1; }

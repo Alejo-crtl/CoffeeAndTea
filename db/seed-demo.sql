@@ -115,3 +115,19 @@ SELECT setval('caja_sesion_id_seq', 1, true);
 SELECT setval('movimiento_caja_id_seq', 2, true);
 SELECT setval('pedido_historial_estado_id_seq', 11, true);
 
+
+-- Imágenes de las tarjetas de producto
+UPDATE producto
+SET imagen_url = CASE id
+    WHEN 1 THEN 'media/productos/cafe-express.jpg'
+    WHEN 2 THEN 'media/productos/capuchino.jpg'
+    WHEN 3 THEN 'media/productos/te-negro.jpg'
+    WHEN 4 THEN 'media/productos/frappe-cafe.jpg'
+    WHEN 5 THEN 'media/productos/jugo-natural.jpg'
+    WHEN 6 THEN 'media/productos/croissant.jpg'
+    WHEN 7 THEN 'media/productos/pan-de-queso.jpg'
+    WHEN 8 THEN 'media/productos/galleta-integral.jpg'
+    WHEN 9 THEN 'media/productos/torta-chocolate.jpg'
+    WHEN 10 THEN 'media/productos/combo-cafe-croissant.jpg'
+END
+WHERE id BETWEEN 1 AND 10;

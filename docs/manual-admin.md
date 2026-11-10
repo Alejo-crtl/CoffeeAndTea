@@ -291,7 +291,7 @@ Reglas:
 - El stock mínimo alimenta las alertas de gestión.
 - El tiempo de preparación influye en el tiempo estimado del pedido.
 - Los pedidos históricos conservan el precio congelado.
-- Las imágenes están reservadas; todavía no se cargan archivos.
+- Las imágenes de productos están en `public/media/productos` y se muestran en la tienda. La carga de archivos desde el panel aún no está habilitada.
 
 ---
 

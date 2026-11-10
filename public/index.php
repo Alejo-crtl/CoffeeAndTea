@@ -164,11 +164,18 @@ cabeceraHtml('CoffeeAndtea | Pide y recoge en tienda', 'tienda');
                 $stock = (int) $producto['stock_actual'];
                 $agotado = $stock < 1;
                 $enCarrito = $cantidadesCarrito[(int) $producto['id']] ?? 0;
+                $imagen = trim((string) ($producto['imagen_url'] ?? ''));
+                $rutaImagen = $imagen !== '' ? APP_ROOT . '/public/' . ltrim($imagen, '/') : '';
+                $tieneImagen = $imagen !== '' && is_file($rutaImagen);
                 ?>
                 <article class="tarjeta-producto<?= $agotado ? ' agotado' : '' ?>">
-                    <div class="producto-imagen" role="img" aria-label="Espacio reservado para la foto de <?= h((string) $producto['nombre']) ?>">
-                        <span><?= h(mb_substr((string) $producto['nombre'], 0, 1)) ?></span>
-                        <small>Foto próximamente</small>
+                    <div class="producto-imagen<?= $tieneImagen ? ' con-foto' : '' ?>">
+                        <?php if ($tieneImagen): ?>
+                            <img src="<?= h(url($imagen)) ?>" alt="<?= h((string) $producto['nombre']) ?>" loading="lazy" decoding="async">
+                        <?php else: ?>
+                            <span aria-hidden="true"><?= h(mb_substr((string) $producto['nombre'], 0, 1)) ?></span>
+                            <small>Foto próximamente</small>
+                        <?php endif; ?>
                     </div>
                     <div class="producto-cuerpo">
                         <div class="producto-meta">
