@@ -1,6 +1,7 @@
 <?php
 /**
- * Política de cancelación y reembolsos.
+ * BLOQUE B10 · DOCUMENTACIÓN, ANEXOS Y VIDEO
+ * Qué hace: explica la política de cancelación y reembolsos.
  */
 declare(strict_types=1);
 

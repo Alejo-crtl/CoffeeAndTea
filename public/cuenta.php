@@ -1,6 +1,8 @@
 <?php
 /**
- * Cuenta del cliente: perfil e historial de pedidos.
+ * BLOQUE B02 · AUTENTICACIÓN Y CUENTAS
+ * Qué hace: historial y datos del cliente autenticado.
+ * Relacionados: cuenta.php, pedidos.php.
  */
 declare(strict_types=1);
 

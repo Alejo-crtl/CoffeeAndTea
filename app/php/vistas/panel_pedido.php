@@ -1,8 +1,8 @@
 <?php
 /**
- * Detalle operativo de un pedido para el panel de gestión.
- *
- * Espera: $pedidoVer, $usuario, $caja.
+ * BLOQUE B04 · CARRITO Y PEDIDOS
+ * Qué hace: panel reutilizable con el resumen y los datos de un pedido.
+ * Páginas: pedido.php, gestion.php.
  */
 declare(strict_types=1);
 

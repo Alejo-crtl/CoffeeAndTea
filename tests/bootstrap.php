@@ -1,9 +1,9 @@
 <?php
 /**
- * Arranque de las pruebas automatizadas de CoffeeAndtea.
- *
- * Funciona con PHPUnit instalado (composer install) o con el runner
- * autónomo tests/run.php, que no necesita dependencias.
+ * BLOQUE B12 · PRUEBAS Y QA
+ * Qué hace: arranque de las pruebas, conexión a la base QA y mini framework
+ *          de aserciones cuando no hay PHPUnit.
+ * Seguridad: aborta si la base no termina en _qa o _test.
  */
 declare(strict_types=1);
 

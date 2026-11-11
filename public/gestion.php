@@ -1,6 +1,12 @@
 <?php
 /**
- * Panel de gestión: pedidos, cobros, estados, caja y stock.
+ * BLOQUE B05 · CAJA Y PAGOS · B06 CANCELACIONES · B07 STOCK
+ * Qué hace: operación interna: cobrar, cambiar estado, cancelar,
+ *          abrir/cerrar caja, movimientos y ajustar stock.
+ * Acciones POST: confirmar_pago, avanzar, cancelar, abrir_caja,
+ *                cerrar_caja, movimiento_caja, ajustar_stock.
+ * Relacionados: pedidos.php, plantilla.php.
+ * Pruebas: CP-021 a CP-035, CP-045.
  */
 declare(strict_types=1);
 
@@ -27,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         switch ($accion) {
+            // B05 · Pagos
             case 'confirmar_pago':
                 $pedidoId = (int) ($_POST['pedido_id'] ?? 0);
                 $metodo = (string) ($_POST['metodo'] ?? '');
@@ -45,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $destino = url('gestion.php?tab=pedidos&ver=' . $pedidoId);
                 break;
 
+            // B06 · Estados
             case 'avanzar':
                 $pedidoId = (int) ($_POST['pedido_id'] ?? 0);
                 $nuevo = (string) ($_POST['nuevo_estado'] ?? '');
@@ -53,6 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $destino = url('gestion.php?tab=pedidos&ver=' . $pedidoId);
                 break;
 
+            // B06 · Cancelaciones
             case 'cancelar':
                 $pedidoId = (int) ($_POST['pedido_id'] ?? 0);
                 $resultado = cancelarPedido(
@@ -73,6 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $destino = url('gestion.php?tab=pedidos&ver=' . $pedidoId);
                 break;
 
+            // B05 · Caja
             case 'abrir_caja':
                 $base = (float) str_replace(',', '.', (string) ($_POST['base_inicial'] ?? '0'));
                 abrirCaja($conn, (int) $usuario['id'], $base);
@@ -96,6 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $destino = url('gestion.php?tab=caja');
                 break;
 
+            // B05 · Caja
             case 'movimiento_caja':
                 $sesion = cajaAbierta($conn);
                 if ($sesion === null) {
@@ -113,6 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $destino = url('gestion.php?tab=caja');
                 break;
 
+            // B07 · Stock
             case 'ajustar_stock':
                 $productoId = (int) ($_POST['producto_id'] ?? 0);
                 $nuevoStock = filter_var($_POST['nuevo_stock'] ?? null, FILTER_VALIDATE_INT);

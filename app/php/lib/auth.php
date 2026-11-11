@@ -1,9 +1,13 @@
 <?php
 /**
- * Autenticación, sesiones y control de acceso por roles.
- *
- * Roles de base de datos: CLIENTE, ENCARGADO, ADMIN.
- * El visitante anónimo no es un rol de base de datos.
+ * BLOQUE B02 · AUTENTICACIÓN Y CUENTAS
+ * Qué hace: login, sesión, roles, cambio de contraseña y protección de páginas.
+ * Funciones: usuarioActual(), autenticar(), requerirLogin(), requerirRol(),
+ *            puedeGestionar(), cambiarPassword(), validarPassword().
+ * Tablas: usuario, cliente.
+ * Páginas: login.php, logout.php, cambiar-password.php, cuenta.php.
+ * Reglas: sesión versionada, bloqueo de intentos, RBAC por rol.
+ * Pruebas: CP-001 a CP-011, CP-043.
  */
 declare(strict_types=1);
 

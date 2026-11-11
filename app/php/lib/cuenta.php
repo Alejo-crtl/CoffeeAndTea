@@ -1,6 +1,10 @@
 <?php
 /**
- * Registro y perfil de clientes.
+ * BLOQUE B02 · AUTENTICACIÓN Y CUENTAS
+ * Qué hace: registro y actualización del cliente vinculado a un usuario.
+ * Funciones: registrarCuentaCliente(), clienteDeUsuario(), actualizarPerfilCliente().
+ * Tablas: usuario, cliente.
+ * Páginas: registro.php, cuenta.php.
  */
 declare(strict_types=1);
 

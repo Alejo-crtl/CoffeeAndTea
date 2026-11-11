@@ -1,6 +1,9 @@
 <?php
 /**
- * Restablecimiento de contraseña con token de un solo uso.
+ * BLOQUE B02 · AUTENTICACIÓN Y CUENTAS
+ * Qué hace: valida el token y define una nueva contraseña.
+ * Relacionados: password_reset.php.
+ * Pruebas: CP-007.
  */
 declare(strict_types=1);
 

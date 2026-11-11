@@ -1,12 +1,14 @@
 <?php
 /**
- * Gestión de las imágenes de producto.
- *
- * - Valida el archivo subido (tipo real, tamaño y dimensiones).
- * - Ajusta la imagen sin recortarla para que la foto completa se vea en la tarjeta.
- * - Guarda el archivo en public/media/productos y devuelve la ruta relativa
- *   que se almacena en producto.imagen_url.
- * - Borra el archivo anterior solo si ningún otro producto lo usa.
+ * BLOQUE B03 · CATÁLOGO
+ * Qué hace: valida, ajusta, guarda y elimina las imágenes de producto.
+ * Funciones: guardarImagenProducto(), normalizarImagenProducto(),
+ *            eliminarImagenProducto(), imagenProductoDisponible(),
+ *            urlImagenProducto().
+ * Tablas: producto (imagen_url).
+ * Páginas: admin.php, index.php.
+ * Reglas: JPG/PNG/WebP, máximo 2 MB, sin recortar, máximo 1400 px por lado.
+ * Pruebas: CP-050 a CP-053, CP-055.
  */
 declare(strict_types=1);
 
