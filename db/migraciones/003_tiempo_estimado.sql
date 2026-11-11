@@ -1,4 +1,5 @@
 -- ============================================================
+-- BLOQUE B11 · BASE DE DATOS
 -- CoffeeAndtea - Actualización: tiempo estimado por producto
 --
 -- Agrega la capacidad de preparación simultánea y el buffer de

@@ -1,6 +1,9 @@
 <?php
 /**
- * Cambio de contraseña del usuario autenticado.
+ * BLOQUE B02 · AUTENTICACIÓN Y CUENTAS
+ * Qué hace: cambio de contraseña obligatorio o voluntario.
+ * Relacionados: auth.php.
+ * Pruebas: CP-008.
  */
 declare(strict_types=1);
 

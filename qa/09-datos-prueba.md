@@ -7,7 +7,7 @@
 
 | Rol | Nombre | Correo | Contraseña |
 |---|---|---|---|
-| ADMIN | Kevin Vega Perez | `vegaperezkevinsantiago@gmail.com` | `Admin123!` |
+| ADMIN | Administrador Demo | `admin@coffeeandtea.local` | `Admin123!` |
 | ENCARGADO | Encargado Turno | `encargado@coffeeandtea.local` | `Encargado123!` |
 | CLIENTE | Cliente Demo | `cliente@coffeeandtea.local` | `Cliente123!` |
 

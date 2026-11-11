@@ -1,6 +1,7 @@
 <?php
 /**
- * Política de privacidad y tratamiento de datos.
+ * BLOQUE B10 · DOCUMENTACIÓN, ANEXOS Y VIDEO
+ * Qué hace: política de tratamiento de datos y navegación de regreso.
  */
 declare(strict_types=1);
 

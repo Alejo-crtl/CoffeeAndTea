@@ -1,6 +1,8 @@
 <?php
 /**
- * Página del manual: renderiza el documento que corresponde al rol actual.
+ * BLOQUE B10 · DOCUMENTACIÓN, ANEXOS Y VIDEO
+ * Qué hace: muestra el manual correspondiente al rol.
+ * Relacionados: manual_contenido.php, manual_rol.php, Parsedown.
  */
 declare(strict_types=1);
 

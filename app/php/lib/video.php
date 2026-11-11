@@ -1,10 +1,11 @@
 <?php
 /**
- * Video de presentación del proyecto.
- *
- * - Convierte enlaces de YouTube o Google Drive al formato embebido.
- * - Lee el enlace configurado en Administración → Configuración.
- * - Si no hay enlace válido, la página muestra "Video próximamente".
+ * BLOQUE B10 · DOCUMENTACIÓN, ANEXOS Y VIDEO
+ * Qué hace: valida enlaces de YouTube/Drive y obtiene la URL embebible.
+ * Funciones: normalizarUrlVideo(), urlVideoPresentacion().
+ * Tablas: config_sistema (video_presentacion_url).
+ * Páginas: video.php, admin.php.
+ * Pruebas: CP-054.
  */
 declare(strict_types=1);
 

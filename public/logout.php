@@ -1,6 +1,8 @@
 <?php
 /**
- * Cierre de sesión.
+ * BLOQUE B02 · AUTENTICACIÓN Y CUENTAS
+ * Qué hace: cierra la sesión y redirige a la tienda.
+ * Relacionados: auth.php.
  */
 declare(strict_types=1);
 

@@ -1,6 +1,9 @@
 <?php
 /**
- * Registro público de clientes.
+ * BLOQUE B02 · AUTENTICACIÓN Y CUENTAS
+ * Qué hace: registro de clientes con consentimiento de datos.
+ * Relacionados: cuenta.php, auth.php.
+ * Pruebas: CP-001, CP-002.
  */
 declare(strict_types=1);
 

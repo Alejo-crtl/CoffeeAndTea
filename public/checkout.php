@@ -1,6 +1,9 @@
 <?php
 /**
- * Checkout: datos de contacto y creación del pedido.
+ * BLOQUE B04 · CARRITO Y PEDIDOS
+ * Qué hace: confirma los datos del cliente y crea el pedido.
+ * Relacionados: pedidos.php, plantilla.php.
+ * Pruebas: CP-016, CP-017.
  */
 declare(strict_types=1);
 

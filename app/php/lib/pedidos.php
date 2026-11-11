@@ -1,11 +1,34 @@
 <?php
 /**
- * Reglas de negocio de pedidos, pagos, stock y caja.
+ * ============================================================
+ * BLOQUE B04 · CARRITO Y PEDIDOS
+ * ============================================================
+ * Qué hace:
+ *   Carrito en sesión, cálculo del tiempo de preparación, creación
+ *   y consulta de pedidos, caja, pagos, cancelaciones y stock.
  *
- * Decisiones clave:
- *  - El stock se descuenta únicamente al confirmar el pago.
- *  - El detalle guarda el precio del momento de la venta.
- *  - La caja registra solo efectivo; la tarjeta se apoya en el datáfono externo.
+ * Funciones principales:
+ *   carritoAgregar(), carritoFijar(), crearPedido(), calcularTiempoEstimado(),
+ *   obtenerPedidoPublico(), confirmarPago(), abrirCaja(), cerrarCaja(),
+ *   cancelarPedido(), avanzarEstadoPedido().
+ *
+ * Tablas:
+ *   producto, pedido, detallepedido, cliente, pago, caja_sesion,
+ *   movimiento_caja, movimiento_stock, config_sistema.
+ *
+ * Páginas que lo usan:
+ *   index.php, carrito.php, checkout.php, pedido.php, gestion.php,
+ *   reportes.php, admin.php.
+ *
+ * Reglas clave:
+ *   - El stock se valida en el carrito y se descuenta al pagar.
+ *   - El precio se congela en detallepedido.precio_unitario.
+ *   - El efectivo exige caja abierta.
+ *   - La cancelación devuelve stock y calcula el reembolso.
+ *
+ * Pruebas:
+ *   CP-012 a CP-034, CP-044 a CP-047.
+ * ============================================================
  */
 declare(strict_types=1);
 
@@ -16,6 +39,10 @@ class ReglaNegocioException extends RuntimeException
 
 /** Porcentaje de reembolso cuando el pedido ya entró a preparación. */
 const REEMBOLSO_PARCIAL_PORCENTAJE = 50;
+
+/* ------------------------------------------------------------------ */
+/* B06 · Reglas de reembolso                                           */
+/* ------------------------------------------------------------------ */
 
 /**
  * Porcentaje que se devuelve según el estado del pedido.
@@ -33,6 +60,10 @@ function montoReembolsoCancelacion(float $montoPagado, string $estado): float
 {
     return round($montoPagado * porcentajeReembolsoCancelacion($estado) / 100, 2);
 }
+
+/* ------------------------------------------------------------------ */
+/* B01 · Configuración del sistema                                     */
+/* ------------------------------------------------------------------ */
 
 /** Lee un valor de configuración del sistema. */
 function configSistema(PDO $conn, string $clave, ?string $porDefecto = null): ?string
@@ -61,7 +92,7 @@ function guardarConfigSistema(PDO $conn, string $clave, string $valor, ?string $
 }
 
 /* ------------------------------------------------------------------ */
-/* Carrito                                                             */
+/* B04.1 · Carrito                                                     */
 /* ------------------------------------------------------------------ */
 
 /** Devuelve el carrito de la sesión como [id => cantidad]. */
@@ -233,7 +264,7 @@ function carritoDetallado(PDO $conn): array
 }
 
 /* ------------------------------------------------------------------ */
-/* Pedidos                                                             */
+/* B04.2 · Tiempo, creación y consultas de pedidos                     */
 /* ------------------------------------------------------------------ */
 
 /** Genera un código público único, legible y sin caracteres ambiguos. */
@@ -660,7 +691,7 @@ function avanzarEstadoPedido(PDO $conn, int $pedidoId, string $nuevoEstado, int 
 }
 
 /* ------------------------------------------------------------------ */
-/* Caja                                                                */
+/* B05 · Caja                                                          */
 /* ------------------------------------------------------------------ */
 
 /** Devuelve la sesión de caja abierta, si existe. */
@@ -828,7 +859,7 @@ function cerrarCaja(PDO $conn, int $sesionId, int $usuarioId, float $contado): a
 }
 
 /* ------------------------------------------------------------------ */
-/* Pago y cancelación                                                  */
+/* B05 · Pagos                                                         */
 /* ------------------------------------------------------------------ */
 
 /**
@@ -999,6 +1030,10 @@ function confirmarPago(
         throw new ReglaNegocioException('No se pudo confirmar el pago.');
     }
 }
+
+/* ------------------------------------------------------------------ */
+/* B06 · Cancelaciones                                                 */
+/* ------------------------------------------------------------------ */
 
 /**
  * Cancela un pedido y revierte stock, pago y caja cuando corresponde.

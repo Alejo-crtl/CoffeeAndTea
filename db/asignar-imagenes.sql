@@ -1,4 +1,5 @@
 -- ============================================================
+-- BLOQUE B11 · BASE DE DATOS
 -- CoffeeAndtea - Asignar imágenes a los productos existentes
 --
 -- Uso:

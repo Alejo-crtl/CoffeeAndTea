@@ -47,7 +47,7 @@ INSTALACION RAPIDA
 ADMINISTRADOR
 -------------
 Con datos demo:
-  Correo:      vegaperezkevinsantiago@gmail.com
+  Correo:      admin@coffeeandtea.local
   Contrasena:  Admin123!
 
 En una instalacion limpia crea el administrador con:
@@ -85,6 +85,7 @@ app/php/vistas/      Plantillas.
 bin/crear-admin.php  Alta del administrador inicial.
 db/schema.sql        Esquema completo.
 db/seed-demo.sql     Datos demo (no usar en produccion).
+db/asignar-imagenes.sql  Asigna fotos a productos existentes.
 db/migraciones/      Migracion desde CoffeeAndTea.
 docs/manual.md       Manual de usuario.
 qa/                  Plan, casos, RBAC e informe.

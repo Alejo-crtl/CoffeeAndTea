@@ -1,6 +1,9 @@
 <?php
 /**
- * Carrito de compras: agregar, actualizar, eliminar y revisar.
+ * BLOQUE B04 · CARRITO Y PEDIDOS
+ * Qué hace: muestra y actualiza el carrito en sesión.
+ * Relacionados: pedidos.php, plantilla.php.
+ * Pruebas: CP-014, CP-015.
  */
 declare(strict_types=1);
 
