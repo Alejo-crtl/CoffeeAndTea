@@ -1,6 +1,9 @@
 <?php
 /**
- * Estado público de un pedido mediante código + token.
+ * BLOQUE B04 · CARRITO Y PEDIDOS
+ * Qué hace: consulta pública de un pedido por código + token.
+ * Relacionados: pedidos.php, panel_pedido.php, plantilla.php.
+ * Pruebas: CP-019, CP-020.
  */
 declare(strict_types=1);
 

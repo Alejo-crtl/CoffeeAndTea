@@ -9,7 +9,7 @@ async function iniciarSesion(page, correo, password) {
 }
 
 test('el administrador entra a la gestión', async ({ page }) => {
-    await iniciarSesion(page, 'vegaperezkevinsantiago@gmail.com', 'Admin123!');
+    await iniciarSesion(page, 'admin@coffeeandtea.local', 'Admin123!');
 
     await expect(page).toHaveURL(/gestion\.php/);
     await expect(page.getByRole('heading', { name: 'Gestión' })).toBeVisible();
@@ -68,7 +68,7 @@ test('el encargado no usa carrito ni cuenta de cliente', async ({ page }) => {
 });
 
 test('el administrador no usa carrito ni cuenta de cliente', async ({ page }) => {
-    await iniciarSesion(page, 'vegaperezkevinsantiago@gmail.com', 'Admin123!');
+    await iniciarSesion(page, 'admin@coffeeandtea.local', 'Admin123!');
     await expect(page).toHaveURL(/gestion\.php/);
 
     await expect(page.locator('.menu')).not.toContainText('Carrito');

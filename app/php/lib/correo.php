@@ -1,10 +1,9 @@
 <?php
 /**
- * Envío de correo por SMTP sin dependencias externas.
- *
- * En desarrollo se puede usar Mailpit (sin autenticación) o MAIL_DRIVER=log
- * para escribir los correos en storage/mail.log. En producción funciona con
- * Gmail y una contraseña de aplicación (SMTP_ENCRYPTION=tls).
+ * BLOQUE B01 · NÚCLEO
+ * Qué hace: envía correos por SMTP o los escribe en el log de desarrollo.
+ * Funciones: enviarCorreo(), plantillaCorreo(), registrarErrorCorreo().
+ * Páginas: recuperación de contraseña, prueba SMTP y notificaciones.
  */
 declare(strict_types=1);
 

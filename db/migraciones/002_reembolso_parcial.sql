@@ -1,4 +1,5 @@
 -- ============================================================
+-- BLOQUE B11 · BASE DE DATOS
 -- CoffeeAndtea - Actualización: reembolso parcial
 --
 -- Agrega el monto reembolsado al pago para distinguir un reembolso

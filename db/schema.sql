@@ -1,4 +1,5 @@
 -- ============================================================
+-- BLOQUE B11 · BASE DE DATOS
 -- CoffeeAndTea - Esquema completo
 -- PostgreSQL 18
 -- Orden: usuarios -> catálogo -> pedidos -> pagos/caja -> auditoría
@@ -329,7 +330,7 @@ INSERT INTO config_sistema (clave, valor, descripcion) VALUES
     ('pagina_abierta', 'true', 'Permite recibir pedidos web'),
     ('direccion_tienda', 'Dirección pendiente de configurar', 'Dirección física para recogida'),
     ('telefono_tienda', '', 'Teléfono de contacto de la tienda'),
-    ('correo_contacto', 'vegaperezkevinsantiago@gmail.com', 'Correo público de contacto'),
+    ('correo_contacto', 'contacto@coffeeandtea.local', 'Correo público de contacto'),
     ('horario_tienda', 'Lun a sáb, 8:00 a 20:00', 'Horario de atención');
 
 -- ------------------------------------------------------------

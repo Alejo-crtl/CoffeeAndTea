@@ -1,10 +1,9 @@
 <?php
 /**
- * Selecciona el manual que corresponde al rol de la sesión.
- *
- * - Visitante y CLIENTE: manual de usuario, sin tecnicismos.
- * - ENCARGADO: manual de operación (pedidos, caja, stock y reportes).
- * - ADMIN: manual técnico de administración.
+ * BLOQUE B10 · DOCUMENTACIÓN, ANEXOS Y VIDEO
+ * Qué hace: decide qué manual corresponde al rol de la sesión.
+ * Funciones: manualActual().
+ * Páginas: manual.php, descargar-manual.php.
  */
 declare(strict_types=1);
 

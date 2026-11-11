@@ -1,6 +1,9 @@
 <?php
 /**
- * Inicio de sesión.
+ * BLOQUE B02 · AUTENTICACIÓN Y CUENTAS
+ * Qué hace: formulario de login; autentica y redirige según el rol.
+ * Relacionados: auth.php, bootstrap.php.
+ * Pruebas: CP-003, CP-004.
  */
 declare(strict_types=1);
 

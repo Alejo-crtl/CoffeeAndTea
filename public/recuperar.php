@@ -1,6 +1,9 @@
 <?php
 /**
- * Solicitud de recuperación de contraseña.
+ * BLOQUE B02 · AUTENTICACIÓN Y CUENTAS
+ * Qué hace: solicita un enlace de recuperación de contraseña.
+ * Relacionados: password_reset.php, correo.php.
+ * Pruebas: CP-006.
  */
 declare(strict_types=1);
 

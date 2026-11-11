@@ -1,9 +1,9 @@
 <?php
 /**
- * Conexión PDO a PostgreSQL.
- *
- * La configuración sale de .env (DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASS).
- * Deja la conexión disponible en $conn para el código existente.
+ * BLOQUE B01 · NÚCLEO
+ * Qué hace: crea la conexión PDO a PostgreSQL y la deja en $conn.
+ * Tablas: no aplica.
+ * Páginas: todas (se carga desde bootstrap.php).
  */
 declare(strict_types=1);
 

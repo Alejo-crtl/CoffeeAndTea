@@ -1,6 +1,10 @@
 <?php
 /**
- * Catálogo de documentos de la carpeta anexos/.
+ * BLOQUE B10 · DOCUMENTACIÓN, ANEXOS Y VIDEO
+ * Qué hace: catálogo de documentos descargables de la carpeta anexos/.
+ * Funciones: listaAnexos().
+ * Páginas: anexos.php, descargar-anexo.php.
+ * Pruebas: CP-048.
  */
 declare(strict_types=1);
 
@@ -26,15 +30,15 @@ function listaAnexos(): array
         ],
         'mer' => [
             'titulo'      => 'MER — Modelo entidad-relación',
-            'descripcion' => 'Entidades, relaciones, diccionario de datos, índices y triggers.',
-            'archivo'     => 'Documentacion_MER_CoffeeAndTea_v1.1.docx',
+            'descripcion' => 'Entidades, relaciones, diccionario de datos, índices y triggers v1.2.',
+            'archivo'     => 'Documentacion_MER_CoffeeAndTea_v1.2.docx',
             'tipo'        => 'Word',
             'mime'        => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         ],
         'diagrama' => [
             'titulo'      => 'Diagrama MER editable',
-            'descripcion' => 'Diagrama de las 14 tablas para abrir en diagrams.net / draw.io.',
-            'archivo'     => 'Diagrama_MER_CoffeeAndTea_v1.1.drawio',
+            'descripcion' => 'Diagrama de las 14 tablas y 19 relaciones FK para abrir en diagrams.net / draw.io.',
+            'archivo'     => 'Diagrama_MER_CoffeeAndTea_v1.2.drawio',
             'tipo'        => 'Draw.io',
             'mime'        => 'application/xml',
         ],

@@ -1,6 +1,10 @@
 <?php
 /**
- * Reportes de ventas, productos, stock y caja.
+ * BLOQUE B09 · REPORTES
+ * Qué hace: reportes de ventas, productos, clientes, stock e ingresos;
+ *          exportación CSV.
+ * Relacionados: pedidos.php, plantilla.php.
+ * Pruebas: CP-041.
  */
 declare(strict_types=1);
 

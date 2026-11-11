@@ -1,8 +1,8 @@
 <?php
 /**
- * Pruebas de integración sobre PostgreSQL (base *_qa).
- *
- * Cada prueba crea sus propios datos y los elimina al final.
+ * BLOQUE B12 · PRUEBAS Y QA
+ * Qué hace: pruebas de integración del flujo de pedidos, pagos,
+ *          caja, stock y cancelaciones sobre PostgreSQL.
  */
 declare(strict_types=1);
 

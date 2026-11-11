@@ -1,6 +1,10 @@
 <?php
 /**
- * Registro de auditoría y utilidades de trazabilidad.
+ * BLOQUE B01 · NÚCLEO
+ * Qué hace: registra acciones sensibles en la tabla auditoria.
+ * Funciones: ipCliente(), registrarAuditoria().
+ * Tablas: auditoria.
+ * Páginas: login, gestión, administración y operaciones de pedidos.
  */
 declare(strict_types=1);
 

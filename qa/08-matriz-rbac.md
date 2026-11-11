@@ -19,8 +19,8 @@ El visitante es anónimo y **no** existe como rol en la base.
 | `pedidos-invitado.php` | ✅ | ✅ | ❌ | ❌ |
 | `pedido.php` (código + token) | ✅ | ✅ | ✅ | ✅ |
 | `login.php`, `registro.php`, `recuperar.php`, `restablecer.php` | ✅ | ❌ (redirige) | ❌ | ❌ |
-| `privacidad.php`, `manual.php` | ✅ | ✅ | ✅ | ✅ |
-| `anexos.php` y descargas | ✅ | ✅ | ✅ | ✅ |
+| `privacidad.php`, `politica-cancelacion.php`, `manual.php`, `video.php` | ✅ | ✅ | ✅ | ✅ |
+| `anexos.php`, `descargar-anexo.php`, `descargar-manual.php` | ✅ | ✅ | ✅ | ✅ |
 | `cuenta.php` | ❌ | ✅ | ❌ | ❌ |
 | `cambiar-password.php` | ❌ | ✅ | ✅ | ✅ |
 | `gestion.php` | ❌ | ❌ | ✅ | ✅ |

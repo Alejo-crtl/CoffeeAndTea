@@ -1,6 +1,9 @@
 <?php
 /**
- * Pedidos recientes guardados en este navegador para visitantes.
+ * BLOQUE B04 · CARRITO Y PEDIDOS
+ * Qué hace: muestra los pedidos recientes guardados en el navegador.
+ * Relacionados: pedidos_invitado.php, plantilla.php.
+ * Pruebas: CP-044.
  */
 declare(strict_types=1);
 

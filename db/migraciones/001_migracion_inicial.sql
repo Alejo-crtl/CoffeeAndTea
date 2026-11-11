@@ -1,4 +1,5 @@
 -- ============================================================
+-- BLOQUE B11 · BASE DE DATOS
 -- CoffeeAndtea - Migracion inicial de datos
 -- Origen: base anterior CoffeeAndTea (5 tablas, sin usuarios)
 -- Destino: base nueva con db/schema.sql ya cargado

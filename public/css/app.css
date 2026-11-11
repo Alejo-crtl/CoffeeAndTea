@@ -1,6 +1,30 @@
 /* ==========================================================================
-   CoffeeAndtea - Hoja de estilos única de las páginas actuales
-   Contiene variables, layout, componentes, tablas y toasts.
+   BLOQUE B13 · FRONTEND
+   CoffeeAndtea - Hoja de estilos única de las páginas actuales.
+   Contiene variables, layout, componentes, tablas, formularios, video y toasts.
+
+   Mapa de secciones:
+     1. Variables y base
+     2. Barra superior
+     3. Estructura general
+     4. Héroe / portada
+     5. Botones, chips y avisos
+     6. Pestañas
+     7. Tienda, tarjetas y productos
+     8. Carrito, checkout y pedidos
+     9. Gestión: formularios y listados
+    10. Administración
+    11. Reportes
+    12. Manual, anexos y video
+    13. Pie de página
+    14. Adaptación a pantallas medianas y pequeñas
+    15. Impresión
+
+   Reglas visuales clave:
+     - Las tarjetas de producto usan proporción 3:2.
+     - La imagen se muestra completa con object-fit: contain.
+     - El zoom al pasar el cursor es suave (scale 1.03).
+     - Los colores base viven en :root.
    ========================================================================== */
 
 :root {
@@ -150,7 +174,7 @@ button,
 }
 
 /* --------------------------------------------------------------------------
-   Barra superior
+   B13 · Barra superior
    -------------------------------------------------------------------------- */
 
 .topbar {
@@ -257,7 +281,7 @@ button,
 }
 
 /* --------------------------------------------------------------------------
-   Estructura general
+   B13 · Estructura general
    -------------------------------------------------------------------------- */
 
 .app-main {
@@ -322,7 +346,7 @@ button,
 }
 
 /* --------------------------------------------------------------------------
-   Héroe / portada
+   B13 · Héroe / portada
    -------------------------------------------------------------------------- */
 
 .hero {
@@ -493,7 +517,7 @@ button,
 }
 
 /* --------------------------------------------------------------------------
-   Botones, chips y avisos
+   B13 · Botones, chips y avisos
    -------------------------------------------------------------------------- */
 
 .btn {
@@ -808,7 +832,7 @@ button,
 }
 
 /* --------------------------------------------------------------------------
-   Pestañas
+   B13 · Pestañas
    -------------------------------------------------------------------------- */
 
 .tabs {
@@ -875,7 +899,7 @@ button,
 }
 
 /* --------------------------------------------------------------------------
-   Gestión: formularios y listados
+   B13 · Gestión: formularios y listados
    -------------------------------------------------------------------------- */
 
 .gestion-layout {
@@ -1222,7 +1246,7 @@ label.checkbox input {
 }
 
 /* --------------------------------------------------------------------------
-   Reportes
+   B13 · Reportes
    -------------------------------------------------------------------------- */
 
 .reporte-card {
@@ -1333,7 +1357,7 @@ label.checkbox input {
 }
 
 /* --------------------------------------------------------------------------
-   Manual
+   B13 · Manual
    -------------------------------------------------------------------------- */
 
 .manual-layout {
@@ -1554,7 +1578,7 @@ label.checkbox input {
 }
 
 /* --------------------------------------------------------------------------
-   Video
+   B13 · Video
    -------------------------------------------------------------------------- */
 
 .video-layout {
@@ -1644,7 +1668,7 @@ label.checkbox input {
 }
 
 /* --------------------------------------------------------------------------
-   Pie de página
+   B13 · Pie de página
    -------------------------------------------------------------------------- */
 
 .site-footer {
@@ -1670,7 +1694,7 @@ label.checkbox input {
 }
 
 /* --------------------------------------------------------------------------
-   Adaptación a pantallas medianas y pequeñas
+   B13 · Adaptación responsive
    -------------------------------------------------------------------------- */
 
 @media (max-width: 1280px) {
@@ -1848,7 +1872,7 @@ label.checkbox input {
 }
 
 /* --------------------------------------------------------------------------
-   Impresión: se optimiza la sección Manual
+   B13 · Impresión
    -------------------------------------------------------------------------- */
 
 @media print {
@@ -2080,6 +2104,7 @@ label.checkbox input {
 .filtro.activo { background: var(--marron-oscuro); color: #fff7ec; border-color: var(--marron-oscuro); }
 .filtro.activo span { background: rgba(255, 255, 255, 0.18); color: #fff; }
 
+/* B13 · Tienda y tarjetas de producto */
 .grid-productos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
 
 .anexos-grid {
@@ -2191,6 +2216,7 @@ label.checkbox input {
 .como-funciona strong { display: block; color: var(--marron-oscuro); }
 .como-funciona span { font-size: 0.86rem; }
 
+/* B13 · Paneles de gestión y administración */
 .panel {
     background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--radio);
     padding: 22px; box-shadow: var(--sombra-suave); margin-bottom: 20px;

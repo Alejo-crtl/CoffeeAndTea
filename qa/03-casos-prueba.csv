@@ -1,46 +1,46 @@
-ID;Caso de prueba;Requisito;PrecondiciÃ³n;Pasos;Resultado esperado;Prioridad;Tipo;Estado
-CP-001;Registro de cliente nuevo;RF-AUT-01;Correo no registrado;Abrir registro.php, completar datos y aceptar polÃ­tica;Se crea usuario CLIENTE, se vincula cliente y se inicia sesiÃ³n;Alta;Sistema;Aprobado
+ID;Caso de prueba;Requisito;Precondición;Pasos;Resultado esperado;Prioridad;Tipo;Estado
+CP-001;Registro de cliente nuevo;RF-AUT-01;Correo no registrado;Abrir registro.php, completar datos y aceptar política;Se crea usuario CLIENTE, se vincula cliente y se inicia sesión;Alta;Sistema;Aprobado
 CP-002;Registro con correo duplicado;RF-AUT-01;Correo ya registrado;Intentar registrar el mismo correo;Mensaje de error y no se crea usuario;Alta;Negativo;Aprobado
-CP-003;Login de administrador;RF-AUT-02;Usuario ADMIN activo;Ingresar credenciales vÃ¡lidas;Redirige a gestion.php con sesiÃ³n iniciada;Alta;Sistema;Aprobado
-CP-004;Login con contraseÃ±a incorrecta;RF-AUT-02;Usuario existente;Ingresar contraseÃ±a errÃ³nea;Mensaje genÃ©rico, no revela si el correo existe, registra LOGIN_FALLIDO;Alta;Negativo;Aprobado
-CP-005;Bloqueo por fuerza bruta;RF-AUT-03;SesiÃ³n nueva;Intentar login fallido 8 veces;Se bloquea 10 minutos con mensaje;Media;Seguridad;Aprobado
-CP-006;RecuperaciÃ³n de contraseÃ±a;RF-AUT-04;Usuario activo con correo;Solicitar recuperaciÃ³n;Se envÃ­a enlace genÃ©rico, token de un solo uso, vence en 60 min;Alta;Sistema;Aprobado
-CP-007;Enlace de recuperaciÃ³n usado;RF-AUT-04;Token ya utilizado;Abrir el enlace por segunda vez;Muestra enlace no vÃ¡lido (410);Media;Negativo;Aprobado
-CP-008;Cambio forzado de contraseÃ±a;RF-AUT-05;Usuario con debe_cambiar_password;Iniciar sesiÃ³n;Redirige a cambiar-password.php y no permite otras pÃ¡ginas;Alta;Sistema;Aprobado
-CP-009;Visitante accede a gestiÃ³n;RF-RBAC-01;SesiÃ³n anÃ³nima;Abrir gestion.php;Redirige a login.php;Alta;Seguridad;Aprobado
-CP-010;Cliente accede a administraciÃ³n;RF-RBAC-02;SesiÃ³n CLIENTE;Abrir admin.php;Redirige con aviso de permisos;Alta;Seguridad;Aprobado
-CP-011;Encargado accede a administraciÃ³n;RF-RBAC-03;SesiÃ³n ENCARGADO;Abrir admin.php;Redirige con aviso de permisos;Alta;Seguridad;Aprobado
-CP-012;CatÃ¡logo pÃºblico;RF-TIE-01;Productos activos;Abrir index.php;Muestra productos, precio, stock y tiempo estimado;Alta;Sistema;Aprobado
-CP-013;Precio histÃ³rico congelado;RF-TIE-02;Pedido existente;Cambiar precio del producto y consultar pedido;El total del pedido no cambia;Alta;IntegraciÃ³n;Aprobado
+CP-003;Login de administrador;RF-AUT-02;Usuario ADMIN activo;Ingresar credenciales válidas;Redirige a gestion.php con sesión iniciada;Alta;Sistema;Aprobado
+CP-004;Login con contraseña incorrecta;RF-AUT-02;Usuario existente;Ingresar contraseña errónea;Mensaje genérico, no revela si el correo existe, registra LOGIN_FALLIDO;Alta;Negativo;Aprobado
+CP-005;Bloqueo por fuerza bruta;RF-AUT-03;Sesión nueva;Intentar login fallido 8 veces;Se bloquea 10 minutos con mensaje;Media;Seguridad;Aprobado
+CP-006;Recuperación de contraseña;RF-AUT-04;Usuario activo con correo;Solicitar recuperación;Se envía enlace genérico, token de un solo uso, vence en 60 min;Alta;Sistema;Aprobado
+CP-007;Enlace de recuperación usado;RF-AUT-04;Token ya utilizado;Abrir el enlace por segunda vez;Muestra enlace no válido (410);Media;Negativo;Aprobado
+CP-008;Cambio forzado de contraseña;RF-AUT-05;Usuario con debe_cambiar_password;Iniciar sesión;Redirige a cambiar-password.php y no permite otras páginas;Alta;Sistema;Aprobado
+CP-009;Visitante accede a gestión;RF-RBAC-01;Sesión anónima;Abrir gestion.php;Redirige a login.php;Alta;Seguridad;Aprobado
+CP-010;Cliente accede a administración;RF-RBAC-02;Sesión CLIENTE;Abrir admin.php;Redirige con aviso de permisos;Alta;Seguridad;Aprobado
+CP-011;Encargado accede a administración;RF-RBAC-03;Sesión ENCARGADO;Abrir admin.php;Redirige con aviso de permisos;Alta;Seguridad;Aprobado
+CP-012;Catálogo público;RF-TIE-01;Productos activos;Abrir index.php;Muestra productos, precio, stock y tiempo estimado;Alta;Sistema;Aprobado
+CP-013;Precio histórico congelado;RF-TIE-02;Pedido existente;Cambiar precio del producto y consultar pedido;El total del pedido no cambia;Alta;Integración;Aprobado
 CP-014;Agregar producto al carrito;RF-TIE-03;Stock disponible;Agregar 2 unidades;Carrito refleja 2 unidades y subtotal correcto;Alta;Sistema;Aprobado
-CP-015;Agregar mÃ¡s unidades que el stock;RF-TIE-03;Producto con stock limitado;Intentar agregar cantidad mayor;Mensaje de stock insuficiente y no modifica el carrito;Alta;Negativo;Aprobado
-CP-016;Checkout como invitado;RF-TIE-04;Carrito con productos;Completar datos y confirmar;Se crea pedido PENDIENTE con cÃ³digo y token pÃºblico;Alta;Sistema;Aprobado
-CP-017;Checkout sin aceptar polÃ­tica;RF-TIE-04;Carrito con productos;Enviar sin consentimiento;Error y no se crea el pedido;Media;Negativo;Aprobado
-CP-018;Stock no cambia al crear pedido;RF-TIE-05;Stock conocido;Crear pedido y consultar stock;El stock permanece igual hasta el pago;Alta;IntegraciÃ³n;Aprobado
-CP-019;Consulta pÃºblica del pedido;RF-TIE-06;CÃ³digo y token vÃ¡lidos;Abrir pedido.php;Muestra estado, detalle y tiempo estimado;Alta;Sistema;Aprobado
-CP-020;Token pÃºblico invÃ¡lido;RF-TIE-06;Token incorrecto;Abrir pedido.php con token errÃ³neo;Responde 404 sin filtrar datos;Alta;Seguridad;Aprobado
-CP-021;Pago en efectivo;RF-CAJ-01;Pedido PENDIENTE y caja abierta;Confirmar pago con efectivo recibido;Pedido PAGADO, stock descontado, pago CONFIRMADO, INGRESO en caja y cambio calculado;Alta;IntegraciÃ³n;Aprobado
-CP-022;Pago con tarjeta;RF-CAJ-02;Pedido PENDIENTE;Confirmar pago con referencia de datÃ¡fono;Pedido PAGADO, stock descontado, pago CONFIRMADO con referencia, sin movimiento de caja;Alta;IntegraciÃ³n;Aprobado
+CP-015;Agregar más unidades que el stock;RF-TIE-03;Producto con stock limitado;Intentar agregar cantidad mayor;Mensaje de stock insuficiente y no modifica el carrito;Alta;Negativo;Aprobado
+CP-016;Checkout como invitado;RF-TIE-04;Carrito con productos;Completar datos y confirmar;Se crea pedido PENDIENTE con código y token público;Alta;Sistema;Aprobado
+CP-017;Checkout sin aceptar política;RF-TIE-09;Carrito con productos;Enviar sin consentimiento;Error y no se crea el pedido;Media;Negativo;Aprobado
+CP-018;Stock no cambia al crear pedido;RF-TIE-05;Stock conocido;Crear pedido y consultar stock;El stock permanece igual hasta el pago;Alta;Integración;Aprobado
+CP-019;Consulta pública del pedido;RF-TIE-06;Código y token válidos;Abrir pedido.php;Muestra estado, detalle, tiempo estimado y línea de tiempo con los 5 estados;Alta;Sistema;Aprobado
+CP-020;Token público inválido;RF-TIE-06;Token incorrecto;Abrir pedido.php con token erróneo;Responde 404 sin filtrar datos;Alta;Seguridad;Aprobado
+CP-021;Pago en efectivo;RF-CAJ-01;Pedido PENDIENTE y caja abierta;Confirmar pago con efectivo recibido;Pedido PAGADO, stock descontado, pago CONFIRMADO, INGRESO en caja y cambio calculado;Alta;Integración;Aprobado
+CP-022;Pago con tarjeta;RF-CAJ-02;Pedido PENDIENTE;Confirmar pago con referencia de datáfono;Pedido PAGADO, stock descontado, pago CONFIRMADO con referencia, sin movimiento de caja;Alta;Integración;Aprobado
 CP-023;Pago en efectivo sin caja;RF-CAJ-03;Caja cerrada;Intentar cobrar en efectivo;Error y no se descuenta stock ni se registra pago;Alta;Negativo;Aprobado
 CP-024;Pago con efectivo insuficiente;RF-CAJ-01;Caja abierta;Ingresar recibido menor al total;Error y no se confirma el pago;Alta;Negativo;Aprobado
-CP-025;CancelaciÃ³n de pedido pagado con tarjeta;RF-CAN-01;Pedido PAGADO con tarjeta;Cancelar con motivo y reembolso TARJETA;Pedido CANCELADO, pago REEMBOLSADO, stock devuelto, sin egreso de caja, auditorÃ­a e historial;Alta;IntegraciÃ³n;Aprobado
-CP-026;CancelaciÃ³n de pedido pagado en efectivo;RF-CAN-02;Pedido PAGADO en efectivo y caja abierta;Cancelar con reembolso EFECTIVO;Pedido CANCELADO, pago REEMBOLSADO, stock devuelto, EGRESO en caja;Alta;IntegraciÃ³n;Aprobado
-CP-027;CancelaciÃ³n sin motivo;RF-CAN-03;Cualquier pedido activo;Enviar cancelaciÃ³n con motivo vacÃ­o;Error y no cambia el estado;Media;Negativo;Aprobado
-CP-028;CancelaciÃ³n de pedido entregado;RF-CAN-04;Pedido ENTREGADO;Intentar cancelar;Error y el pedido permanece ENTREGADO;Alta;Negativo;Aprobado
-CP-029;Transiciones de estado;RF-PED-01;Pedido PAGADO;Avanzar a EN_PREPARACION, LISTO y ENTREGADO;Cambios permitidos con historial y auditorÃ­a;Alta;IntegraciÃ³n;Aprobado
-CP-030;TransiciÃ³n invÃ¡lida;RF-PED-01;Pedido PAGADO;Intentar pasar directo a ENTREGADO;Error y no cambia el estado;Media;Negativo;Aprobado
+CP-025;Cancelación de pedido pagado con tarjeta;RF-CAN-01;Pedido PAGADO con tarjeta;Cancelar con motivo y reembolso TARJETA;Pedido CANCELADO, pago REEMBOLSADO, stock devuelto, sin egreso de caja, auditoría e historial;Alta;Integración;Aprobado
+CP-026;Cancelación de pedido pagado en efectivo;RF-CAN-02;Pedido PAGADO en efectivo y caja abierta;Cancelar con reembolso EFECTIVO;Pedido CANCELADO, pago REEMBOLSADO, stock devuelto, EGRESO en caja;Alta;Integración;Aprobado
+CP-027;Cancelación sin motivo;RF-CAN-03;Cualquier pedido activo;Enviar cancelación con motivo vacío;Error y no cambia el estado;Media;Negativo;Aprobado
+CP-028;Cancelación de pedido entregado;RF-CAN-04;Pedido ENTREGADO;Intentar cancelar;Error y el pedido permanece ENTREGADO;Alta;Negativo;Aprobado
+CP-029;Transiciones de estado;RF-PED-01;Pedido PAGADO;Avanzar a EN_PREPARACION, LISTO y ENTREGADO;Cambios permitidos con historial y auditoría;Alta;Integración;Aprobado
+CP-030;Transición inválida;RF-PED-01;Pedido PAGADO;Intentar pasar directo a ENTREGADO;Error y no cambia el estado;Media;Negativo;Aprobado
 CP-031;Abrir caja;RF-CAJ-04;Caja cerrada;Registrar base inicial;Caja ABIERTA con base y usuario;Alta;Sistema;Aprobado
-CP-032;Doble apertura de caja;RF-CAJ-04;Caja abierta;Intentar abrir otra caja;Error por Ã­ndice Ãºnico de caja abierta;Alta;Negativo;Aprobado
+CP-032;Doble apertura de caja;RF-CAJ-04;Caja abierta;Intentar abrir otra caja;Error por índice único de caja abierta;Alta;Negativo;Aprobado
 CP-033;Cierre de caja cuadrado;RF-CAJ-05;Caja abierta con movimientos;Cerrar con efectivo contado igual al esperado;Diferencia 0 y cierre auditado;Alta;Sistema;Aprobado
 CP-034;Cierre de caja con faltante;RF-CAJ-05;Caja abierta;Cerrar con contado menor al esperado;Diferencia negativa registrada y auditada;Media;Sistema;Aprobado
-CP-035;Ajuste manual de stock;RF-STO-01;Producto activo;Cambiar stock desde gestiÃ³n;Stock actualizado con movimiento AJUSTE y auditorÃ­a;Media;Sistema;Aprobado
-CP-036;Crear usuario con contraseÃ±a temporal;RF-ADM-01;SesiÃ³n ADMIN;Crear usuario sin contraseÃ±a;Se genera contraseÃ±a temporal, se muestra una vez y exige cambio;Alta;Sistema;Aprobado
-CP-037;Reset administrativo de contraseÃ±a;RF-ADM-02;SesiÃ³n ADMIN;Resetear contraseÃ±a de un usuario;ContraseÃ±a temporal, sesiones cerradas y correo registrado;Alta;Sistema;Aprobado
-CP-038;Crear y editar producto;RF-ADM-03;SesiÃ³n ADMIN;Crear producto y editar precio/stock;Datos guardados, movimiento de stock y pedidos histÃ³ricos intactos;Alta;Sistema;Aprobado
-CP-039;Desactivar Ãºltimo administrador;RF-ADM-04;Ãšnico ADMIN activo;Intentar quitarse el rol;Error y no se permite;Alta;Negativo;Aprobado
-CP-040;ConfiguraciÃ³n de tienda;RF-ADM-05;SesiÃ³n ADMIN;Cambiar tiempo estimado y cerrar pedidos web;Cambios aplicados en tienda pÃºblica;Media;Sistema;Aprobado
-CP-041;Reportes y CSV;RF-REP-01;Ventas del dÃ­a;Abrir reportes y exportar CSV;Totales correctos y archivo descargable;Media;Sistema;Aprobado
-CP-042;MigraciÃ³n de datos;RF-MIG-01;Base original CoffeeAndTea;Cargar esquema nuevo y ejecutar migraciÃ³n;6 categorÃ­as, 11 clientes, 15 productos, 12 pedidos y 22 detalles migrados;Alta;Datos;Aprobado
+CP-035;Ajuste manual de stock;RF-STO-01;Producto activo;Cambiar stock desde gestión;Stock actualizado con movimiento AJUSTE y auditoría;Media;Sistema;Aprobado
+CP-036;Crear usuario con contraseña temporal;RF-ADM-01;Sesión ADMIN;Crear usuario sin contraseña;Se genera contraseña temporal, se muestra una vez y exige cambio;Alta;Sistema;Aprobado
+CP-037;Reset administrativo de contraseña;RF-ADM-02;Sesión ADMIN;Resetear contraseña de un usuario;Contraseña temporal, sesiones cerradas y correo registrado;Alta;Sistema;Aprobado
+CP-038;Crear y editar producto;RF-ADM-03;Sesión ADMIN;Crear producto y editar precio/stock;Datos guardados, movimiento de stock y pedidos históricos intactos;Alta;Sistema;Aprobado
+CP-039;Desactivar último administrador;RF-ADM-04;Único ADMIN activo;Intentar quitarse el rol;Error y no se permite;Alta;Negativo;Aprobado
+CP-040;Configuración de tienda;RF-ADM-05;Sesión ADMIN;Cambiar tiempo estimado y cerrar pedidos web;Cambios aplicados en tienda pública;Media;Sistema;Aprobado
+CP-041;Reportes y CSV;RF-REP-01;Ventas del día;Abrir reportes y exportar CSV;Totales correctos y archivo descargable;Media;Sistema;Aprobado
+CP-042;Migración de datos;RF-MIG-01;Base original CoffeeAndTea;Cargar esquema nuevo y ejecutar migración;6 categorías, 11 clientes, 15 productos, 12 pedidos y 22 detalles migrados;Alta;Datos;Aprobado
 CP-043;Personal interno sin carrito ni cuenta;RF-RBAC-04;Sesión ENCARGADO o ADMIN;Abrir carrito.php, checkout.php y cuenta.php;Redirige a gestion.php y la tienda no muestra botones de agregar;Alta;Seguridad;Aprobado
 CP-044;Pedidos recientes de invitado;RF-TIE-07;Visitante con un pedido creado;Abrir pedidos-invitado.php;Muestra el pedido guardado en el navegador con enlace a su estado;Media;Sistema;Aprobado
 CP-045;Cancelación en preparación con reembolso del 50%;RF-CAN-05;Pedido pagado y en preparación;Cancelar con motivo y reembolso tarjeta;Devuelve stock, pago REEMBOLSADO con monto_reembolsado del 50% y auditoría;Alta;Integración;Aprobado
