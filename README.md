@@ -4,9 +4,34 @@ Sistema web de tienda y gestión para una cafetería. Permite **pedir en línea
 para recoger en tienda**, cobrar en el mostrador y administrar pedidos, caja,
 stock, usuarios y reportes.
 
+**Stack:** PHP 8.3 · PostgreSQL 18 · HTML/CSS/JS  
+**Estado:** Finalizado — 2026
+
+![Tienda CoffeeAndtea](docs/img/tienda.jpg)
+
 > **Solo recogida.** No hay domicilios. El pago se realiza en el mostrador en
 > efectivo o con tarjeta; el datáfono es externo y el sistema solo guarda la
 > referencia de la transacción.
+
+## Contenido
+
+- [Funcionalidades](#1-funcionalidades)
+- [Capturas](#capturas)
+- [Estructura del proyecto](#2-estructura-del-proyecto)
+- [Requisitos](#3-requisitos)
+- [Instalación rápida](#4-instalación-rápida)
+- [Migración](#5-migración-desde-la-base-anterior)
+- [Roles y permisos](#6-roles-y-permisos)
+- [Reglas de negocio](#7-reglas-de-negocio)
+- [Correo](#8-correo)
+- [Seguridad](#9-seguridad)
+- [Pruebas](#10-pruebas)
+- [Resultados](#resultados)
+- [Despliegue](#11-despliegue)
+- [Contenido de la entrega](#12-contenido-de-la-entrega)
+- [Credenciales de demostración](#13-credenciales-de-demostración)
+- [Documentación](#14-documentación)
+- [Licencia](#licencia)
 
 ---
 
@@ -41,15 +66,25 @@ stock, usuarios y reportes.
 - Página pública `video.php`, enlazada desde el pie como **Video**.
 - Acepta enlaces de YouTube o Google Drive y los muestra embebidos.
 - El enlace se configura en **Administración → Configuración**.
-- Si no hay enlace, muestra **“Video próximamente”**.
+- Si no hay enlace, muestra **"Video próximamente"**.
 - También se puede definir con `APP_VIDEO_URL` en `.env` como respaldo.
+
+---
+
+## Capturas
+
+| Tienda | Administración |
+|---|---|
+| ![Catálogo de productos](docs/img/tienda.jpg) | ![Panel de administración](docs/img/admin.jpg) |
+
+![Video de presentación](docs/img/video.jpg)
 
 ---
 
 ## 2. Estructura del proyecto
 
 ```text
-CoffeeAndtea_Entrega/
+CoffeeAndTea/
 ├─ public/                  Document root (solo esto se publica)
 │  ├─ index.php             Tienda pública
 │  ├─ carrito.php           Carrito
@@ -132,6 +167,9 @@ B12 Pruebas y QA → B13 Frontend
 ---
 
 ## 4. Instalación rápida
+
+> Los comandos de esta guía usan PowerShell/Windows y Laragon. En Linux o macOS
+> usa los equivalentes de `psql` y `php -S`.
 
 ### 4.1 Configuración
 
@@ -239,7 +277,7 @@ cuadran. Instrucciones y consultas de verificación en
 | `ADMIN` | Todas las funciones de gestión y administración: usuarios, productos, categorías, configuración y auditoría. No usa carrito ni cuenta de cliente. |
 
 > Las cuentas internas (`ENCARGADO` y `ADMIN`) pueden consultar el menú, pero no
-> comprar. El carrito, el checkout y “Mi cuenta” son exclusivos de visitantes y
+> comprar. El carrito, el checkout y "Mi cuenta" son exclusivos de visitantes y
 > clientes.
 
 Matriz completa en [`qa/08-matriz-rbac.md`](qa/08-matriz-rbac.md).
@@ -306,14 +344,14 @@ en `_qa` o `_test`.
 ```powershell
 npm install
 npx playwright install chromium
-# Con el servidor en 127.0.0.1:8001
+$env:E2E_BASE_URL='http://localhost:8000'
 npx playwright test
 ```
 
-Si usas otra URL:
+Si usas otra URL, cambia `E2E_BASE_URL`.
 
 ```powershell
-$env:E2E_BASE_URL='http://localhost:8000'
+$env:E2E_BASE_URL='http://coffeeandtea.test'
 npx playwright test
 ```
 
@@ -328,6 +366,17 @@ composer phpcs
 
 El pack completo de QA está en [`qa/`](qa/): plan, 55 casos, matriz de riesgos,
 matriz RBAC, checklist de release e informe de resultados.
+
+---
+
+## Resultados
+
+- Casos QA: **55/55 aprobados**.
+- Pruebas PHP: **15/15 aprobadas**.
+- Pruebas E2E: **16/16 aprobadas**.
+- Migración: 6 categorías, 11 clientes, 15 productos, 12 pedidos y 22 detalles.
+
+El detalle está en [`qa/07-informe-resultados.md`](qa/07-informe-resultados.md).
 
 ---
 
@@ -425,7 +474,7 @@ Solo existen si se cargó `db/seed-demo.sql`. **No usarlas en producción.**
 
 | Rol | Correo | Contraseña |
 |---|---|---|
-| `ADMIN` | `vegaperezkevinsantiago@gmail.com` | `Admin123!` |
+| `ADMIN` | `admin@coffeeandtea.local` | `Admin123!` |
 | `ENCARGADO` | `encargado@coffeeandtea.local` | `Encargado123!` |
 | `CLIENTE` | `cliente@coffeeandtea.local` | `Cliente123!` |
 
@@ -440,6 +489,17 @@ Solo existen si se cargó `db/seed-demo.sql`. **No usarlas en producción.**
 - [`docs/LEEME.txt`](docs/LEEME.txt) — inicio rápido en texto plano.
 - [`db/migraciones/README.md`](db/migraciones/README.md) — migración de datos.
 - [`qa/07-informe-resultados.md`](qa/07-informe-resultados.md) — resultados de QA.
+- [`anexos/SRS_CoffeeAndTea_v1.3.docx`](anexos/SRS_CoffeeAndTea_v1.3.docx) — especificación de requisitos.
+- [`anexos/PAC_Plan_Aseguramiento_Calidad_Coffeeandtea_v1.2.docx`](anexos/PAC_Plan_Aseguramiento_Calidad_Coffeeandtea_v1.2.docx) — plan de aseguramiento de calidad.
+- [`anexos/Documentacion_MER_CoffeeAndTea_v1.2.docx`](anexos/Documentacion_MER_CoffeeAndTea_v1.2.docx) — modelo entidad-relación.
+- [`anexos/Diagrama_MER_CoffeeAndTea_v1.2.drawio`](anexos/Diagrama_MER_CoffeeAndTea_v1.2.drawio) — diagrama editable v1.2.
+- [`anexos/script_bd.sql`](anexos/script_bd.sql) — script de base de datos.
+
+---
+
+## Licencia
+
+Uso académico. Código propiedad del autor.
 
 ---
 

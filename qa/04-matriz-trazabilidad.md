@@ -16,14 +16,20 @@ Requisito → implementación → prueba. Estados: **Aprobado**, **Pendiente**, 
 | RF-TIE-01 | Catálogo público con stock y tiempo | `public/index.php` | CP-012 | Aprobado |
 | RF-TIE-02 | Precio histórico inmutable | `detallepedido.precio_unitario`, `recalcularTotalPedido()` | CP-013 | Aprobado |
 | RF-TIE-03 | Carrito con validación de stock | `carritoAgregar()`, `carritoFijar()` | CP-014, CP-015 | Aprobado |
-| RF-TIE-04 | Checkout de invitado o cliente | `crearPedido()` | CP-016, CP-017 | Aprobado |
+| RF-TIE-04 | Checkout de invitado o cliente | `crearPedido()` | CP-016 | Aprobado |
 | RF-TIE-05 | Stock se descuenta solo al pagar | `confirmarPago()` | CP-018, CP-021 | Aprobado |
 | RF-TIE-06 | Consulta pública por código y token | `obtenerPedidoPublico()`, `pedido.php` | CP-019, CP-020 | Aprobado |
 | RF-TIE-07 | Historial de invitado en el navegador | `pedidos_invitado.php`, `pedidos-invitado.php` | CP-044 | Aprobado |
+| RF-TIE-08 | Línea de tiempo con los 5 estados | `pedido.php`, `panel_pedido.php` | CP-019 | Aprobado |
+| RF-TIE-09 | Aceptación obligatoria de la política de cancelación | `checkout.php` | CP-017 | Aprobado |
 | RF-TIE-10 | Tiempo estimado por producto, capacidad y cola | `calcularTiempoEstimado()`, `calcularTiempoPreparacion()` | CP-046 | Aprobado |
 | RF-TIE-11 | Copiar enlace limpio del pedido | `pedido.php`, botón Copiar enlace | CP-047 | Aprobado |
 | RF-DOC-01 | Página de anexos y descargas controladas | `anexos.php`, `descargar-anexo.php` | CP-048 | Aprobado |
 | RF-DOC-02 | Video de presentación embebido | `public/video.php`, `app/php/lib/video.php` | CP-054 | Aprobado |
+| RF-UI-01 | Aviso de compra como invitado y política visible | `index.php`, `checkout.php`, `pedidos_invitado.php` | CP-044, CP-017 | Aprobado |
+| RF-MAN-01 | Manual de usuario para visitante y CLIENTE | `manual.php`, `manual_rol.php` | Revisión manual | Aprobado |
+| RF-MAN-02 | Manual de operación para ENCARGADO | `manual.php`, `manual_rol.php` | Revisión manual | Aprobado |
+| RF-MAN-03 | Manual de administración para ADMIN | `manual.php`, `manual_rol.php` | Revisión manual | Aprobado |
 | RF-UI-02 | Navegación con botones en todas las páginas | `pieHtml()`, botones de regreso | CP-049 | Aprobado |
 | RF-CAJ-01 | Cobro en efectivo con cambio | `confirmarPago()` | CP-021, CP-024 | Aprobado |
 | RF-CAJ-02 | Cobro con tarjeta y referencia externa | `confirmarPago()` | CP-022 | Aprobado |

@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 
 async function iniciarSesionAdmin(page) {
     await page.goto('/login.php');
-    await page.fill('#correo', 'vegaperezkevinsantiago@gmail.com');
+    await page.fill('#correo', 'admin@coffeeandtea.local');
     await page.fill('#password', 'Admin123!');
     await page.getByRole('button', { name: 'Entrar' }).click();
     await expect(page).toHaveURL(/gestion\.php/);

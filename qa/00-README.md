@@ -76,6 +76,7 @@ composer phpcs
 # E2E (requiere Node y Playwright)
 npm install
 npx playwright install chromium
+$env:E2E_BASE_URL='http://localhost:8000'
 npx playwright test
 ```
 

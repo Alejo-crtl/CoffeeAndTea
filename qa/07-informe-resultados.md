@@ -1,8 +1,9 @@
 # Informe de resultados — CoffeeAndtea
 
 **Fecha de ejecución:** 2026-11-10  
+**Revisión de documentos:** 2026-11-11  
 **Entorno:** Desarrollo, PostgreSQL 18, base `coffeeandtea_qa`, PHP 8.3.36  
-**Servidor:** `php -S 127.0.0.1:8001 -t public`  
+**Servidor:** Apache/Laragon — `http://coffeeandtea.test/`  
 **Correo:** `MAIL_DRIVER=log` (sin envío real)
 
 ## 1. Resumen
@@ -26,6 +27,7 @@
 | Tienda y carrito | CP-012 a CP-020, CP-044, CP-046, CP-047 | Aprobado. Catálogo, stock, checkout, token público, precio histórico, pedidos recientes, tiempo estimado y copiar enlace. |
 | Anexos y navegación | CP-048, CP-049 | Aprobado. Descarga de anexos y botones de regreso en las páginas. |
 | Video de presentación | CP-054 | Aprobado. Enlace en el pie, página propia y aviso “Video próximamente”. |
+| Manuales por rol | Revisión manual | Aprobado. Se abrió `manual.php` con visitante/CLIENTE, ENCARGADO y ADMIN; cada rol mostró el documento correcto. |
 | Pagos y caja | CP-021 a CP-024, CP-031 a CP-034 | Aprobado. Efectivo con cambio, tarjeta con referencia, caja obligatoria, cierre cuadrado y faltante de $2.000. |
 | Cancelaciones y estados | CP-025 a CP-030, CP-045 | Aprobado. Reembolso tarjeta/efectivo, devolución de stock, motivo obligatorio, transiciones válidas y reembolso del 50% en preparación. |
 | Administración | CP-035 a CP-040, CP-050 a CP-053, CP-055 | Aprobado. Stock, usuarios, contraseña temporal, CRUD de producto, imágenes de producto sin recortes, protección del último admin y configuración. |
@@ -71,7 +73,7 @@
 ### Imágenes de producto
 - Se creó una categoría y un producto desde Administración; ambos aparecieron en la tienda y la categoría en los filtros del menú.
 - La imagen subida se guardó en `public/media/productos` y se mostró **completa, sin recortes**, dentro de una tarjeta 3:2 con fondo crema.
-- Se revisó el catálogo en 1440, 1024, 768, 600 y 390 px; ninguna imagen quedó cortada por arriba o por abajo.
+- Se revisó el catálogo en 1440, 768 y 390 px; la tarjeta 3:2 mantiene la imagen completa y no la corta por arriba ni por abajo.
 - Al reemplazar la imagen cambió la ruta y se eliminó el archivo anterior.
 - Al marcar **Quitar la imagen actual**, `producto.imagen_url` quedó vacío y la tienda mostró el espacio reservado.
 - Un archivo falso con extensión `.jpg` fue rechazado con el mensaje **Formato no permitido. Usa JPG, PNG o WebP.**
@@ -85,6 +87,13 @@
 - Se guardó un enlace de YouTube y la página mostró el iframe de `youtube-nocookie.com`.
 - Luego se vació el campo y la página volvió al aviso **“Video próximamente”**.
 - La página no desborda horizontalmente en 390 px.
+
+### Manuales por rol
+- Se abrió `manual.php` como visitante/CLIENTE y se mostró `docs/manual.md`.
+- Se abrió como ENCARGADO y se mostró `docs/manual-encargado.md`.
+- Se abrió como ADMIN y se mostró `docs/manual-admin.md`.
+- La descarga de cada manual correspondió al rol de la sesión.
+- Resultado: revisión manual aprobada para RF-MAN-01, RF-MAN-02 y RF-MAN-03.
 
 ### Seguridad
 - 8 intentos fallidos de login → bloqueo de 10 minutos.

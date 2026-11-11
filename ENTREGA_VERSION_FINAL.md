@@ -1,7 +1,6 @@
 # Entrega final — CoffeeAndtea
 
-Rama: `feature/version-final-php`  
-Base: `main`  
+Rama: `main`  
 Repositorio: `Alejo-crtl/CoffeeAndTea`
 
 Esta rama contiene la versión final en PHP 8.3 y PostgreSQL 18, con
@@ -52,5 +51,6 @@ npx playwright test
 
 ## Nota para el administrador
 
-El merge debe hacerse desde `feature/version-final-php` hacia `main`.
+La versión final está consolidada en `main`. Las correcciones documentales y de
+presentación se gestionan en PRs separados sobre `refactor/simplificacion`.
 La rama reemplaza la aplicación anterior y deja la versión final en la raíz.

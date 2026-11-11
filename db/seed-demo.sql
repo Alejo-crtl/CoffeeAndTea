@@ -9,7 +9,7 @@
 -- ============================================================
 
 INSERT INTO usuario (id, nombre, correo, password_hash, rol, activo) VALUES
-    (1, 'Kevin Vega Perez', 'vegaperezkevinsantiago@gmail.com',
+    (1, 'Administrador Demo', 'admin@coffeeandtea.local',
      '$2y$10$cRqerumdlhWkeeQLqpRtWurGrgv5sXr2CdSmLy30o2ywHSm0rhoqC', 'ADMIN', true),
     (2, 'Encargado Turno', 'encargado@coffeeandtea.local',
      '$2y$10$3knJh1/xOCNMp3Kc3LDl2.LowwD85x8QcJSNH6XtlIFlshX2M.oxe', 'ENCARGADO', true),
