@@ -1,4 +1,5 @@
 -- ============================================================
+-- BLOQUE B11 · BASE DE DATOS
 -- CoffeeAndTea - Datos de demostración para QA
 -- Contraseñas:
 --   admin@coffeeandtea.local      -> Admin123!
