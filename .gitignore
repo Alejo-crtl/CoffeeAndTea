@@ -19,6 +19,11 @@
 /playwright-report/
 /.phpunit.cache/
 
+# Historial local y documentos legacy (no se publican)
+/anexos/_historico/
+/documentacion/
+/storage/
+
 # Base de datos
 /db/*.sql.bak
 /db/*.dump
