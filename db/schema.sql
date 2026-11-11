@@ -1,4 +1,5 @@
 -- ============================================================
+-- BLOQUE B11 · BASE DE DATOS
 -- CoffeeAndTea - Esquema completo
 -- PostgreSQL 18
 -- Orden: usuarios -> catálogo -> pedidos -> pagos/caja -> auditoría
