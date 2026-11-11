@@ -297,6 +297,7 @@ Reglas:
 - Para reemplazar la foto, selecciona otro archivo y guarda. El archivo anterior se elimina si ningún otro producto lo usa.
 - Para dejar el producto sin foto, marca **Quitar la imagen actual** y guarda. La tienda mostrará el espacio reservado.
 - Se rechazan archivos que no sean JPG, PNG o WebP, que superen los 2 MB o que no contengan una imagen válida.
+- Si al cambiar de equipo las fotos no aparecen, verifica que existan en `public/media/productos` y ejecuta `db/asignar-imagenes.sql` para completar `producto.imagen_url`.
 
 ---
 
