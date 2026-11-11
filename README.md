@@ -237,6 +237,11 @@ O manualmente:
 php -S localhost:8000 -t public
 ```
 
+> **Falsos positivos de antivirus:** `scripts\iniciar.bat` solo inicia el servidor
+> PHP y muestra la URL; no descarga ni ejecuta nada más. Si Windows Defender lo
+> marca, puedes arrancar manualmente con `php -S localhost:8000 -t public`.
+> El script `qa\scripts\preparar-bd.ps1` solo recrea la base de QA.
+
 ---
 
 ## 5. Migración desde la base anterior

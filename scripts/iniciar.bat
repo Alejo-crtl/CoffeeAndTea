@@ -39,9 +39,9 @@ if not exist "%RAIZ%\.env" (
 
 cd /d "%RAIZ%"
 echo Servidor CoffeeAndtea: http://localhost:8000/
+echo Abre esa URL en el navegador.
 echo Presiona Ctrl+C para detenerlo.
 echo.
-start "" /b powershell -NoProfile -WindowStyle Hidden -Command "Start-Sleep -Seconds 2; Start-Process 'http://localhost:8000/'"
 "%PHP%" -S localhost:8000 -t public
 
 endlocal
