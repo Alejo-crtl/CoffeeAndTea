@@ -45,4 +45,4 @@ if ($LASTEXITCODE -ne 0) { throw 'Fallo seed-demo.sql.' }
 
 Write-Host ''
 Write-Host "Base $DbName lista para pruebas."
-Write-Host 'Usuarios demo: vegaperezkevinsantiago@gmail.com (ADMIN, Admin123!) / encargado@coffeeandtea.local (Encargado123!) / cliente@coffeeandtea.local (Cliente123!)'
+Write-Host 'Usuarios demo: admin@coffeeandtea.local (ADMIN, Admin123!) / encargado@coffeeandtea.local (Encargado123!) / cliente@coffeeandtea.local (Cliente123!)'
