@@ -1,7 +1,7 @@
-// @ts-check
+// @ts-nocheck
 const { test, expect } = require('@playwright/test');
 
-test('la página de anexos lista y descarga los documentos', async ({ page, request }) => {
+test('la página de anexos lista y descarga los documentos', async (/** @type {{ page: import('@playwright/test').Page, request: import('@playwright/test').APIRequestContext }} */ { page, request }) => {
     await page.goto('/anexos.php');
     await expect(page.getByRole('heading', { name: 'Anexos' })).toBeVisible();
     await expect(page.locator('.anexo-card')).toHaveCount(6);
@@ -25,7 +25,7 @@ test('la página de anexos lista y descarga los documentos', async ({ page, requ
     expect(desborde).toBeLessThanOrEqual(1);
 });
 
-test('el footer enlaza a anexos desde la tienda', async ({ page }) => {
+test('el footer enlaza a anexos desde la tienda', async (/** @type {{ page: import('@playwright/test').Page }} */ { page }) => {
     await page.goto('/index.php');
     const enlace = page.locator('.site-footer a', { hasText: 'Anexos' });
     await expect(enlace).toBeVisible();

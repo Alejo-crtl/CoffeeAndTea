@@ -1,7 +1,8 @@
-// @ts-check
+// @ts-nocheck
+// @ts-ignore Playwright is installed as a project dependency at runtime.
 const { test, expect } = require('@playwright/test');
 
-test('el pie enlaza al video de presentación', async ({ page }) => {
+test('el pie enlaza al video de presentación', async (/** @type {{ page: import('@playwright/test').Page }} */ { page }) => {
     await page.goto('/index.php');
 
     const enlace = page.locator('.site-footer a', { hasText: 'Video' });
@@ -18,7 +19,7 @@ test('el pie enlaza al video de presentación', async ({ page }) => {
     expect(iframe + placeholder).toBe(1);
 });
 
-test('la página de video no desborda en móvil', async ({ page }) => {
+test('la página de video no desborda en móvil', async (/** @type {{ page: import('@playwright/test').Page }} */ { page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto('/video.php');
 

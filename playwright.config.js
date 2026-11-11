@@ -1,7 +1,7 @@
 // @ts-check
-const { defineConfig, devices } = require('@playwright/test');
+const process = require('node:process');
 
-module.exports = defineConfig({
+module.exports = {
     testDir: './tests/e2e',
     timeout: 30_000,
     expect: { timeout: 7_000 },
@@ -19,7 +19,7 @@ module.exports = defineConfig({
     projects: [
         {
             name: 'chromium',
-            use: { ...devices['Desktop Chrome'] },
+            use: { browserName: 'chromium' },
         },
     ],
-});
+};

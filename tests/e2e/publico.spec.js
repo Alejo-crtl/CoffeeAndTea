@@ -1,7 +1,8 @@
 // @ts-check
+// @ts-ignore Playwright is installed by the project test environment.
 const { test, expect } = require('@playwright/test');
 
-test('la tienda muestra catálogo, stock y tiempo estimado', async ({ page }) => {
+test('la tienda muestra catálogo, stock y tiempo estimado', async (/** @type {{ page: any }} */ { page }) => {
     await page.goto('/index.php');
 
     await expect(page).toHaveTitle(/CoffeeAndtea/i);
@@ -13,7 +14,7 @@ test('la tienda muestra catálogo, stock y tiempo estimado', async ({ page }) =>
     await expect(page.locator('.tarjeta-producto .producto-precio').first()).toContainText('$');
 });
 
-test('un visitante puede pedir para recoger en tienda', async ({ page }) => {
+test('un visitante puede pedir para recoger en tienda', async (/** @type {{ page: any }} */ { page }) => {
     const sufijo = Date.now().toString().slice(-6);
 
     await page.goto('/index.php');
@@ -63,7 +64,7 @@ test('un visitante puede pedir para recoger en tienda', async ({ page }) => {
     await expect(page.locator('.menu a.activo')).toHaveText('Mis pedidos');
 });
 
-test('el checkout exige aceptar el tratamiento de datos', async ({ page }) => {
+test('el checkout exige aceptar el tratamiento de datos', async (/** @type {{ page: any }} */ { page }) => {
     await page.goto('/index.php');
     await page.locator('.tarjeta-producto .form-agregar button').first().click();
     await expect(page.locator('body')).toContainText('Producto agregado al carrito');
