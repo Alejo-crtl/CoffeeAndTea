@@ -1,6 +1,10 @@
 <?php
 /**
- * Tienda pública: catálogo, tiempo estimado y acceso al carrito.
+ * BLOQUE B03 · CATÁLOGO
+ * Qué hace: tienda pública: filtros, tarjetas, carrito y tiempo estimado.
+ * Tablas: categoria, producto, pedido, detallepedido.
+ * Relacionados: bootstrap.php, pedidos.php, plantilla.php.
+ * Pruebas: CP-012, CP-046, CP-047.
  */
 declare(strict_types=1);
 

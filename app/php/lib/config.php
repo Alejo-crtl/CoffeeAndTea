@@ -1,9 +1,9 @@
 <?php
 /**
- * Configuración compartida de CoffeeAndtea.
- *
- * Carga el archivo .env de la raíz del proyecto sin dependencias externas.
- * Las variables ya definidas en el entorno del sistema tienen prioridad.
+ * BLOQUE B01 · NÚCLEO
+ * Qué hace: carga .env, resuelve URLs base y configuración del entorno.
+ * Funciones: env(), envBool(), cargarEntorno(), urlBase(), url(), zonaHorariaApp().
+ * Páginas: todas (se carga desde bootstrap.php).
  */
 declare(strict_types=1);
 

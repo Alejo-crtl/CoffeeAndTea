@@ -1,11 +1,36 @@
 <?php
 /**
- * Arranque común de la aplicación CoffeeAndtea.
+ * ============================================================
+ * BLOQUE B01 · NÚCLEO
+ * ============================================================
+ * Qué hace:
+ *   Arranque común: carga .env, configura errores, sesión, cabeceras
+ *   de seguridad, conexión PDO y librerías base.
  *
- * - Carga .env y la configuración.
- * - Configura la sesión antes de iniciarla.
- * - Carga la conexión PDO ($conn).
- * - Carga plantilla, auditoría, autenticación y utilidades.
+ * Funciones principales:
+ *   flash(), tomarFlashes(), csrfToken(), campoCsrf(), validarCsrf(),
+ *   redirigir(), moneda(), fechaBonita(), slugificar(), urlVolver()
+ *
+ * Tablas:
+ *   No aplica.
+ *
+ * Páginas que lo usan:
+ *   Todas las páginas de public/.
+ *
+ * Reglas clave:
+ *   - La sesión se configura antes de iniciarla.
+ *   - Los errores no se muestran en producción.
+ *   - El CSRF se valida en todos los POST.
+ *
+ * Mapa de bloques:
+ *   B01 Núcleo · B02 Autenticación · B03 Catálogo · B04 Carrito y pedidos
+ *   B05 Caja y pagos · B06 Cancelaciones · B07 Stock · B08 Administración
+ *   B09 Reportes · B10 Documentación y video · B11 Base de datos
+ *   B12 Pruebas y QA · B13 Frontend
+ *
+ * Orden de estudio recomendado:
+ *   B01 → B02 → B03 → B04 → B05 → B06 → B07 → B08 → B09 → B10 → B11 → B12 → B13
+ * ============================================================
  */
 declare(strict_types=1);
 
@@ -26,6 +51,7 @@ if (is_dir($logDir) && is_writable($logDir)) {
 
 date_default_timezone_set(zonaHorariaApp());
 
+// B01.1 · Sesión y cabeceras de seguridad
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_name((string) env('APP_SESSION_NAME', 'coffeeandtea'));
     session_set_cookie_params([
@@ -51,6 +77,7 @@ if (!headers_sent()) {
     }
 }
 
+// B01.2 · Librerías base y conexión
 require_once __DIR__ . '/conectarBD.php';
 require_once __DIR__ . '/../vistas/plantilla.php';
 require_once __DIR__ . '/auditoria.php';
@@ -67,6 +94,7 @@ if (!isset($conn) || !($conn instanceof PDO)) {
 
 $conn->exec('SET TIME ZONE ' . $conn->quote(zonaHorariaApp()));
 
+// B01.3 · Redirección y mensajes flash
 /** Redirige y detiene la ejecución. */
 function redirigir(string $url): never
 {
@@ -93,6 +121,7 @@ function tomarFlashes(): array
     return is_array($flashes) ? $flashes : [];
 }
 
+// B01.4 · Protección CSRF
 /** Token CSRF de la sesión. */
 function csrfToken(): string
 {
@@ -128,6 +157,7 @@ function exigirCsrf(): void
     }
 }
 
+// B01.5 · URLs y utilidades
 /**
  * Ruta base relativa del proyecto (compatibilidad con enlaces existentes).
  */
@@ -166,6 +196,7 @@ function esVerdadero(mixed $valor): bool
         || $valor === 'true';
 }
 
+// B01.6 · Formato para vistas
 /** Formatea un valor monetario en pesos colombianos. */
 function moneda(float|int|string|null $valor): string
 {
@@ -214,6 +245,7 @@ function opcionesActivas(array $filas, ?int $idActual = null): array
     ));
 }
 
+// B01.7 · Cálculos compartidos
 /**
  * Recalcula el total de un pedido a partir del precio histórico de sus detalles.
  */
@@ -233,6 +265,7 @@ function recalcularTotalPedido(PDO $conn, int $idPedido): void
     $stmt->execute();
 }
 
+// B01.8 · Texto y navegación
 /** Genera un identificador seguro para los títulos del manual. */
 function slugificar(string $texto): string
 {

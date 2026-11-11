@@ -1,9 +1,11 @@
 <?php
 /**
- * Recuperación de contraseña por correo.
- *
- * El token se guarda hasheado (SHA-256), vence en 60 minutos y es de un solo
- * uso. La respuesta al usuario es siempre genérica para no revelar correos.
+ * BLOQUE B02 · AUTENTICACIÓN Y CUENTAS
+ * Qué hace: genera, valida y consume tokens de recuperación de contraseña.
+ * Funciones: solicitarRecuperacion(), buscarResetValido(), restablecerPassword().
+ * Tablas: password_reset, usuario.
+ * Páginas: recuperar.php, restablecer.php.
+ * Pruebas: CP-006, CP-007.
  */
 declare(strict_types=1);
 

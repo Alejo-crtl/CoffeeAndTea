@@ -1,6 +1,8 @@
 <?php
 /**
- * Descarga el manual en Markdown que corresponde al rol actual.
+ * BLOQUE B10 · DOCUMENTACIÓN, ANEXOS Y VIDEO
+ * Qué hace: descarga el manual del rol en Markdown.
+ * Relacionados: manual_rol.php, docs/manual*.md.
  */
 declare(strict_types=1);
 

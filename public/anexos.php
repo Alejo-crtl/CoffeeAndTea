@@ -1,6 +1,9 @@
 <?php
 /**
- * Página pública de anexos y descargas.
+ * BLOQUE B10 · DOCUMENTACIÓN, ANEXOS Y VIDEO
+ * Qué hace: lista los anexos y ofrece su descarga controlada.
+ * Relacionados: app/php/lib/anexos.php, descargar-anexo.php.
+ * Pruebas: CP-048.
  */
 declare(strict_types=1);
 

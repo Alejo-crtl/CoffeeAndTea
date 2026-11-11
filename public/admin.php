@@ -1,6 +1,27 @@
 <?php
 /**
- * Administración: usuarios, catálogo, configuración y auditoría.
+ * ============================================================
+ * BLOQUE B08 · ADMINISTRACIÓN
+ * ============================================================
+ * Qué hace:
+ *   Panel solo para ADMIN: usuarios, productos, categorías,
+ *   configuración, imágenes, video y auditoría.
+ *
+ * Acciones POST:
+ *   usuario_crear, usuario_editar, usuario_reset, categoria_guardar,
+ *   producto_guardar, config_guardar, probar_correo.
+ *
+ * Tablas:
+ *   usuario, cliente, producto, categoria, config_sistema, auditoria.
+ *
+ * Reglas clave:
+ *   - Solo el rol ADMIN.
+ *   - CSRF obligatorio.
+ *   - No se puede desactivar al último administrador.
+ *   - Toda acción sensible queda auditada.
+ *
+ * Pruebas: CP-036 a CP-040, CP-050 a CP-053, CP-055.
+ * ============================================================
  */
 declare(strict_types=1);
 
@@ -42,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         switch ($accion) {
+            // B08.1 · Usuarios
             case 'usuario_crear':
                 $nombre = trim((string) ($_POST['nombre'] ?? ''));
                 $correo = mb_strtolower(trim((string) ($_POST['correo'] ?? '')), 'UTF-8');
@@ -202,6 +224,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $destino = url('admin.php?tab=usuarios');
                 break;
 
+            // B08.2 · Categorías
             case 'categoria_guardar':
                 $id = (int) ($_POST['id'] ?? 0);
                 $nombre = trim((string) ($_POST['nombre'] ?? ''));
@@ -245,6 +268,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $destino = url('admin.php?tab=categorias');
                 break;
 
+            // B08.3 · Productos
             case 'producto_guardar':
                 $id = (int) ($_POST['id'] ?? 0);
                 $nombre = trim((string) ($_POST['nombre'] ?? ''));
@@ -406,6 +430,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $destino = url('admin.php?tab=productos');
                 break;
 
+            // B08.4 · Configuración y correo
             case 'config_guardar':
                 $urlVideo = null;
                 if (array_key_exists('video_presentacion_url', $_POST)) {
@@ -529,6 +554,7 @@ cabeceraHtml('Administración | CoffeeAndtea', 'admin');
     <?php endforeach; ?>
 </nav>
 
+<?php /* B08.5 · Vistas de Administración */ ?>
 <?php if ($tab === 'usuarios'): ?>
     <div class="layout-admin">
         <section class="panel">

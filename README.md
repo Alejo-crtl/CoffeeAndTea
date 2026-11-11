@@ -86,6 +86,36 @@ CoffeeAndtea_Entrega/
 └─ playwright.config.js
 ```
 
+### 2.1 Mapa de bloques del backend
+
+La documentación principal vive en la cabecera de cada archivo PHP. Este mapa
+sirve como índice para estudiarlo.
+
+| Bloque | Nombre | Archivos principales |
+|---|---|---|
+| B01 | Núcleo | `bootstrap.php`, `config.php`, `conectarBD.php`, `auditoria.php`, `correo.php` |
+| B02 | Autenticación y cuentas | `auth.php`, `password_reset.php`, `cuenta.php` |
+| B03 | Catálogo | `imagenes.php`, `public/index.php` |
+| B04 | Carrito y pedidos | `pedidos.php`, `pedidos_invitado.php`, `carrito.php`, `checkout.php`, `pedido.php` |
+| B05 | Caja y pagos | `pedidos.php` (caja/pagos), `public/gestion.php` |
+| B06 | Cancelaciones y estados | `pedidos.php` (cancelaciones/estados), `public/gestion.php` |
+| B07 | Stock | `pedidos.php` (movimientos), `public/gestion.php`, `public/admin.php` |
+| B08 | Administración | `public/admin.php` |
+| B09 | Reportes | `public/reportes.php` |
+| B10 | Documentación, anexos y video | `anexos.php`, `manual*.php`, `video.php` |
+| B11 | Base de datos | `db/schema.sql`, `seed-demo.sql`, `asignar-imagenes.sql`, migraciones |
+| B12 | Pruebas y QA | `tests/`, `qa/` |
+| B13 | Frontend | `public/css/app.css`, `public/js/tienda.js`, `vistas/plantilla.php` |
+
+Orden recomendado para estudiar el backend:
+
+```text
+B01 Núcleo → B02 Autenticación → B03 Catálogo → B04 Pedidos →
+B05 Caja y pagos → B06 Cancelaciones → B07 Stock → B08 Administración →
+B09 Reportes → B10 Documentación y video → B11 Base de datos →
+B12 Pruebas y QA → B13 Frontend
+```
+
 ---
 
 ## 3. Requisitos

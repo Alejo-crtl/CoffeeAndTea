@@ -1,12 +1,8 @@
 <?php
 /**
- * Runner autónomo de pruebas (no requiere Composer ni PHPUnit).
- *
- * Uso:
- *   $env:DB_NAME='coffeeandtea_qa'
- *   $env:DB_USER='postgres'
- *   $env:DB_PASS='tu_clave'
- *   php tests/run.php
+ * BLOQUE B12 · PRUEBAS Y QA
+ * Qué hace: ejecutor autónomo de pruebas unitarias y de integración.
+ * Uso: php tests/run.php
  */
 declare(strict_types=1);
 

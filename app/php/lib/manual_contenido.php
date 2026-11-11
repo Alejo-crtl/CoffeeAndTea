@@ -1,9 +1,9 @@
 <?php
 /**
- * Lectura y renderizado de los manuales en Markdown.
- *
- * Cada rol tiene su propio archivo fuente. Parsedown lo convierte a HTML
- * en modo seguro y aquí se agregan IDs a los títulos para construir el índice.
+ * BLOQUE B10 · DOCUMENTACIÓN, ANEXOS Y VIDEO
+ * Qué hace: carga el manual Markdown, lo convierte con Parsedown y genera el índice.
+ * Funciones: prepararManual(), renderizarTocManual().
+ * Páginas: manual.php, descargar-manual.php.
  */
 declare(strict_types=1);
 

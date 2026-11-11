@@ -1,6 +1,7 @@
 <?php
 /**
- * Pruebas unitarias de funciones puras y validaciones.
+ * BLOQUE B12 · PRUEBAS Y QA
+ * Qué hace: pruebas de funciones puras, validaciones y URLs de video.
  */
 declare(strict_types=1);
 

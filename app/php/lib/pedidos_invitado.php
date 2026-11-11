@@ -1,10 +1,11 @@
 <?php
 /**
- * Pedidos recientes de un visitante.
- *
- * El visitante no tiene cuenta ni historial en la base. Para no perder el
- * acceso a sus pedidos, se guardan el código y el token en una cookie
- * HttpOnly de este navegador (máximo 5 pedidos, 90 días).
+ * BLOQUE B04 · CARRITO Y PEDIDOS
+ * Qué hace: guarda en el navegador los últimos pedidos de un invitado.
+ * Funciones: pedidosInvitadoLeer(), pedidosInvitadoGuardar(),
+ *            pedidosInvitadoOlvidar(), avisoCompraInvitadoHtml().
+ * Páginas: index.php, pedidos-invitado.php, pedido.php.
+ * Pruebas: CP-044.
  */
 declare(strict_types=1);
 

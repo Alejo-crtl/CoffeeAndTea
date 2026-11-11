@@ -1,6 +1,9 @@
 <?php
 /**
- * Descarga controlada de los documentos de anexos/.
+ * BLOQUE B10 · DOCUMENTACIÓN, ANEXOS Y VIDEO
+ * Qué hace: sirve un anexo permitido con cabeceras de descarga.
+ * Relacionados: app/php/lib/anexos.php.
+ * Seguridad: solo descarga archivos del catálogo.
  */
 declare(strict_types=1);
 

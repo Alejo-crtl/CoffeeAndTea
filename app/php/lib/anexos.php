@@ -1,6 +1,10 @@
 <?php
 /**
- * Catálogo de documentos de la carpeta anexos/.
+ * BLOQUE B10 · DOCUMENTACIÓN, ANEXOS Y VIDEO
+ * Qué hace: catálogo de documentos descargables de la carpeta anexos/.
+ * Funciones: listaAnexos().
+ * Páginas: anexos.php, descargar-anexo.php.
+ * Pruebas: CP-048.
  */
 declare(strict_types=1);
 

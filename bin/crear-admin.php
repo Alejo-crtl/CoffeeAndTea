@@ -1,13 +1,9 @@
 <?php
 /**
- * Crea el administrador inicial de CoffeeAndtea.
- *
- * Uso:
- *   php bin/crear-admin.php --nombre="Kevin Vega" --correo="admin@dominio.com"
- *   php bin/crear-admin.php --nombre="Kevin Vega" --correo="admin@dominio.com" --password="Opcional123!"
- *
- * Si no se pasa --password se genera una contraseña temporal segura y se
- * muestra una sola vez. El usuario deberá cambiarla al iniciar sesión.
+ * BLOQUE B02 · AUTENTICACIÓN Y CUENTAS
+ * Qué hace: crea el administrador inicial por CLI con contraseña temporal.
+ * Tablas: usuario.
+ * Uso: php bin/crear-admin.php --nombre="..." --correo="..."
  */
 declare(strict_types=1);
 

@@ -1,6 +1,10 @@
 <?php
 /**
- * Utilidades HTML y estructura visual compartida por CoffeeAndtea.
+ * BLOQUE B13 · FRONTEND
+ * Qué hace: layout compartido: cabecera, navegación, avisos, toasts y pie.
+ * Funciones: h(), cabeceraHtml(), pieHtml(), toastsHtml(), avisosHtml(),
+ *            badgeEstado(), unidadesCarrito().
+ * Páginas: todas.
  */
 declare(strict_types=1);
 

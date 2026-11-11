@@ -1,6 +1,10 @@
 <?php
 /**
- * Video de presentación del proyecto.
+ * BLOQUE B10 · DOCUMENTACIÓN, ANEXOS Y VIDEO
+ * Qué hace: página del video de presentación; muestra el iframe o
+ *          el aviso “Video próximamente”.
+ * Relacionados: app/php/lib/video.php, admin.php.
+ * Pruebas: CP-054.
  */
 declare(strict_types=1);
 
