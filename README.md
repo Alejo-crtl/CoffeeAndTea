@@ -7,6 +7,11 @@ stock, usuarios y reportes.
 **Stack:** PHP 8.3 · PostgreSQL 18 · HTML/CSS/JS  
 **Estado:** Finalizado — 2026
 
+**Autores:** 
+- Kevin Santiago Vega Pérez  
+- Beimar Alejandro Rocha Suarez
+- Juan José Narvaez Gonzalez
+
 ![Tienda CoffeeAndtea](docs/img/tienda.jpg)
 
 > **Solo recogida.** No hay domicilios. El pago se realiza en el mostrador en
@@ -507,6 +512,4 @@ Solo existen si se cargó `db/seed-demo.sql`. **No usarlas en producción.**
 Uso académico. Código propiedad del autor.
 
 ---
-
-**Autor:** Kevin Vega Pérez  
-**Año:** 2026
+ **Año:** 2026
