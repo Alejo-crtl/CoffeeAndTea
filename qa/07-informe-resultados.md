@@ -89,10 +89,10 @@
 - La página no desborda horizontalmente en 390 px.
 
 ### Manuales por rol
-- Se abrió `manual.php` como visitante/CLIENTE y se mostró `docs/manual.md`.
-- Se abrió como ENCARGADO y se mostró `docs/manual-encargado.md`.
-- Se abrió como ADMIN y se mostró `docs/manual-admin.md`.
-- La descarga de cada manual correspondió al rol de la sesión.
+- Se abrió `manual.php` como visitante/CLIENTE y se mostró `docs/manual.md` con 11 capturas.
+- Se abrió como ENCARGADO y como ADMIN y se mostró `docs/manual-tecnico.md` con 16 capturas.
+- La descarga de cada manual correspondió al rol de la sesión, tanto en Markdown como en Word.
+- Los documentos Word se abrieron con portada, índice, tablas e imágenes incrustadas.
 - Resultado: revisión manual aprobada para RF-MAN-01, RF-MAN-02 y RF-MAN-03.
 
 ### Seguridad

@@ -40,3 +40,5 @@ error_log*
 *.bak
 *.dump
 *.sql.gz
+# Capturas intermedias de los manuales
+/tools/_capturas/

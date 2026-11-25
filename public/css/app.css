@@ -1433,6 +1433,35 @@ label.checkbox input {
     margin-bottom: 0;
 }
 
+.manual-contenido img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    max-height: 620px;
+    height: auto;
+    margin: 1.3em auto 0.55em;
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    background: var(--crema-2);
+    box-shadow: 0 10px 26px rgba(74, 44, 23, 0.12);
+}
+
+.manual-contenido p > em:only-child {
+    display: block;
+    margin: -0.1em 0 1.7em;
+    color: #7a6552;
+    font-size: 0.84rem;
+    line-height: 1.45;
+    text-align: center;
+}
+
+@media print {
+    .manual-contenido img {
+        box-shadow: none;
+        break-inside: avoid;
+    }
+}
+
 .manual-contenido h2 {
     margin: 2.1em 0 0.6em;
     padding-top: 0.7em;

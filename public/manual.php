@@ -31,7 +31,8 @@ cabeceraHtml($manualActual['titulo'] . ' | CoffeeAndtea', 'manual');
         <div class="section-actions">
             <a class="btn btn-secundario" href="<?= h(url('index.php')) ?>">Volver a la tienda</a>
             <button type="button" class="btn btn-secundario" onclick="window.print()">Imprimir manual</button>
-            <a class="btn btn-secundario" href="<?= h(baseUrl() . 'descargar-manual.php') ?>" download>Descargar .md</a>
+            <a class="btn btn-secundario" href="<?= h(baseUrl() . 'descargar-manual.php?formato=md') ?>" download>Descargar .md</a>
+            <a class="btn btn-primario" href="<?= h(baseUrl() . 'descargar-manual.php?formato=docx') ?>" download>Descargar en Word</a>
         </div>
     </div>
 
