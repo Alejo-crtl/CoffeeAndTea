@@ -34,30 +34,47 @@ function registrarCuentaCliente(PDO $conn, array $datos): int
     $consentimiento = !empty($datos['consentimiento']);
 
     $errores = [];
+    $campos = [];
     if (mb_strlen($nombre) < 3 || mb_strlen($nombre) > 150) {
-        $errores[] = 'Escribe tu nombre completo.';
+        $mensaje = 'Escribe tu nombre completo.';
+        $errores[] = $mensaje;
+        $campos['nombre'] = $mensaje;
     }
     if (!filter_var($correo, FILTER_VALIDATE_EMAIL) || mb_strlen($correo) > 150) {
-        $errores[] = 'Escribe un correo electrónico válido.';
+        $mensaje = 'Escribe un correo electrónico válido.';
+        $errores[] = $mensaje;
+        $campos['correo'] = $mensaje;
     }
-    if ($telefono !== '' && mb_strlen($telefono) > 30) {
-        $errores[] = 'El teléfono no puede superar 30 caracteres.';
+    if (!telefonoValido($telefono)) {
+        $mensaje = 'Escribe un teléfono válido (solo números, espacios, +, - y paréntesis).';
+        $errores[] = $mensaje;
+        $campos['telefono'] = $mensaje;
     }
-    $errores = array_merge($errores, validarPassword($password));
+    foreach (validarPassword($password) as $mensaje) {
+        $errores[] = $mensaje;
+        $campos['password'] = $mensaje;
+    }
     if ($password !== $password2) {
-        $errores[] = 'Las contraseñas no coinciden.';
+        $mensaje = 'Las contraseñas no coinciden.';
+        $errores[] = $mensaje;
+        $campos['password2'] = $mensaje;
     }
     if (!$consentimiento) {
-        $errores[] = 'Debes autorizar el tratamiento de tus datos.';
+        $mensaje = 'Debes autorizar el tratamiento de tus datos.';
+        $errores[] = $mensaje;
+        $campos['consentimiento'] = $mensaje;
     }
     if ($errores !== []) {
-        throw new ReglaNegocioException(implode(' ', $errores));
+        throw new ValidacionException(implode(' ', $errores), $campos);
     }
 
     $stmt = $conn->prepare('SELECT id FROM usuario WHERE lower(correo) = :correo LIMIT 1');
     $stmt->execute([':correo' => $correo]);
     if ($stmt->fetchColumn() !== false) {
-        throw new ReglaNegocioException('Ya existe una cuenta con ese correo. Inicia sesión o recupera tu contraseña.');
+        throw new ValidacionException(
+            'Ya existe una cuenta con ese correo. Inicia sesión o recupera tu contraseña.',
+            ['correo' => 'Ya existe una cuenta con ese correo.']
+        );
     }
 
     $conn->beginTransaction();
@@ -141,8 +158,8 @@ function actualizarPerfilCliente(PDO $conn, int $usuarioId, string $nombre, stri
     if (mb_strlen($nombre) < 3 || mb_strlen($nombre) > 150) {
         throw new ReglaNegocioException('Escribe tu nombre completo.');
     }
-    if ($telefono !== '' && mb_strlen($telefono) > 30) {
-        throw new ReglaNegocioException('El teléfono no puede superar 30 caracteres.');
+    if (!telefonoValido($telefono)) {
+        throw new ReglaNegocioException('Escribe un teléfono válido (solo números, espacios, +, - y paréntesis).');
     }
 
     $conn->beginTransaction();

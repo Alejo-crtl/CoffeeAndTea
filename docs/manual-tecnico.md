@@ -376,15 +376,15 @@ alerta de gestión.
 
 ### 5.8 Reportes
 
-![Reportes de ventas del día y productos más vendidos](media/capturas/reportes.jpg)
+![Reportes de ventas del periodo, clientes y productos más vendidos](media/capturas/reportes.jpg)
 
-*Figura 9. Reportes: ventas del día, ticket promedio, medios de pago y top de
-productos de los últimos 30 días.*
+*Figura 9. Reportes: ventas del periodo, ticket promedio, medios de pago, top
+de productos y clientes con mayor consumo.*
 
-`reportes.php` incluye ventas del día, productos más vendidos, clientes con mayor
-consumo, productos con bajo stock e ingresos por categoría. La exportación CSV
-descarga las ventas del día con la fecha en el nombre y se abre en Excel o Google
-Sheets.
+`reportes.php` incluye ventas del periodo seleccionado, productos más vendidos,
+clientes con mayor consumo, productos con bajo stock e ingresos por categoría.
+La exportación CSV descarga las ventas del rango elegido y se abre en Excel o
+Google Sheets.
 
 Los reportes son de consulta: no modifican pedidos, pagos ni stock.
 

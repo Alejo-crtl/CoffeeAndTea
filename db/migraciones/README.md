@@ -118,3 +118,27 @@ psql -U postgres -h 127.0.0.1 -d CoffeeAndTea `
 Las instalaciones nuevas ya incluyen estas claves en `db/schema.sql`.
 
 
+
+## 004_bloqueo_login.sql
+
+Agrega `usuario.intentos_fallidos` y `usuario.bloqueado_hasta`. El bloqueo de
+acceso deja de vivir en la sesión: ahora se aplica por cuenta y sobrevive a
+borrar la cookie o cambiar de navegador.
+
+- Tras 8 fallos consecutivos, la cuenta queda bloqueada 10 minutos.
+- Un acceso correcto limpia el contador y el bloqueo.
+
+## 005_reportes_parametrizados.sql
+
+Reemplaza los cinco procedimientos `sp_reporte_*` por versiones con parámetros:
+
+| Procedimiento | Parámetros |
+|---|---|
+| `sp_reporte_ventas_diarias` | `desde`, `hasta`, cursor |
+| `sp_reporte_top_productos` | `desde`, `hasta`, `limite`, cursor |
+| `sp_reporte_clientes_vip` | `desde`, `hasta`, `limite`, cursor |
+| `sp_reporte_bajo_stock` | `solo_bajo`, cursor |
+| `sp_reporte_ingresos_categoria` | `desde`, `hasta`, cursor |
+
+La página de reportes los ejecuta con `app/php/lib/reportes.php`
+(`consultarProcedimiento`), así que dejan de ser código muerto.

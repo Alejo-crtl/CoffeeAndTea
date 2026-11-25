@@ -64,4 +64,38 @@
         }
         actualizarPago(form);
     });
+
+    // Bloquea el doble envío y avisa que el formulario se está procesando.
+    document.addEventListener('submit', function (evento) {
+        var form = evento.target;
+        if (!form || form.dataset.sinBloqueo !== undefined) {
+            return;
+        }
+        var boton = form.querySelector('button[type="submit"], input[type="submit"]');
+        if (!boton || boton.disabled) {
+            return;
+        }
+        if (boton.tagName === 'INPUT') {
+            boton.value = 'Procesando…';
+        } else {
+            boton.textContent = 'Procesando…';
+        }
+        boton.disabled = true;
+        form.setAttribute('aria-busy', 'true');
+    });
+
+    // Marca las tablas que se desplazan en horizontal.
+    function marcarTablas() {
+        document.querySelectorAll('.tabla-scroll').forEach(function (caja) {
+            caja.classList.toggle('con-desborde', caja.scrollWidth > caja.clientWidth + 4);
+        });
+    }
+    marcarTablas();
+    window.addEventListener('resize', marcarTablas);
+
+    // Lleva el foco al primer campo con error.
+    var primerInvalido = document.querySelector('[aria-invalid="true"]');
+    if (primerInvalido) {
+        primerInvalido.focus();
+    }
 })();

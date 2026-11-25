@@ -1,11 +1,10 @@
-# Entorno
+﻿# Entorno
 .env
 .env.local
 .env.*.local
 
 # PHP / Composer
 /vendor/
-/composer.lock
 
 # Node / npm
 /node_modules/

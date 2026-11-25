@@ -550,7 +550,7 @@ cabeceraHtml('Administración | CoffeeAndtea', 'admin');
         'auditoria'     => 'Auditoría',
     ];
     foreach ($etiquetasTabs as $id => $etiqueta): ?>
-        <a class="tab<?= $tab === $id ? ' activo' : '' ?>" href="<?= h(url('admin.php?tab=' . $id)) ?>"><?= h($etiqueta) ?></a>
+        <a class="tab<?= $tab === $id ? ' activo' : '' ?>" href="<?= h(url('admin.php?tab=' . $id)) ?>"<?= $tab === $id ? ' aria-current="page"' : '' ?>><?= h($etiqueta) ?></a>
     <?php endforeach; ?>
 </nav>
 
@@ -667,7 +667,13 @@ cabeceraHtml('Administración | CoffeeAndtea', 'admin');
                                     <div class="producto-tabla">
                                         <?php $imagenFila = trim((string) ($producto['imagen_url'] ?? '')); ?>
                                         <?php if (imagenProductoDisponible($imagenFila)): ?>
-                                            <img class="miniatura-producto" src="<?= h(urlImagenProducto($imagenFila)) ?>" alt="" loading="lazy" decoding="async">
+                                            <?php $webpFila = urlImagenProductoWebp($imagenFila); ?>
+                                            <picture>
+                                                <?php if ($webpFila !== null): ?>
+                                                    <source srcset="<?= h($webpFila) ?>" type="image/webp">
+                                                <?php endif; ?>
+                                                <img class="miniatura-producto" src="<?= h(urlImagenProducto($imagenFila)) ?>" alt="" loading="lazy" decoding="async">
+                                            </picture>
                                         <?php else: ?>
                                             <span class="miniatura-producto miniatura-vacia" aria-hidden="true"><?= h(mb_substr((string) $producto['nombre'], 0, 1)) ?></span>
                                         <?php endif; ?>
@@ -727,8 +733,14 @@ cabeceraHtml('Administración | CoffeeAndtea', 'admin');
                 <div class="campo">
                     <label for="p-imagen">Imagen del producto (JPG, PNG o WebP, máx. 2 MB)</label>
                     <?php if (imagenProductoDisponible($imagenActualProducto)): ?>
+                        <?php $webpActual = urlImagenProductoWebp($imagenActualProducto); ?>
                         <div class="vista-previa-imagen">
-                            <img src="<?= h(urlImagenProducto($imagenActualProducto)) ?>" alt="Vista previa de <?= h($valoresProducto['nombre']) ?>">
+                            <picture>
+                                <?php if ($webpActual !== null): ?>
+                                    <source srcset="<?= h($webpActual) ?>" type="image/webp">
+                                <?php endif; ?>
+                                <img src="<?= h(urlImagenProducto($imagenActualProducto)) ?>" alt="Vista previa de <?= h($valoresProducto['nombre']) ?>">
+                            </picture>
                         </div>
                     <?php endif; ?>
                     <input id="p-imagen" name="imagen" type="file" accept="image/jpeg,image/png,image/webp">

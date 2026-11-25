@@ -96,7 +96,7 @@
 - Resultado: revisión manual aprobada para RF-MAN-01, RF-MAN-02 y RF-MAN-03.
 
 ### Seguridad
-- 8 intentos fallidos de login → bloqueo de 10 minutos.
+- 8 intentos fallidos por cuenta → bloqueo de 10 minutos guardado en la base; no se evade borrando la cookie.
 - Cliente y encargado reciben redirección al intentar abrir `admin.php`.
 - Token de restablecimiento inválido → HTTP 410.
 - El último administrador activo no puede quitarse el rol ni desactivarse.
@@ -146,7 +146,34 @@ de consentimiento, gestión de imágenes de producto y página de video.
 - El tiempo estimado mostrado puede ser mayor al base por el recargo de cola (máximo +20 min).
 - Las contraseñas demo de `qa/09-datos-prueba.md` son solo para desarrollo y deben cambiarse en producción.
 
-## 7. Conclusión
+## 7. Contraste verificado (WCAG 2.1 AA)
+
+Se midieron los pares de color reales de `public/css/app.css` con la fórmula de
+luminancia relativa de WCAG 2.1. El script `tools/contraste.py` repite la medición
+y falla si algún par baja del mínimo.
+
+| Par de colores | Ratio | Mínimo | Estado |
+|---|---|---|---|
+| `producto-categoria` `#7d5a38` / `#fffdf9` | 6.09:1 | 4.5 | Cumple |
+| `producto-stock` `#7a6a5a` / `#fffdf9` | 5.12:1 | 4.5 | Cumple |
+| Texto secundario `#785d43` / crema | 5.34:1 | 4.5 | Cumple |
+| Texto secundario `#785d43` / crema-2 | 4.82:1 | 4.5 | Cumple |
+| Texto secundario `#785d43` / blanco | 6.00:1 | 4.5 | Cumple |
+| Texto principal `#5c4433` / crema | 7.90:1 | 4.5 | Cumple |
+| Foco `#8a5a25` / crema | 5.15:1 | 3.0 | Cumple |
+| Foco `#8a5a25` / blanco | 5.79:1 | 3.0 | Cumple |
+| Menú activo `#2f1c10` / ámbar | 7.05:1 | 4.5 | Cumple |
+| Pie de página `#7b6a5c` / blanco | 5.09:1 | 4.5 | Cumple |
+| Error `#a92c38` / blanco | 6.66:1 | 4.5 | Cumple |
+| Éxito `#1e7e34` / verde suave | 4.57:1 | 4.5 | Cumple |
+
+Resultado: **12 de 12 pares cumplen**. Los controles modificados fueron
+`.producto-categoria`, `.producto-stock`, los textos secundarios `#8a6d51`,
+`:focus-visible` y la paleta de estados.
+
+---
+
+## 8. Conclusión
 
 El sistema cumple los flujos críticos de tienda, cobro, caja, stock, cancelación,
 seguridad, imágenes de producto, video de presentación y migración de datos. Los

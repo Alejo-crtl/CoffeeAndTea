@@ -21,6 +21,7 @@ $valores = [
     'consentimiento' => false,
 ];
 $errores = [];
+$erroresCampo = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exigirCsrf();
@@ -56,6 +57,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         flash('exito', 'Tu cuenta se creó correctamente. ¡Bienvenido!');
         redirigir(url('cuenta.php'));
+    } catch (ValidacionException $e) {
+        $errores[] = $e->getMessage();
+        $erroresCampo = $e->campos;
     } catch (ReglaNegocioException $e) {
         $errores[] = $e->getMessage();
     }
@@ -82,32 +86,39 @@ cabeceraHtml('Crear cuenta | CoffeeAndtea', 'login', false);
             <div class="campo">
                 <label for="nombre">Nombre completo</label>
                 <input id="nombre" name="nombre" type="text" maxlength="150" required autocomplete="name"
-                       value="<?= h($valores['nombre']) ?>">
+                       value="<?= h($valores['nombre']) ?>"<?= atributosError('nombre', $erroresCampo) ?>>
+                <?= mensajeError('nombre', $erroresCampo) ?>
             </div>
             <div class="campo">
                 <label for="correo">Correo electrónico</label>
                 <input id="correo" name="correo" type="email" maxlength="150" required autocomplete="email"
-                       value="<?= h($valores['correo']) ?>">
+                       value="<?= h($valores['correo']) ?>"<?= atributosError('correo', $erroresCampo) ?>>
+                <?= mensajeError('correo', $erroresCampo) ?>
             </div>
             <div class="campo">
                 <label for="telefono">Teléfono (opcional)</label>
-                <input id="telefono" name="telefono" type="tel" maxlength="30" autocomplete="tel"
-                       value="<?= h($valores['telefono']) ?>">
+                <input id="telefono" name="telefono" type="tel" maxlength="30" inputmode="tel"
+                       pattern="[0-9+()\-\s]{7,30}" autocomplete="tel"
+                       value="<?= h($valores['telefono']) ?>"<?= atributosError('telefono', $erroresCampo) ?>>
+                <?= mensajeError('telefono', $erroresCampo) ?>
             </div>
             <div class="campo">
                 <label for="password">Contraseña</label>
-                <input id="password" name="password" type="password" required autocomplete="new-password">
+                <input id="password" name="password" type="password" required autocomplete="new-password"<?= atributosError('password', $erroresCampo) ?>>
                 <small>Mínimo 8 caracteres, con mayúscula, minúscula y número.</small>
+                <?= mensajeError('password', $erroresCampo) ?>
             </div>
             <div class="campo">
                 <label for="password2">Confirmar contraseña</label>
-                <input id="password2" name="password2" type="password" required autocomplete="new-password">
+                <input id="password2" name="password2" type="password" required autocomplete="new-password"<?= atributosError('password2', $erroresCampo) ?>>
+                <?= mensajeError('password2', $erroresCampo) ?>
             </div>
             <label class="check">
-                <input type="checkbox" name="consentimiento" value="1"<?= $valores['consentimiento'] ? ' checked' : '' ?> required>
+                <input type="checkbox" name="consentimiento" value="1"<?= $valores['consentimiento'] ? ' checked' : '' ?> required<?= atributosError('consentimiento', $erroresCampo) ?>>
                 <span>Autorizo el tratamiento de mis datos personales
                     (<a href="<?= h(url('privacidad.php')) ?>" target="_blank" rel="noopener">ver política</a>).</span>
             </label>
+            <?= mensajeError('consentimiento', $erroresCampo) ?>
             <button class="btn btn-primario btn-bloque" type="submit">Crear mi cuenta</button>
         </form>
 

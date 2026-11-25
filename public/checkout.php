@@ -37,6 +37,7 @@ $valores = [
     'acepta_cancelacion' => false,
 ];
 $errores = [];
+$erroresCampo = [];
 
 if ($usuario !== null) {
     $stmt = $conn->prepare('SELECT telefono FROM cliente WHERE usuario_id = :id LIMIT 1');
@@ -68,6 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             pedidosInvitadoGuardar((string) $resultado['codigo'], (string) $resultado['token']);
         }
         redirigir(url('pedido.php?codigo=' . urlencode($resultado['codigo']) . '&token=' . urlencode($resultado['token']) . '&nuevo=1'));
+    } catch (ValidacionException $e) {
+        $errores[] = $e->getMessage();
+        $erroresCampo = $e->campos;
+        $carrito = carritoDetallado($conn);
     } catch (ReglaNegocioException $e) {
         $errores[] = $e->getMessage();
         $carrito = carritoDetallado($conn);
@@ -106,35 +111,42 @@ cabeceraHtml('Confirmar pedido | CoffeeAndtea', 'carrito');
             <div class="campo">
                 <label for="nombre">Nombre completo <span aria-hidden="true">*</span></label>
                 <input id="nombre" name="nombre" type="text" maxlength="150" required autocomplete="name"
-                       value="<?= h($valores['nombre']) ?>">
+                       value="<?= h($valores['nombre']) ?>"<?= atributosError('nombre', $erroresCampo) ?>>
+                <?= mensajeError('nombre', $erroresCampo) ?>
             </div>
             <div class="campo">
                 <label for="correo">Correo electrónico <span aria-hidden="true">*</span></label>
                 <input id="correo" name="correo" type="email" maxlength="150" required autocomplete="email"
-                       value="<?= h($valores['correo']) ?>">
+                       value="<?= h($valores['correo']) ?>"<?= atributosError('correo', $erroresCampo) ?>>
                 <small>Lo usamos para identificar tu pedido y avisarte novedades.</small>
+                <?= mensajeError('correo', $erroresCampo) ?>
             </div>
             <div class="campo">
                 <label for="telefono">Teléfono (opcional)</label>
-                <input id="telefono" name="telefono" type="tel" maxlength="30" autocomplete="tel"
-                       value="<?= h($valores['telefono']) ?>">
+                <input id="telefono" name="telefono" type="tel" maxlength="30" inputmode="tel"
+                       pattern="[0-9+()\-\s]{7,30}" autocomplete="tel"
+                       value="<?= h($valores['telefono']) ?>"<?= atributosError('telefono', $erroresCampo) ?>>
+                <?= mensajeError('telefono', $erroresCampo) ?>
             </div>
             <div class="campo">
                 <label for="observaciones">Observaciones (opcional)</label>
                 <textarea id="observaciones" name="observaciones" maxlength="500" rows="3"
-                          placeholder="Sin azúcar, para llevar, alguna alergia..."><?= h($valores['observaciones']) ?></textarea>
+                          placeholder="Sin azúcar, para llevar, alguna alergia..."<?= atributosError('observaciones', $erroresCampo) ?>><?= h($valores['observaciones']) ?></textarea>
+                <?= mensajeError('observaciones', $erroresCampo) ?>
             </div>
             <label class="check">
-                <input type="checkbox" name="consentimiento" value="1"<?= $valores['consentimiento'] ? ' checked' : '' ?> required>
+                <input type="checkbox" name="consentimiento" value="1"<?= $valores['consentimiento'] ? ' checked' : '' ?> required<?= atributosError('consentimiento', $erroresCampo) ?>>
                 <span>Autorizo el tratamiento de mis datos personales para gestionar este pedido
                     (<a href="<?= h(url('privacidad.php')) ?>" target="_blank" rel="noopener">ver política</a>).</span>
             </label>
+            <?= mensajeError('consentimiento', $erroresCampo) ?>
             <label class="check">
-                <input type="checkbox" name="acepta_cancelacion" value="1"<?= $valores['acepta_cancelacion'] ? ' checked' : '' ?> required>
+                <input type="checkbox" name="acepta_cancelacion" value="1"<?= $valores['acepta_cancelacion'] ? ' checked' : '' ?> required<?= atributosError('acepta_cancelacion', $erroresCampo) ?>>
                 <span>Acepto la política de cancelación: si el pedido ya está en preparación o listo,
                     el reembolso será del 50% de lo pagado
                     (<a href="<?= h(url('politica-cancelacion.php')) ?>" target="_blank" rel="noopener">ver política</a>).</span>
             </label>
+            <?= mensajeError('acepta_cancelacion', $erroresCampo) ?>
             <button class="btn btn-primario" type="submit">Registrar pedido</button>
         </form>
     </section>

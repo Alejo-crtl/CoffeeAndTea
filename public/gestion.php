@@ -261,9 +261,9 @@ cabeceraHtml('Gestión | CoffeeAndtea', 'gestion');
 </div>
 
 <nav class="tabs" aria-label="Secciones de gestión">
-    <a class="tab<?= $tab === 'pedidos' ? ' activo' : '' ?>" href="<?= h(url('gestion.php?tab=pedidos')) ?>">Pedidos</a>
-    <a class="tab<?= $tab === 'caja' ? ' activo' : '' ?>" href="<?= h(url('gestion.php?tab=caja')) ?>">Caja</a>
-    <a class="tab<?= $tab === 'stock' ? ' activo' : '' ?>" href="<?= h(url('gestion.php?tab=stock')) ?>">Stock</a>
+    <a class="tab<?= $tab === 'pedidos' ? ' activo' : '' ?>" href="<?= h(url('gestion.php?tab=pedidos')) ?>"<?= $tab === 'pedidos' ? ' aria-current="page"' : '' ?>>Pedidos</a>
+    <a class="tab<?= $tab === 'caja' ? ' activo' : '' ?>" href="<?= h(url('gestion.php?tab=caja')) ?>"<?= $tab === 'caja' ? ' aria-current="page"' : '' ?>>Caja</a>
+    <a class="tab<?= $tab === 'stock' ? ' activo' : '' ?>" href="<?= h(url('gestion.php?tab=stock')) ?>"<?= $tab === 'stock' ? ' aria-current="page"' : '' ?>>Stock</a>
 </nav>
 
 <?php if ($tab === 'pedidos'): ?>
