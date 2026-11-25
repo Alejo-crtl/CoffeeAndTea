@@ -119,6 +119,15 @@ try {
     await page.fill('#correo', 'laura.gomez@example.com');
     await page.fill('#telefono', '3001234567');
     await page.fill('#observaciones', 'Sin azúcar en el café, por favor.');
+    const enlacesPolitica = page.locator('[data-politica-enlace]');
+    const totalPoliticas = await enlacesPolitica.count();
+    for (let i = 0; i < totalPoliticas; i++) {
+      const [popup] = await Promise.all([
+        page.context().waitForEvent('page'),
+        enlacesPolitica.nth(i).click(),
+      ]);
+      await popup.close();
+    }
     await page.check('input[name="consentimiento"]');
     await page.check('input[name="acepta_cancelacion"]');
     await page.evaluate(() => window.scrollTo(0, 0));

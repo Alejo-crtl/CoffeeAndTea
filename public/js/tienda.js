@@ -93,6 +93,56 @@
     marcarTablas();
     window.addEventListener('resize', marcarTablas);
 
+    // Habilita la aceptación de una política después de abrirla en otra pestaña.
+    document.querySelectorAll('[data-politica]').forEach(function (bloque) {
+        var check = bloque.querySelector('[data-politica-check]');
+        var enlace = bloque.querySelector('[data-politica-enlace]');
+        var nota = document.getElementById(bloque.getAttribute('data-politica-nota') || '');
+        if (!check || !enlace) {
+            return;
+        }
+
+        var clave = 'politica:' + (check.name || 'aceptar');
+        var abierta = false;
+        try {
+            abierta = window.sessionStorage.getItem(clave) === '1';
+        } catch (error) {
+            abierta = true;
+        }
+
+        function habilitar() {
+            check.disabled = false;
+            if (nota) {
+                nota.hidden = true;
+            }
+            try {
+                window.sessionStorage.setItem(clave, '1');
+            } catch (error) {
+                // Sin sessionStorage se habilita solo en esta página.
+            }
+        }
+
+        if (abierta) {
+            habilitar();
+            return;
+        }
+
+        check.disabled = true;
+        if (nota) {
+            nota.hidden = false;
+            var ids = (check.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean);
+            if (ids.indexOf(nota.id) === -1) {
+                ids.push(nota.id);
+            }
+            check.setAttribute('aria-describedby', ids.join(' '));
+        }
+
+        enlace.addEventListener('click', function () {
+            habilitar();
+            check.focus();
+        });
+    });
+
     // Lleva el foco al primer campo con error.
     var primerInvalido = document.querySelector('[aria-invalid="true"]');
     if (primerInvalido) {

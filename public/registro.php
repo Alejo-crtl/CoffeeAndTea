@@ -113,11 +113,12 @@ cabeceraHtml('Crear cuenta | CoffeeAndtea', 'login', false);
                 <input id="password2" name="password2" type="password" required autocomplete="new-password"<?= atributosError('password2', $erroresCampo) ?>>
                 <?= mensajeError('password2', $erroresCampo) ?>
             </div>
-            <label class="check">
-                <input type="checkbox" name="consentimiento" value="1"<?= $valores['consentimiento'] ? ' checked' : '' ?> required<?= atributosError('consentimiento', $erroresCampo) ?>>
+            <label class="check" data-politica data-politica-nota="nota-consentimiento">
+                <input type="checkbox" name="consentimiento" value="1"<?= $valores['consentimiento'] ? ' checked' : '' ?> required data-politica-check<?= atributosError('consentimiento', $erroresCampo) ?>>
                 <span>Autorizo el tratamiento de mis datos personales
-                    (<a href="<?= h(url('privacidad.php')) ?>" target="_blank" rel="noopener">ver política</a>).</span>
+                    (<a href="<?= h(url('privacidad.php')) ?>" target="_blank" rel="noopener" data-politica-enlace>ver política</a>).</span>
             </label>
+            <p class="check-nota" id="nota-consentimiento" hidden>Lee la política para continuar.</p>
             <?= mensajeError('consentimiento', $erroresCampo) ?>
             <button class="btn btn-primario btn-bloque" type="submit">Crear mi cuenta</button>
         </form>

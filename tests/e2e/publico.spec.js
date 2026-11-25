@@ -1,6 +1,22 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
 
+/**
+ * Abre en otra pestaña cada política visible y la cierra.
+ * Es necesario porque la casilla se habilita al leer el enlace.
+ */
+async function abrirPoliticas(page) {
+    const enlaces = page.locator('[data-politica-enlace]');
+    const total = await enlaces.count();
+    for (let i = 0; i < total; i++) {
+        const [popup] = await Promise.all([
+            page.context().waitForEvent('page'),
+            enlaces.nth(i).click(),
+        ]);
+        await popup.close();
+    }
+}
+
 test('la tienda muestra catálogo, stock y tiempo estimado', async ({ page }) => {
     await page.goto('/index.php');
 
@@ -37,6 +53,7 @@ test('un visitante puede pedir para recoger en tienda', async ({ page }) => {
     await page.fill('#correo', `e2e.${sufijo}@example.com`);
     await page.fill('#telefono', '3001234567');
     await page.fill('#observaciones', 'Pedido creado por Playwright');
+    await abrirPoliticas(page);
     await page.check('input[name="consentimiento"]');
     await page.check('input[name="acepta_cancelacion"]');
     await page.getByRole('button', { name: 'Registrar pedido' }).click();
