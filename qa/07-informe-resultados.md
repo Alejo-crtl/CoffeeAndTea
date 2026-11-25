@@ -122,12 +122,13 @@ Ejecución sobre la base copia `coffeeandtea_migracion`, creada desde `db/schema
 | Suite | Comando | Resultado |
 |---|---|---|
 | PHP unitarias + integración | `php tests/run.php` | **15/15 aprobadas** |
-| Playwright E2E | `npx playwright test` | **16/16 aprobadas** |
+| Playwright E2E | `npx playwright test` | **34/34 aprobadas** (24 pruebas en 3 perfiles) |
 
 Las pruebas de integración crean y eliminan sus propios datos en `coffeeandtea_qa`.
 Las E2E cubren catálogo, carrito, checkout, confirmación, login por rol, RBAC,
 restricciones del personal interno, pedidos recientes de invitado, validación
-de consentimiento, gestión de imágenes de producto y página de video.
+de consentimiento, gestión de imágenes de producto, página de video y los
+perfiles móviles de 320 y 390 px.
 
 ## 5. Defectos encontrados y corregidos
 

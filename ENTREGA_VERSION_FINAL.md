@@ -13,7 +13,7 @@ documentación, anexos y pruebas.
 - `anexos/`: PAC, SRS, MER, diagrama, script de base de datos y log de errores.
 - `bin/crear-admin.php`: alta del administrador inicial.
 - `db/`: esquema, datos demo y migraciones.
-- `docs/`: manuales por rol.
+- `docs/`: manual de usuario y manual técnico, en Markdown y Word.
 - `qa/`: plan, casos, riesgos, RBAC e informe.
 - `tests/`: pruebas unitarias, integración y E2E.
 
@@ -21,8 +21,9 @@ documentación, anexos y pruebas.
 
 - Casos QA: **55/55**.
 - Pruebas PHP: **15/15**.
-- Pruebas E2E: **16/16**.
+- Pruebas E2E: **34/34** (24 pruebas en 3 perfiles).
 - Migración: 6 categorías, 11 clientes, 15 productos, 12 pedidos y 22 detalles.
+- Migraciones aplicadas: 001 a 005 (datos, reembolso, tiempos, bloqueo y reportes).
 
 ## Instalación rápida
 
@@ -52,5 +53,5 @@ npx playwright test
 ## Nota para el administrador
 
 La versión final está consolidada en `main`. Las correcciones documentales y de
-presentación se gestionan en PRs separados sobre `refactor/simplificacion`.
+presentación se gestionan en PRs separados sobre `main`.
 La rama reemplaza la aplicación anterior y deja la versión final en la raíz.

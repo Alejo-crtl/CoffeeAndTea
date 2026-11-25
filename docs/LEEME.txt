@@ -86,7 +86,7 @@ bin/crear-admin.php  Alta del administrador inicial.
 db/schema.sql        Esquema completo.
 db/seed-demo.sql     Datos demo (no usar en produccion).
 db/asignar-imagenes.sql  Asigna fotos a productos existentes.
-db/migraciones/      Migracion desde CoffeeAndTea.
+db/migraciones/      Migraciones 001-005 (datos, reembolso, tiempos, bloqueo y reportes).
 docs/manual.md       Manual de usuario.
 docs/manual-tecnico.md  Manual tecnico (operacion y administracion).
 docs/word/           Los manuales en Word, con capturas.
@@ -150,6 +150,7 @@ SEGURIDAD
 DOCUMENTACION
 -------------
 README.md                  Vision general e instalacion.
-docs/manual.md             Manual de usuario y operacion.
+docs/manual.md             Manual de usuario.
+docs/manual-tecnico.md     Manual tecnico (operacion y administracion).
 docs/README_LARAGON.md     Instalacion con Laragon.
 qa/07-informe-resultados.md Resultados de las pruebas.

@@ -27,9 +27,9 @@ Requisito → implementación → prueba. Estados: **Aprobado**, **Pendiente**, 
 | RF-DOC-01 | Página de anexos y descargas controladas | `anexos.php`, `descargar-anexo.php` | CP-048 | Aprobado |
 | RF-DOC-02 | Video de presentación embebido | `public/video.php`, `app/php/lib/video.php` | CP-054 | Aprobado |
 | RF-UI-01 | Aviso de compra como invitado y política visible | `index.php`, `checkout.php`, `pedidos_invitado.php` | CP-044, CP-017 | Aprobado |
-| RF-MAN-01 | Manual de usuario para visitante y CLIENTE | `manual.php`, `manual_rol.php` | Revisión manual | Aprobado |
-| RF-MAN-02 | Manual de operación para ENCARGADO | `manual.php`, `manual_rol.php` | Revisión manual | Aprobado |
-| RF-MAN-03 | Manual de administración para ADMIN | `manual.php`, `manual_rol.php` | Revisión manual | Aprobado |
+| RF-MAN-01 | Manual de usuario para visitante y CLIENTE | `manual.php`, `manual_rol.php`, `docs/manual.md` | Revisión manual | Aprobado |
+| RF-MAN-02 | Manual de operación para ENCARGADO | `manual.php`, `manual_rol.php`, `docs/manual-tecnico.md` (operación) | Revisión manual | Aprobado |
+| RF-MAN-03 | Manual de administración para ADMIN | `manual.php`, `manual_rol.php`, `docs/manual-tecnico.md` (administración) | Revisión manual | Aprobado |
 | RF-UI-02 | Navegación con botones en todas las páginas | `pieHtml()`, botones de regreso | CP-049 | Aprobado |
 | RF-CAJ-01 | Cobro en efectivo con cambio | `confirmarPago()` | CP-021, CP-024 | Aprobado |
 | RF-CAJ-02 | Cobro con tarjeta y referencia externa | `confirmarPago()` | CP-022 | Aprobado |
@@ -49,7 +49,7 @@ Requisito → implementación → prueba. Estados: **Aprobado**, **Pendiente**, 
 | RF-ADM-04 | Proteger el último administrador | `administradoresActivos()` | CP-039 | Aprobado |
 | RF-ADM-05 | Configuración de tienda | `config_sistema`, `admin.php` | CP-040 | Aprobado |
 | RF-ADM-06 | Gestión de imágenes de producto | `public/admin.php`, `app/php/lib/imagenes.php` | CP-050, CP-051, CP-052, CP-053, CP-055 | Aprobado |
-| RF-REP-01 | Reportes y exportación CSV | `public/reportes.php` | CP-041 | Aprobado |
+| RF-REP-01 | Reportes con rango de fechas, clientes y exportación CSV | `public/reportes.php`, `sp_reporte_*` | CP-041 | Aprobado |
 | RF-MIG-01 | Migración fiel de datos | `db/migraciones/001_migracion_inicial.sql` | CP-042 | Aprobado |
 | RF-AUD-01 | Auditoría de acciones sensibles | `auditoria.php` | Transversal | Aprobado |
 | RF-SEG-01 | CSRF en formularios | `campoCsrf()`, `exigirCsrf()` | Transversal | Aprobado |

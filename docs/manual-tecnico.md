@@ -66,9 +66,9 @@ CoffeeAndtea_Entrega/
 │  └─ .htaccess             Endurecimiento de Apache
 ├─ anexos/                  PAC, SRS, MER, script de BD y log de errores
 ├─ app/php/
-│  ├─ lib/                  config, conectarBD, bootstrap, auth, pedidos,
-│  │                        correo, password_reset, cuenta, auditoría, imágenes,
-│  │                        video, anexos, manual_rol
+│  ├─ lib/                  config, conectarBD, bootstrap, excepciones, auth,
+│  │                        pedidos, reportes, correo, password_reset, cuenta,
+│  │                        auditoría, imágenes, video, anexos, manual_rol
 │  └─ vistas/               plantilla.php y panel_pedido.php
 ├─ bin/crear-admin.php      Alta del administrador inicial
 ├─ db/                      schema.sql, seed-demo.sql y migraciones
@@ -529,7 +529,7 @@ Controles implementados:
 - Regeneración del ID de sesión al iniciar y al cambiar contraseña.
 - Expiración por inactividad y duración máxima de la sesión.
 - Token CSRF en todos los formularios POST.
-- Límite de 8 intentos fallidos de login por 10 minutos.
+- Límite de 8 intentos fallidos por cuenta, con bloqueo de 10 minutos persistente en la base.
 - RBAC por página y por acción, validado en el servidor.
 - Validación de stock y de transiciones de estado en el servidor.
 - Auditoría de acciones sensibles.
