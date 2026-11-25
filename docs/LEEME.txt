@@ -88,6 +88,8 @@ db/seed-demo.sql     Datos demo (no usar en produccion).
 db/asignar-imagenes.sql  Asigna fotos a productos existentes.
 db/migraciones/      Migracion desde CoffeeAndTea.
 docs/manual.md       Manual de usuario.
+docs/manual-tecnico.md  Manual tecnico (operacion y administracion).
+docs/word/           Los manuales en Word, con capturas.
 qa/                  Plan, casos, RBAC e informe.
 tests/               Pruebas PHP y Playwright.
 storage/             Logs (se crea solo; no se entrega).

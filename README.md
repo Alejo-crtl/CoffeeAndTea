@@ -100,7 +100,7 @@ CoffeeAndTea/
 │  ├─ gestion.php           Pedidos, caja y stock
 │  ├─ admin.php             Usuarios, productos, configuración y auditoría
 │  ├─ reportes.php          Reportes y CSV
-│  ├─ manual.php            Manual renderizado desde docs/manual.md
+│  ├─ manual.php            Manual del rol (usuario o técnico)
 │  ├─ video.php             Video de presentación del proyecto
 │  ├─ css/, js/, media/     Estilos, scripts e imágenes
 │  └─ ...
@@ -114,7 +114,8 @@ CoffeeAndTea/
 │  ├─ seed-demo.sql         Datos demo/QA (no usar en producción)
 │  ├─ asignar-imagenes.sql  Asigna fotos a productos existentes
 │  └─ migraciones/          Migración desde la base anterior
-├─ docs/                    Manual, guía de Laragon y LEEME
+├─ docs/                    Manuales (md y Word), guía de Laragon y LEEME
+├─ tools/                   Capturas, diagramas y generación de los manuales
 ├─ qa/                      Plan, casos, matriz RBAC e informe
 ├─ tests/                   Unitarias, integración y E2E
 ├─ scripts/iniciar.bat      Servidor local de respaldo
@@ -492,9 +493,10 @@ Solo existen si se cargó `db/seed-demo.sql`. **No usarlas en producción.**
 
 ## 14. Documentación
 
-- [`docs/manual.md`](docs/manual.md) — manual de usuario para visitantes y clientes.
-- [`docs/manual-encargado.md`](docs/manual-encargado.md) — manual técnico de operación (caja, pedidos y stock).
-- [`docs/manual-admin.md`](docs/manual-admin.md) — manual técnico de administración.
+- [`docs/manual.md`](docs/manual.md) — manual de usuario para visitantes y clientes, con capturas.
+- [`docs/manual-tecnico.md`](docs/manual-tecnico.md) — manual técnico único: operación, administración, instalación, base de datos y mantenimiento.
+- [`docs/word/`](docs/word) — los mismos manuales en Word, con portada, índice, numeración y capturas.
+- La página **Manual** permite descargar el documento del rol en Word o Markdown.
 - [`docs/README_LARAGON.md`](docs/README_LARAGON.md) — instalación con Laragon.
 - [`docs/LEEME.txt`](docs/LEEME.txt) — inicio rápido en texto plano.
 - [`db/migraciones/README.md`](db/migraciones/README.md) — migración de datos.
