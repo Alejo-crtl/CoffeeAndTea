@@ -39,12 +39,17 @@ $valores = [
 $errores = [];
 $erroresCampo = [];
 
+// El consentimiento de datos solo hace falta si no está registrado en la cuenta.
+$mostrarConsentimientoDatos = true;
 if ($usuario !== null) {
-    $stmt = $conn->prepare('SELECT telefono FROM cliente WHERE usuario_id = :id LIMIT 1');
+    $stmt = $conn->prepare('SELECT telefono, consentimiento FROM cliente WHERE usuario_id = :id LIMIT 1');
     $stmt->execute([':id' => $usuario['id']]);
-    $telefono = $stmt->fetchColumn();
-    if ($telefono !== false && $telefono !== null) {
-        $valores['telefono'] = (string) $telefono;
+    $filaCliente = $stmt->fetch();
+    if ($filaCliente !== false) {
+        if ($filaCliente['telefono'] !== null && $filaCliente['telefono'] !== '') {
+            $valores['telefono'] = (string) $filaCliente['telefono'];
+        }
+        $mostrarConsentimientoDatos = !esVerdadero($filaCliente['consentimiento']);
     }
 }
 
@@ -55,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'correo'         => mb_strtolower(trim((string) ($_POST['correo'] ?? '')), 'UTF-8'),
         'telefono'       => trim((string) ($_POST['telefono'] ?? '')),
         'observaciones'  => trim((string) ($_POST['observaciones'] ?? '')),
-        'consentimiento' => isset($_POST['consentimiento']),
+        'consentimiento' => $mostrarConsentimientoDatos ? isset($_POST['consentimiento']) : true,
         'acepta_cancelacion' => isset($_POST['acepta_cancelacion']),
     ];
 
@@ -134,18 +139,22 @@ cabeceraHtml('Confirmar pedido | CoffeeAndtea', 'carrito');
                           placeholder="Sin azúcar, para llevar, alguna alergia..."<?= atributosError('observaciones', $erroresCampo) ?>><?= h($valores['observaciones']) ?></textarea>
                 <?= mensajeError('observaciones', $erroresCampo) ?>
             </div>
-            <label class="check">
-                <input type="checkbox" name="consentimiento" value="1"<?= $valores['consentimiento'] ? ' checked' : '' ?> required<?= atributosError('consentimiento', $erroresCampo) ?>>
-                <span>Autorizo el tratamiento de mis datos personales para gestionar este pedido
-                    (<a href="<?= h(url('privacidad.php')) ?>" target="_blank" rel="noopener">ver política</a>).</span>
-            </label>
-            <?= mensajeError('consentimiento', $erroresCampo) ?>
-            <label class="check">
-                <input type="checkbox" name="acepta_cancelacion" value="1"<?= $valores['acepta_cancelacion'] ? ' checked' : '' ?> required<?= atributosError('acepta_cancelacion', $erroresCampo) ?>>
+            <?php if ($mostrarConsentimientoDatos): ?>
+                <label class="check" data-politica data-politica-nota="nota-consentimiento">
+                    <input type="checkbox" name="consentimiento" value="1"<?= $valores['consentimiento'] ? ' checked' : '' ?> required data-politica-check<?= atributosError('consentimiento', $erroresCampo) ?>>
+                    <span>Autorizo el tratamiento de mis datos personales para gestionar este pedido
+                        (<a href="<?= h(url('privacidad.php')) ?>" target="_blank" rel="noopener" data-politica-enlace>ver política</a>).</span>
+                </label>
+                <p class="check-nota" id="nota-consentimiento" hidden>Lee la política para continuar.</p>
+                <?= mensajeError('consentimiento', $erroresCampo) ?>
+            <?php endif; ?>
+            <label class="check" data-politica data-politica-nota="nota-cancelacion">
+                <input type="checkbox" name="acepta_cancelacion" value="1"<?= $valores['acepta_cancelacion'] ? ' checked' : '' ?> required data-politica-check<?= atributosError('acepta_cancelacion', $erroresCampo) ?>>
                 <span>Acepto la política de cancelación: si el pedido ya está en preparación o listo,
                     el reembolso será del 50% de lo pagado
-                    (<a href="<?= h(url('politica-cancelacion.php')) ?>" target="_blank" rel="noopener">ver política</a>).</span>
+                    (<a href="<?= h(url('politica-cancelacion.php')) ?>" target="_blank" rel="noopener" data-politica-enlace>ver política</a>).</span>
             </label>
+            <p class="check-nota" id="nota-cancelacion" hidden>Lee la política para continuar.</p>
             <?= mensajeError('acepta_cancelacion', $erroresCampo) ?>
             <button class="btn btn-primario" type="submit">Registrar pedido</button>
         </form>

@@ -109,21 +109,29 @@ cabeceraHtml('Reportes | CoffeeAndtea', 'reportes');
         <h1>Reportes</h1>
         <p>Ventas, productos, clientes y caja. Los importes usan el precio histórico de cada pedido.</p>
     </div>
-    <a class="btn btn-secundario" href="<?= h(url('gestion.php')) ?>">Volver a gestión</a>
-    <a class="btn btn-secundario" href="<?= h(url('reportes.php?export=ventas&desde=' . urlencode($desde) . '&hasta=' . urlencode($hasta))) ?>">
-        Exportar CSV (<?= h($rangoTexto) ?>)
-    </a>
+    <div class="cabecera-acciones">
+        <a class="btn btn-secundario" href="<?= h(url('gestion.php')) ?>">Volver a gestión</a>
+        <a class="btn btn-primario" href="<?= h(url('reportes.php?export=ventas&desde=' . urlencode($desde) . '&hasta=' . urlencode($hasta))) ?>">
+            Exportar CSV (<?= h($rangoTexto) ?>)
+        </a>
+    </div>
 </section>
 
-<form class="filtros-inline" method="get" action="<?= h(url('reportes.php')) ?>">
-    <label for="desde">Desde</label>
-    <input id="desde" name="desde" type="date" value="<?= h($desde) ?>" max="<?= h($hoy) ?>" required>
-    <label for="hasta">Hasta</label>
-    <input id="hasta" name="hasta" type="date" value="<?= h($hasta) ?>" max="<?= h($hoy) ?>" required>
-    <button class="btn btn-primario btn-pequeno" type="submit">Aplicar</button>
-    <a class="btn btn-fantasma btn-pequeno" href="<?= h(url('reportes.php')) ?>">Hoy</a>
-    <span class="texto-suave">Periodo: <?= h($rangoTexto) ?></span>
-</form>
+<div class="barra-filtros">
+    <form class="filtros-periodo" method="get" action="<?= h(url('reportes.php')) ?>">
+        <div class="campo-filtro">
+            <label for="desde">Desde</label>
+            <input id="desde" name="desde" type="date" value="<?= h($desde) ?>" max="<?= h($hoy) ?>" required>
+        </div>
+        <div class="campo-filtro">
+            <label for="hasta">Hasta</label>
+            <input id="hasta" name="hasta" type="date" value="<?= h($hasta) ?>" max="<?= h($hoy) ?>" required>
+        </div>
+        <button class="btn btn-primario" type="submit">Aplicar</button>
+        <a class="btn btn-fantasma" href="<?= h(url('reportes.php')) ?>">Hoy</a>
+        <span class="periodo-texto">Periodo: <?= h($rangoTexto) ?></span>
+    </form>
+</div>
 
 <div class="stats-grid">
     <div class="stat stat-destacado">

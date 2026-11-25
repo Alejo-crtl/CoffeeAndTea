@@ -86,13 +86,15 @@ En la pantalla **Confirmar pedido** escribe:
 - Teléfono (opcional).
 - Observaciones (opcional).
 
-Después marca las dos casillas obligatorias: la autorización del tratamiento de
-datos y la aceptación de la política de cancelación. Pulsa **Registrar pedido**.
+Después marca las casillas que correspondan: si pides como invitado, la
+autorización del tratamiento de datos; en todos los casos, la aceptación de la
+política de cancelación. Cada casilla se habilita cuando abres su política.
+Pulsa **Registrar pedido**.
 
 ![Formulario de confirmación con los datos de contacto y las casillas de autorización](media/capturas/checkout.jpg)
 
-*Figura 4. Confirmación del pedido: datos de contacto, observaciones y las dos
-autorizaciones obligatorias.*
+*Figura 4. Confirmación del pedido: datos de contacto, observaciones y las
+autorizaciones que correspondan al tipo de cuenta.*
 
 ### Paso 4. Guarda tu código
 
@@ -182,6 +184,10 @@ Si creas una cuenta puedes:
 - Ver tus pedidos anteriores.
 - Consultar el estado de cada pedido.
 - Cambiar tu contraseña.
+
+Al crear la cuenta autorizas el tratamiento de tus datos, por eso el checkout no
+te lo vuelve a pedir: solo tendrás que aceptar la política de cancelación del
+pedido.
 
 Para entrar, usa **Ingresar** en la barra superior.
 

@@ -2509,3 +2509,78 @@ label.checkbox input {
 .layout-reportes > * {
     min-width: 0;
 }
+
+/* --------------------------------------------------------------------------
+   Aceptación de políticas (se habilita tras abrir el enlace)
+   -------------------------------------------------------------------------- */
+.check-nota {
+    margin: 2px 0 10px;
+    color: #785d43;
+    font-size: 0.84rem;
+}
+
+.check input:disabled + span {
+    opacity: 0.6;
+}
+
+/* --------------------------------------------------------------------------
+   Barra de filtros de reportes
+   -------------------------------------------------------------------------- */
+.barra-filtros {
+    max-width: var(--ancho);
+    margin: 0 auto 20px;
+    padding: 0 24px;
+}
+
+.filtros-periodo {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 14px 18px;
+    background: var(--superficie);
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    box-shadow: var(--sombra-suave);
+}
+
+.filtros-periodo .campo-filtro {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.filtros-periodo label {
+    color: #6b5847;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.filtros-periodo input {
+    min-width: 160px;
+    min-height: 44px;
+    padding: 8px 10px;
+    border: 1px solid var(--borde-fuerte);
+    border-radius: 9px;
+    background: #fff;
+    font: inherit;
+}
+
+.filtros-periodo .periodo-texto {
+    margin-left: auto;
+    align-self: center;
+    color: #785d43;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+    .filtros-periodo .campo-filtro,
+    .filtros-periodo input {
+        width: 100%;
+    }
+
+    .filtros-periodo .periodo-texto {
+        margin-left: 0;
+        width: 100%;
+    }
+}
