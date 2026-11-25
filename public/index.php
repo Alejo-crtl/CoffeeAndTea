@@ -101,9 +101,9 @@ cabeceraHtml('CoffeeAndtea | Pide y recoge en tienda', 'tienda');
             <span class="hero-vapor"></span>
             <span class="hero-vapor"></span>
             <div class="hero-taza-logo">
-                <img src="<?= h(url('media/logo-cafe-sabroso.png')) ?>"
-                     alt="Café Sabroso: el sabor que enamora y conquista tu alma"
-                     width="600" height="547" loading="eager" decoding="async">
+                <img src="<?= h(url('media/logo-coffeeandtea.png')) ?>"
+                     alt="CoffeeAndtea"
+                     width="126" height="126" loading="eager" decoding="async">
             </div>
             <span class="hero-plato"></span>
         </div>
@@ -174,7 +174,13 @@ cabeceraHtml('CoffeeAndtea | Pide y recoge en tienda', 'tienda');
                 <article class="tarjeta-producto<?= $agotado ? ' agotado' : '' ?>">
                     <div class="producto-imagen<?= $tieneImagen ? ' con-foto' : '' ?>">
                         <?php if ($tieneImagen): ?>
-                            <img src="<?= h(urlImagenProducto($imagen)) ?>" alt="<?= h((string) $producto['nombre']) ?>" loading="lazy" decoding="async">
+                            <?php $imagenWebp = urlImagenProductoWebp($imagen); ?>
+                            <picture>
+                                <?php if ($imagenWebp !== null): ?>
+                                    <source srcset="<?= h($imagenWebp) ?>" type="image/webp">
+                                <?php endif; ?>
+                                <img src="<?= h(urlImagenProducto($imagen)) ?>" alt="<?= h((string) $producto['nombre']) ?>" width="600" height="400" loading="lazy" decoding="async">
+                            </picture>
                         <?php else: ?>
                             <span aria-hidden="true"><?= h(mb_substr((string) $producto['nombre'], 0, 1)) ?></span>
                             <small>Foto próximamente</small>

@@ -79,6 +79,7 @@ if (!headers_sent()) {
 
 // B01.2 · Librerías base y conexión
 require_once __DIR__ . '/conectarBD.php';
+require_once __DIR__ . '/excepciones.php';
 require_once __DIR__ . '/../vistas/plantilla.php';
 require_once __DIR__ . '/auditoria.php';
 require_once __DIR__ . '/auth.php';
@@ -194,6 +195,34 @@ function esVerdadero(mixed $valor): bool
         || $valor === '1'
         || $valor === 't'
         || $valor === 'true';
+}
+
+/** Valida un teléfono opcional: dígitos, espacios, +, - y paréntesis. */
+function telefonoValido(string $telefono): bool
+{
+    if ($telefono === '') {
+        return true;
+    }
+    return preg_match('/^[0-9+()\-\s]{7,30}$/', $telefono) === 1;
+}
+
+/** Atributos ARIA para un campo con error de validación. */
+function atributosError(string $campo, array $erroresCampo): string
+{
+    if (!isset($erroresCampo[$campo])) {
+        return '';
+    }
+    return ' aria-invalid="true" aria-describedby="error-' . h($campo) . '"';
+}
+
+/** Mensaje de error asociado a un campo. */
+function mensajeError(string $campo, array $erroresCampo): string
+{
+    if (!isset($erroresCampo[$campo]) || $erroresCampo[$campo] === '') {
+        return '';
+    }
+    return '<p class="campo-error" id="error-' . h($campo) . '">'
+        . h((string) $erroresCampo[$campo]) . '</p>';
 }
 
 // B01.6 · Formato para vistas

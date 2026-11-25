@@ -50,7 +50,7 @@ cabeceraHtml('Ingresar | CoffeeAndtea', 'login', false);
         <p class="texto-suave">Accede para ver tus pedidos o para gestionar la tienda.</p>
 
         <?php if ($error !== null): ?>
-            <div class="alerta-error" role="alert"><?= h($error) ?></div>
+            <div class="alerta-error" role="alert" id="errores-login"><?= h($error) ?></div>
         <?php endif; ?>
 
         <form method="post" action="<?= h(url('login.php')) ?>" class="formulario">
@@ -58,11 +58,11 @@ cabeceraHtml('Ingresar | CoffeeAndtea', 'login', false);
             <div class="campo">
                 <label for="correo">Correo electrónico</label>
                 <input id="correo" name="correo" type="email" required autofocus autocomplete="username"
-                       value="<?= h($correo) ?>">
+                       value="<?= h($correo) ?>"<?= $error !== null ? ' aria-invalid="true" aria-describedby="errores-login"' : '' ?>>
             </div>
             <div class="campo">
                 <label for="password">Contraseña</label>
-                <input id="password" name="password" type="password" required autocomplete="current-password">
+                <input id="password" name="password" type="password" required autocomplete="current-password"<?= $error !== null ? ' aria-invalid="true" aria-describedby="errores-login"' : '' ?>>
             </div>
             <button class="btn btn-primario btn-bloque" type="submit">Entrar</button>
         </form>

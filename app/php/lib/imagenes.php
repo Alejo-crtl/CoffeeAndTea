@@ -76,6 +76,45 @@ function urlImagenProducto(?string $ruta): string
     return url(rutaWebImagenProducto($ruta));
 }
 
+/** Ruta web del WebP hermano de una imagen, si existe. */
+function rutaWebpProducto(?string $ruta): ?string
+{
+    $rutaWeb = rutaWebImagenProducto($ruta);
+    if ($rutaWeb === '' || preg_match('/\.webp$/i', $rutaWeb) === 1) {
+        return null;
+    }
+    $webp = preg_replace('/\.(?:jpe?g|png)$/i', '.webp', $rutaWeb);
+    if ($webp === null || $webp === $rutaWeb) {
+        return null;
+    }
+    return is_file(APP_ROOT . '/public/' . $webp) ? $webp : null;
+}
+
+/** URL pública del WebP de un producto, o null si no existe. */
+function urlImagenProductoWebp(?string $ruta): ?string
+{
+    $webp = rutaWebpProducto($ruta);
+    return $webp === null ? null : url($webp);
+}
+
+/** Genera el WebP hermano de una imagen ya guardada, si GD lo permite. */
+function generarWebpProducto(string $rutaAbsoluta): void
+{
+    if (!function_exists('imagewebp')) {
+        return;
+    }
+    $webp = preg_replace('/\.(?:jpe?g|png)$/i', '.webp', $rutaAbsoluta);
+    if ($webp === null || $webp === $rutaAbsoluta) {
+        return;
+    }
+    $imagen = @imagecreatefromstring((string) @file_get_contents($rutaAbsoluta));
+    if ($imagen === false) {
+        return;
+    }
+    @imagewebp($imagen, $webp, 82);
+    imagedestroy($imagen);
+}
+
 /**
  * Valida y guarda una imagen subida desde el panel.
  *
@@ -142,6 +181,8 @@ function guardarImagenProducto(array $archivo): string
     if (!normalizarImagenProducto($temporal, $destino)) {
         throw new ReglaNegocioException('No se pudo procesar la imagen. Prueba con otro archivo.');
     }
+
+    generarWebpProducto($destino);
 
     return 'media/productos/' . $nombre;
 }
@@ -230,5 +271,10 @@ function eliminarImagenProducto(?string $ruta, ?PDO $conn = null, ?int $excluirP
         }
     }
 
-    return @unlink($absoluta);
+    $borrado = @unlink($absoluta);
+    $webp = preg_replace('/\.(?:jpe?g|png)$/i', '.webp', $absoluta);
+    if ($webp !== null && $webp !== $absoluta && is_file($webp)) {
+        @unlink($webp);
+    }
+    return $borrado;
 }

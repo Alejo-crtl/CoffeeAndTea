@@ -168,11 +168,23 @@ function autenticar(PDO $conn, string $correo, string $password): array
     }
 
     $stmt = $conn->prepare(
-        'SELECT id, nombre, correo, password_hash, rol, activo, debe_cambiar_password, session_version
+        'SELECT id, nombre, correo, password_hash, rol, activo, debe_cambiar_password,
+                session_version, intentos_fallidos, bloqueado_hasta
          FROM usuario WHERE lower(correo) = :correo LIMIT 1'
     );
     $stmt->execute([':correo' => $correo]);
     $fila = $stmt->fetch();
+
+    // Bloqueo por cuenta: sobrevive a borrar la cookie o cambiar de navegador.
+    if ($fila !== false && $fila['bloqueado_hasta'] !== null && (int) strtotime((string) $fila['bloqueado_hasta']) > $ahora) {
+        registrarAuditoria($conn, (int) $fila['id'], 'LOGIN_BLOQUEADO', 'usuario', (int) $fila['id'], [
+            'correo' => $correo,
+        ]);
+        return [
+            'ok'    => false,
+            'error' => 'Demasiados intentos fallidos. Inténtalo de nuevo en 10 minutos.',
+        ];
+    }
 
     $hash = $fila['password_hash'] ?? '$2y$10$invalidinvalidinvalidinvalidinvalidinvalidinvalidinvalidinva';
     $valida = password_verify($password, (string) $hash);
@@ -180,6 +192,32 @@ function autenticar(PDO $conn, string $correo, string $password): array
     if ($fila === false || !$valida || !esVerdadero($fila['activo'])) {
         $intentos[] = $ahora;
         $_SESSION['login_intentos'] = $intentos;
+
+        if ($fila !== false && esVerdadero($fila['activo'])) {
+            $fallos = (int) $fila['intentos_fallidos'] + 1;
+            $bloqueado = $fallos >= 8;
+            $stmt = $conn->prepare(
+                $bloqueado
+                    ? "UPDATE usuario
+                          SET intentos_fallidos = 0,
+                              bloqueado_hasta = CURRENT_TIMESTAMP + INTERVAL '10 minutes'
+                        WHERE id = :id"
+                    : 'UPDATE usuario SET intentos_fallidos = :fallos WHERE id = :id'
+            );
+            if (!$bloqueado) {
+                $stmt->bindValue(':fallos', $fallos, PDO::PARAM_INT);
+            }
+            $stmt->bindValue(':id', (int) $fila['id'], PDO::PARAM_INT);
+            $stmt->execute();
+
+            if ($bloqueado) {
+                registrarAuditoria($conn, (int) $fila['id'], 'LOGIN_BLOQUEADO', 'usuario', (int) $fila['id'], [
+                    'correo'   => $correo,
+                    'intentos' => $fallos,
+                ]);
+            }
+        }
+
         registrarAuditoria($conn, $fila !== false ? (int) $fila['id'] : null, 'LOGIN_FALLIDO', 'usuario', $fila !== false ? (int) $fila['id'] : null, [
             'correo' => $correo,
         ]);
@@ -193,7 +231,13 @@ function autenticar(PDO $conn, string $correo, string $password): array
     }
 
     unset($_SESSION['login_intentos']);
-    $stmt = $conn->prepare('UPDATE usuario SET ultimo_acceso = CURRENT_TIMESTAMP WHERE id = :id');
+    $stmt = $conn->prepare(
+        'UPDATE usuario
+            SET ultimo_acceso = CURRENT_TIMESTAMP,
+                intentos_fallidos = 0,
+                bloqueado_hasta = NULL
+          WHERE id = :id'
+    );
     $stmt->execute([':id' => (int) $fila['id']]);
 
     iniciarSesionUsuario($fila);

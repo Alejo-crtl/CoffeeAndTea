@@ -289,7 +289,7 @@ cabeceraHtml('Pedido ' . $pedido['codigo'] . ' | CoffeeAndtea', $seccionPedido);
         <?php endif; ?>
 
         <a class="btn btn-secundario btn-bloque" href="<?= h(url('index.php')) ?>">Volver a la tienda</a>
-        <?php if ($usuario !== null): ?>
+        <?php if ($usuarioPedido !== null): ?>
             <a class="btn btn-fantasma btn-bloque" href="<?= h(url('cuenta.php')) ?>">Ir a mi cuenta</a>
         <?php elseif (pedidosInvitadoLeer() !== []): ?>
             <a class="btn btn-fantasma btn-bloque" href="<?= h(url('pedidos-invitado.php')) ?>">Mis pedidos recientes</a>

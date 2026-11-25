@@ -75,7 +75,7 @@ function cabeceraHtml(string $titulo, string $seccionActiva = 'tienda', bool $mo
     echo '    <a class="skip-link" href="#contenido">Saltar al contenido</a>' . "\n";
     echo "    <header class=\"topbar\">\n";
     echo "        <div class=\"topbar-inner\">\n";
-    echo '            <a class="brand" href="' . h(url('index.php')) . '" aria-label="CoffeeAndtea, ir a la tienda"><span class="brand-icono" aria-hidden="true"><img src="' . h(url('media/logo-coffeeandtea.png')) . '" alt="" width="46" height="46" decoding="async"></span><span class="brand-texto">CoffeeAndtea</span></a>' . "\n";
+    echo '            <a class="brand" href="' . h(url('index.php')) . '" aria-label="CoffeeAndtea, ir a la tienda"><span class="brand-icono" aria-hidden="true"><picture><source srcset="' . h(url('media/logo-coffeeandtea.webp')) . '" type="image/webp"><img src="' . h(url('media/logo-coffeeandtea.png')) . '" alt="" width="46" height="46" decoding="async"></picture></span><span class="brand-texto">CoffeeAndtea</span></a>' . "\n";
 
     if ($mostrarNavegacion) {
         echo "            <nav class=\"menu\" aria-label=\"Secciones del sistema\">\n";

@@ -30,7 +30,7 @@
 :root {
     --marron-oscuro: #2f1c10;
     --marron: #6f4e37;
-    --marron-claro: #a47b52;
+    --marron-claro: #7d5a38;
     --crema: #f6efe5;
     --crema-2: #efe3d3;
     --superficie: #fffdf9;
@@ -152,7 +152,7 @@ button,
 }
 
 :focus-visible {
-    outline: 3px solid rgba(217, 160, 91, 0.9);
+    outline: 3px solid #8a5a25;
     outline-offset: 3px;
 }
 
@@ -332,7 +332,7 @@ button,
 .eyebrow {
     margin: 0;
     color: #a06b2d;
-    font-size: 0.72rem;
+    font-size: 0.76rem;
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -340,7 +340,7 @@ button,
 
 .hint {
     margin: 5px 0 0;
-    color: #8a6d51;
+    color: #785d43;
     font-size: 0.8rem;
     line-height: 1.45;
 }
@@ -512,7 +512,7 @@ button,
 .hero-panel .hero-nota {
     margin: 14px 0 0;
     color: rgba(255, 255, 255, 0.58);
-    font-size: 0.73rem;
+    font-size: 0.78rem;
     line-height: 1.4;
 }
 
@@ -525,7 +525,7 @@ button,
     align-items: center;
     justify-content: center;
     gap: 6px;
-    min-height: 40px;
+    min-height: 44px;
     padding: 9px 15px;
     border: 1px solid transparent;
     border-radius: 10px;
@@ -599,7 +599,7 @@ button,
 }
 
 .btn-pequeno {
-    min-height: 32px;
+    min-height: 36px;
     padding: 6px 10px;
     border-radius: 8px;
     font-size: 0.78rem;
@@ -642,13 +642,15 @@ button,
     align-items: center;
     justify-content: center;
     min-height: 24px;
-    padding: 3px 9px;
+    padding: 5px 11px;
     border: 1px solid transparent;
     border-radius: 999px;
-    font-size: 0.71rem;
-    font-weight: 800;
+    font-size: 0.74rem;
+    font-weight: 700;
     line-height: 1;
     white-space: nowrap;
+    background: var(--crema-2);
+    color: var(--marron);
 }
 
 .badge-neutro {
@@ -798,8 +800,8 @@ button,
 }
 
 .toast button {
-    width: 26px;
-    height: 26px;
+    width: 36px;
+    height: 36px;
     border: none;
     border-radius: 50%;
     color: #7d5f49;
@@ -853,6 +855,7 @@ button,
     align-items: center;
     gap: 7px;
     flex: 0 0 auto;
+    min-height: 44px;
     padding: 9px 13px;
     border-radius: 9px;
     color: #765941;
@@ -949,7 +952,7 @@ button,
 
 .form-help {
     margin: -4px 0 0;
-    color: #8a6d51;
+    color: #785d43;
     font-size: 0.78rem;
 }
 
@@ -985,7 +988,7 @@ button,
 .form-card textarea,
 .form-inline input[type="number"] {
     width: 100%;
-    min-height: 40px;
+    min-height: 44px;
     padding: 9px 11px;
     border: 1px solid var(--borde-fuerte);
     border-radius: 9px;
@@ -1140,6 +1143,7 @@ label.checkbox input {
 }
 
 .tabla-scroll {
+    position: relative;
     width: 100%;
     overflow-x: auto;
     scrollbar-width: thin;
@@ -1240,7 +1244,7 @@ label.checkbox input {
     margin: 0;
     padding: 38px 20px;
     border-top: 1px solid var(--borde);
-    color: #8a6d51;
+    color: #785d43;
     text-align: center;
     font-size: 0.9rem;
 }
@@ -1346,7 +1350,7 @@ label.checkbox input {
     margin-top: 16px;
     padding-top: 12px;
     border-top: 1px solid var(--borde);
-    color: #8a6d51;
+    color: #785d43;
     font-size: 0.75rem;
 }
 
@@ -1411,7 +1415,7 @@ label.checkbox input {
 
 .toc-nivel-3 a {
     padding-left: 19px;
-    color: #8a6d51;
+    color: #785d43;
     font-size: 0.75rem;
 }
 
@@ -1654,7 +1658,7 @@ label.checkbox input {
 
 .video-meta .video-canal {
     margin: 0 0 12px;
-    color: #8a6d51;
+    color: #785d43;
     font-size: 0.8rem;
     font-weight: 600;
 }
@@ -1686,7 +1690,7 @@ label.checkbox input {
     margin: auto 0 0;
     padding-top: 13px;
     border-top: 1px solid var(--borde);
-    color: #8a6d51;
+    color: #785d43;
     font-size: 0.75rem;
     line-height: 1.45;
 }
@@ -1778,13 +1782,15 @@ label.checkbox input {
     .menu {
         width: 100%;
         gap: 2px;
-        overflow-x: auto;
-        flex-wrap: nowrap;
+        flex-wrap: wrap;
         padding-bottom: 2px;
     }
 
     .menu a {
-        padding: 7px 10px;
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding: 10px 12px;
         font-size: 0.84rem;
     }
 
@@ -2126,6 +2132,7 @@ label.checkbox input {
 .filtros { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
 .filtro {
     display: inline-flex; align-items: center; gap: 8px; padding: 9px 15px; border-radius: 999px;
+    min-height: 44px;
     background: rgba(255, 253, 249, 0.72); border: 1px solid var(--borde); color: var(--marron);
     text-decoration: none; font-weight: 600; font-size: 0.9rem;
 }
@@ -2165,7 +2172,7 @@ label.checkbox input {
 }
 .video-placeholder h3 { margin: 0; color: #fff; font-size: 1.45rem; }
 .video-placeholder p { margin: 0; max-width: 520px; color: rgba(255, 255, 255, 0.78); font-size: 0.92rem; }
-.video-nota { margin: 12px 0 0; text-align: center; color: #8a7a6a; font-size: 0.82rem; }
+.video-nota { margin: 12px 0 0; text-align: center; color: #7a6a5a; font-size: 0.82rem; }
 @media (max-width: 600px) {
     .video-presentacion { padding: 0 16px; }
     .video-placeholder { padding: 20px; }
@@ -2224,13 +2231,13 @@ label.checkbox input {
 .producto-imagen small { font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(111, 78, 55, 0.45); }
 .producto-cuerpo { display: flex; flex-direction: column; gap: 9px; padding: 16px; flex: 1; }
 .producto-meta { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
-.producto-categoria { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--marron-claro); }
+.producto-categoria { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--marron-claro); }
 .producto-destacado { font-size: 0.66rem; background: #f7e3c4; color: #7a4b17; padding: 2px 7px; border-radius: 999px; font-weight: 700; }
 .producto-cuerpo h3 { margin: 0; font-size: 1.08rem; color: var(--marron-oscuro); }
 .producto-descripcion { margin: 0; font-size: 0.88rem; color: var(--gris-texto); min-height: 2.6em; }
 .producto-pie { margin-top: auto; display: flex; justify-content: space-between; align-items: flex-end; gap: 8px; }
 .producto-precio { margin: 0; font-size: 1.2rem; font-weight: 800; color: var(--marron-oscuro); }
-.producto-stock { margin: 0; font-size: 0.74rem; color: #8a7a6a; text-align: right; }
+.producto-stock { margin: 0; font-size: 0.78rem; color: #7a6a5a; text-align: right; }
 .form-agregar { display: grid; grid-template-columns: 64px 1fr; gap: 8px; margin-top: 6px; }
 .form-agregar input[type="number"], .form-cantidad input[type="number"], .form-stock input[type="number"] {
     width: 100%; padding: 8px; border: 1px solid var(--borde); border-radius: 9px; background: #fff; font: inherit;
@@ -2329,7 +2336,7 @@ label.checkbox input {
 .caja-tiempo { background: var(--crema); border: 1px solid var(--borde); border-radius: 12px; padding: 12px; display: flex; flex-direction: column; gap: 2px; margin: 14px 0; }
 .caja-tiempo span { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.09em; color: #866d58; }
 .caja-tiempo strong { font-size: 1.5rem; color: var(--marron-oscuro); }
-.caja-tiempo small { font-size: 0.74rem; color: #8a7a6a; }
+.caja-tiempo small { font-size: 0.74rem; color: #7a6a5a; }
 .acciones-carrito { margin-top: 12px; }
 
 .formulario { display: flex; flex-direction: column; gap: 13px; }
@@ -2340,7 +2347,7 @@ label.checkbox input {
     background: #fff; color: var(--gris-texto); font: inherit;
 }
 .campo input:focus, .campo select:focus, .campo textarea:focus { outline: 2px solid rgba(217, 160, 91, 0.45); border-color: var(--ambar); }
-.campo small { color: #8a7a6a; font-size: 0.76rem; }
+.campo small { color: #7a6a5a; font-size: 0.78rem; }
 .campo-doble { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .check { display: flex; gap: 9px; align-items: flex-start; font-size: 0.88rem; }
 .check input { margin-top: 3px; }
@@ -2369,10 +2376,9 @@ label.checkbox input {
 .linea-tiempo li.actual .punto { background: var(--marron-oscuro); color: #fff; }
 .linea-tiempo li.completado.actual .punto { background: var(--verde); color: #fff; }
 .linea-tiempo strong { display: block; font-size: 0.86rem; color: var(--marron-oscuro); }
-.linea-tiempo small { font-size: 0.73rem; color: #8a7a6a; }
+.linea-tiempo small { font-size: 0.78rem; color: #7a6a5a; }
 .confirmacion { align-items: center; }
 
-.badge { display: inline-flex; padding: 5px 11px; border-radius: 999px; font-size: 0.74rem; font-weight: 700; white-space: nowrap; background: var(--crema-2); color: var(--marron); }
 .estado-pendiente { background: #fff0d6; color: #8a5300; }
 .estado-pagado { background: #e3f0fb; color: #225b86; }
 .estado-en-preparacion { background: #fde9cf; color: #96520c; }
@@ -2423,7 +2429,7 @@ label.checkbox input {
 @media (max-width: 1180px) {
     .grid-productos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .stats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .layout-carrito, .layout-checkout, .layout-pedido, .layout-cuenta, .layout-admin { grid-template-columns: 1fr; }
+    .layout-carrito, .layout-checkout, .layout-pedido, .layout-cuenta, .layout-admin { grid-template-columns: minmax(0, 1fr); }
     .resumen-carrito { position: static; }
     .como-funciona ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -2434,7 +2440,7 @@ label.checkbox input {
     .grid-productos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .anexos-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .linea-tiempo { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .layout-caja, .layout-reportes { grid-template-columns: 1fr; }
+    .layout-caja, .layout-reportes { grid-template-columns: minmax(0, 1fr); }
     .pedido-resumen-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .pedido-acciones, .pedido-secundario { grid-template-columns: 1fr; }
     .auth-layout { grid-template-columns: 1fr; }
@@ -2450,4 +2456,56 @@ label.checkbox input {
     .menu-usuario { display: none; }
     .pagina-cabecera { padding-top: 20px; }
     .panel { padding: 16px; }
+}
+
+/* --------------------------------------------------------------------------
+   Accesibilidad táctil y pistas de tablas con desplazamiento
+   -------------------------------------------------------------------------- */
+@media (pointer: coarse) {
+    .btn-pequeno {
+        min-height: 44px;
+    }
+}
+
+.tabla-scroll.con-desborde::before {
+    content: "Desliza para ver más →";
+    display: block;
+    margin-bottom: 6px;
+    color: #785d43;
+    font-size: 0.78rem;
+    text-align: right;
+}
+
+/* --------------------------------------------------------------------------
+   Errores por campo en formularios
+   -------------------------------------------------------------------------- */
+.campo-error {
+    margin: 5px 0 0;
+    color: #a92c38;
+    font-size: 0.84rem;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.campo input[aria-invalid="true"],
+.campo select[aria-invalid="true"],
+.campo textarea[aria-invalid="true"] {
+    border-color: #a92c38;
+    box-shadow: 0 0 0 3px rgba(169, 44, 56, 0.12);
+}
+
+.check input[aria-invalid="true"] {
+    outline: 2px solid #a92c38;
+    outline-offset: 2px;
+}
+
+/* Evita que una tabla ancha estire las columnas del layout en móvil. */
+.layout-carrito > *,
+.layout-checkout > *,
+.layout-pedido > *,
+.layout-cuenta > *,
+.layout-caja > *,
+.layout-admin > *,
+.layout-reportes > * {
+    min-width: 0;
 }

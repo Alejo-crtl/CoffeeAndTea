@@ -32,11 +32,6 @@
  */
 declare(strict_types=1);
 
-/** Error de regla de negocio con mensaje apto para el usuario. */
-class ReglaNegocioException extends RuntimeException
-{
-}
-
 /** Porcentaje de reembolso cuando el pedido ya entró a preparación. */
 const REEMBOLSO_PARCIAL_PORCENTAJE = 50;
 
@@ -385,26 +380,39 @@ function crearPedido(PDO $conn, array $datos, ?int $usuarioId = null): array
     $consentimiento = !empty($datos['consentimiento']);
 
     $errores = [];
+    $campos = [];
     if (mb_strlen($nombre) < 3 || mb_strlen($nombre) > 150) {
-        $errores[] = 'Escribe tu nombre completo (entre 3 y 150 caracteres).';
+        $mensaje = 'Escribe tu nombre completo (entre 3 y 150 caracteres).';
+        $errores[] = $mensaje;
+        $campos['nombre'] = $mensaje;
     }
     if (!filter_var($correo, FILTER_VALIDATE_EMAIL) || mb_strlen($correo) > 150) {
-        $errores[] = 'Escribe un correo electrónico válido.';
+        $mensaje = 'Escribe un correo electrónico válido.';
+        $errores[] = $mensaje;
+        $campos['correo'] = $mensaje;
     }
-    if ($telefono !== '' && mb_strlen($telefono) > 30) {
-        $errores[] = 'El teléfono no puede superar 30 caracteres.';
+    if (!telefonoValido($telefono)) {
+        $mensaje = 'Escribe un teléfono válido (solo números, espacios, +, - y paréntesis).';
+        $errores[] = $mensaje;
+        $campos['telefono'] = $mensaje;
     }
     if (mb_strlen($observaciones) > 500) {
-        $errores[] = 'Las observaciones no pueden superar 500 caracteres.';
+        $mensaje = 'Las observaciones no pueden superar 500 caracteres.';
+        $errores[] = $mensaje;
+        $campos['observaciones'] = $mensaje;
     }
     if (!$consentimiento) {
-        $errores[] = 'Debes autorizar el tratamiento de tus datos para continuar.';
+        $mensaje = 'Debes autorizar el tratamiento de tus datos para continuar.';
+        $errores[] = $mensaje;
+        $campos['consentimiento'] = $mensaje;
     }
     if (empty($datos['acepta_cancelacion'])) {
-        $errores[] = 'Debes aceptar la política de cancelación para continuar.';
+        $mensaje = 'Debes aceptar la política de cancelación para continuar.';
+        $errores[] = $mensaje;
+        $campos['acepta_cancelacion'] = $mensaje;
     }
     if ($errores !== []) {
-        throw new ReglaNegocioException(implode(' ', $errores));
+        throw new ValidacionException(implode(' ', $errores), $campos);
     }
 
     $carrito = carritoDetallado($conn);

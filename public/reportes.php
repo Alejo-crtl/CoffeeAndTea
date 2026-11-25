@@ -2,74 +2,59 @@
 /**
  * BLOQUE B09 · REPORTES
  * Qué hace: reportes de ventas, productos, clientes, stock e ingresos;
- *          exportación CSV.
- * Relacionados: pedidos.php, plantilla.php.
+ *          exportación CSV con rango de fechas.
+ * Relacionados: pedidos.php, reportes.php (lib), plantilla.php.
  * Pruebas: CP-041.
  */
 declare(strict_types=1);
 
 require_once __DIR__ . '/../app/php/lib/bootstrap.php';
 require_once __DIR__ . '/../app/php/lib/pedidos.php';
+require_once __DIR__ . '/../app/php/lib/reportes.php';
 
 requerirRol(ROL_ENCARGADO, ROL_ADMIN);
 exigirCambioPassword();
 
-$ventasHoy = $conn->query(
-    "SELECT p.id, p.codigo, c.nombre AS cliente, p.total, p.metodo_pago, p.fecha_pago
-     FROM pedido p
-     INNER JOIN cliente c ON c.id = p.cliente_id
-     WHERE p.estado IN ('PAGADO', 'EN_PREPARACION', 'LISTO', 'ENTREGADO')
-       AND COALESCE(p.fecha_pago, p.fecha_creacion)::date = CURRENT_DATE
-     ORDER BY COALESCE(p.fecha_pago, p.fecha_creacion) DESC"
-)->fetchAll();
+// Rango de fechas: por defecto, hoy.
+$hoy = date('Y-m-d');
+$desde = (string) ($_GET['desde'] ?? $hoy);
+$hasta = (string) ($_GET['hasta'] ?? $hoy);
+if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $desde)) {
+    $desde = $hoy;
+}
+if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $hasta)) {
+    $hasta = $hoy;
+}
+if ($desde > $hasta) {
+    [$desde, $hasta] = [$hasta, $desde];
+}
 
-$totalesHoy = $conn->query(
-    "SELECT COUNT(*) AS pedidos, COALESCE(SUM(total), 0) AS ventas,
-            COALESCE(AVG(total), 0) AS ticket
-     FROM pedido
-     WHERE estado IN ('PAGADO', 'EN_PREPARACION', 'LISTO', 'ENTREGADO')
-       AND COALESCE(fecha_pago, fecha_creacion)::date = CURRENT_DATE"
-)->fetch();
+$ventas = consultarProcedimiento($conn, 'sp_reporte_ventas_diarias', [$desde, $hasta]);
 
-$porMetodo = $conn->query(
-    "SELECT metodo_pago, COUNT(*) AS pedidos, COALESCE(SUM(total), 0) AS total
-     FROM pedido
-     WHERE estado IN ('PAGADO', 'EN_PREPARACION', 'LISTO', 'ENTREGADO')
-       AND COALESCE(fecha_pago, fecha_creacion)::date = CURRENT_DATE
-     GROUP BY metodo_pago ORDER BY total DESC"
-)->fetchAll();
+$totalVentas = 0.0;
+$porMetodo = [];
+foreach ($ventas as $venta) {
+    $total = (float) $venta['total'];
+    $totalVentas += $total;
+    $metodo = (string) ($venta['metodo_pago'] ?? 'Sin método');
+    if (!isset($porMetodo[$metodo])) {
+        $porMetodo[$metodo] = ['metodo_pago' => $metodo, 'pedidos' => 0, 'total' => 0.0];
+    }
+    $porMetodo[$metodo]['pedidos']++;
+    $porMetodo[$metodo]['total'] += $total;
+}
+usort($porMetodo, static fn(array $a, array $b): int => $b['total'] <=> $a['total']);
 
-$topProductos = $conn->query(
-    "SELECT pr.nombre AS producto, c.nombre AS categoria,
-            SUM(d.cantidad) AS unidades, SUM(d.cantidad * d.precio_unitario) AS ingresos
-     FROM detallepedido d
-     INNER JOIN producto pr ON pr.id = d.id_producto
-     INNER JOIN categoria c ON c.id = pr.categoria_id
-     INNER JOIN pedido p ON p.id = d.id_pedido
-     WHERE p.estado IN ('PAGADO', 'EN_PREPARACION', 'LISTO', 'ENTREGADO')
-       AND COALESCE(p.fecha_pago, p.fecha_creacion) >= CURRENT_DATE - INTERVAL '30 days'
-     GROUP BY pr.id, pr.nombre, c.nombre
-     ORDER BY unidades DESC, ingresos DESC LIMIT 10"
-)->fetchAll();
+$totales = [
+    'pedidos' => count($ventas),
+    'ventas'  => $totalVentas,
+    'ticket'  => $ventas === [] ? 0.0 : $totalVentas / count($ventas),
+];
 
-$ingresosCategoria = $conn->query(
-    "SELECT c.nombre AS categoria, SUM(d.cantidad) AS unidades,
-            SUM(d.cantidad * d.precio_unitario) AS ingresos
-     FROM detallepedido d
-     INNER JOIN producto pr ON pr.id = d.id_producto
-     INNER JOIN categoria c ON c.id = pr.categoria_id
-     INNER JOIN pedido p ON p.id = d.id_pedido
-     WHERE p.estado IN ('PAGADO', 'EN_PREPARACION', 'LISTO', 'ENTREGADO')
-       AND COALESCE(p.fecha_pago, p.fecha_creacion) >= CURRENT_DATE - INTERVAL '30 days'
-     GROUP BY c.id, c.nombre ORDER BY ingresos DESC"
-)->fetchAll();
-
-$bajoStock = $conn->query(
-    "SELECT p.nombre, p.stock_actual, p.stock_minimo, c.nombre AS categoria
-     FROM producto p INNER JOIN categoria c ON c.id = p.categoria_id
-     WHERE p.activo = TRUE AND p.stock_actual <= p.stock_minimo
-     ORDER BY p.stock_actual ASC, p.nombre"
-)->fetchAll();
+$topProductos = consultarProcedimiento($conn, 'sp_reporte_top_productos', [$desde, $hasta, 10]);
+$ingresosCategoria = consultarProcedimiento($conn, 'sp_reporte_ingresos_categoria', [$desde, $hasta]);
+$clientes = consultarProcedimiento($conn, 'sp_reporte_clientes_vip', [$desde, $hasta, 10]);
+$bajoStock = consultarProcedimiento($conn, 'sp_reporte_bajo_stock', [true]);
 
 $ultimosDias = $conn->query(
     "SELECT COALESCE(fecha_pago, fecha_creacion)::date AS dia,
@@ -88,28 +73,32 @@ $cierres = $conn->query(
      ORDER BY cs.id DESC LIMIT 10"
 )->fetchAll();
 
-// Exportación CSV de las ventas de hoy.
+// Exportación CSV del rango seleccionado.
 if (($_GET['export'] ?? '') === 'ventas') {
-    $nombreArchivo = 'ventas-hoy-' . date('Y-m-d') . '.csv';
+    $nombreArchivo = 'ventas-' . $desde . '_a_' . $hasta . '.csv';
     header('Content-Type: text/csv; charset=UTF-8');
     header('Content-Disposition: attachment; filename="' . $nombreArchivo . '"');
     $salida = fopen('php://output', 'w');
     if ($salida !== false) {
         fwrite($salida, "\xEF\xBB\xBF");
         fputcsv($salida, ['Código', 'Cliente', 'Total', 'Método', 'Fecha de pago'], ';');
-        foreach ($ventasHoy as $venta) {
+        foreach ($ventas as $venta) {
             fputcsv($salida, [
                 $venta['codigo'],
                 $venta['cliente'],
                 number_format((float) $venta['total'], 2, ',', ''),
                 $venta['metodo_pago'] ?? '',
-                (string) $venta['fecha_pago'],
+                (string) $venta['fecha'],
             ], ';');
         }
         fclose($salida);
     }
     exit;
 }
+
+$rangoTexto = $desde === $hasta
+    ? date('d/m/Y', strtotime($desde))
+    : date('d/m/Y', strtotime($desde)) . ' – ' . date('d/m/Y', strtotime($hasta));
 
 cabeceraHtml('Reportes | CoffeeAndtea', 'reportes');
 ?>
@@ -118,25 +107,37 @@ cabeceraHtml('Reportes | CoffeeAndtea', 'reportes');
     <div>
         <p class="eyebrow">Analítica del negocio</p>
         <h1>Reportes</h1>
-        <p>Ventas, productos y caja. Los importes usan el precio histórico de cada pedido.</p>
+        <p>Ventas, productos, clientes y caja. Los importes usan el precio histórico de cada pedido.</p>
     </div>
     <a class="btn btn-secundario" href="<?= h(url('gestion.php')) ?>">Volver a gestión</a>
-    <a class="btn btn-secundario" href="<?= h(url('reportes.php?export=ventas')) ?>">Exportar ventas de hoy (CSV)</a>
+    <a class="btn btn-secundario" href="<?= h(url('reportes.php?export=ventas&desde=' . urlencode($desde) . '&hasta=' . urlencode($hasta))) ?>">
+        Exportar CSV (<?= h($rangoTexto) ?>)
+    </a>
 </section>
+
+<form class="filtros-inline" method="get" action="<?= h(url('reportes.php')) ?>">
+    <label for="desde">Desde</label>
+    <input id="desde" name="desde" type="date" value="<?= h($desde) ?>" max="<?= h($hoy) ?>" required>
+    <label for="hasta">Hasta</label>
+    <input id="hasta" name="hasta" type="date" value="<?= h($hasta) ?>" max="<?= h($hoy) ?>" required>
+    <button class="btn btn-primario btn-pequeno" type="submit">Aplicar</button>
+    <a class="btn btn-fantasma btn-pequeno" href="<?= h(url('reportes.php')) ?>">Hoy</a>
+    <span class="texto-suave">Periodo: <?= h($rangoTexto) ?></span>
+</form>
 
 <div class="stats-grid">
     <div class="stat stat-destacado">
-        <span>Ventas de hoy</span><strong><?= h(moneda((float) $totalesHoy['ventas'])) ?></strong>
+        <span>Ventas del periodo</span><strong><?= h(moneda($totales['ventas'])) ?></strong>
     </div>
     <div class="stat">
-        <span>Pedidos pagados hoy</span><strong><?= (int) $totalesHoy['pedidos'] ?></strong>
+        <span>Pedidos pagados</span><strong><?= (int) $totales['pedidos'] ?></strong>
     </div>
     <div class="stat">
-        <span>Ticket promedio</span><strong><?= h(moneda((float) $totalesHoy['ticket'])) ?></strong>
+        <span>Ticket promedio</span><strong><?= h(moneda($totales['ticket'])) ?></strong>
     </div>
     <?php foreach ($porMetodo as $metodo): ?>
         <div class="stat">
-            <span><?= h((string) ($metodo['metodo_pago'] ?? 'Sin método')) ?></span>
+            <span><?= h((string) $metodo['metodo_pago']) ?></span>
             <strong><?= h(moneda((float) $metodo['total'])) ?></strong>
             <small><?= (int) $metodo['pedidos'] ?> pedidos</small>
         </div>
@@ -146,22 +147,22 @@ cabeceraHtml('Reportes | CoffeeAndtea', 'reportes');
 <div class="layout-reportes">
     <section class="panel">
         <div class="panel-head">
-            <h2>Ventas de hoy</h2>
-            <span class="texto-suave"><?= count($ventasHoy) ?> registros</span>
+            <h2>Ventas del periodo</h2>
+            <span class="texto-suave"><?= count($ventas) ?> registros</span>
         </div>
-        <?php if ($ventasHoy === []): ?>
-            <div class="estado-vacio compacto"><p>Aún no hay ventas registradas hoy.</p></div>
+        <?php if ($ventas === []): ?>
+            <div class="estado-vacio compacto"><p>No hay ventas registradas en este periodo.</p></div>
         <?php else: ?>
             <div class="tabla-scroll">
                 <table class="tabla">
-                    <thead><tr><th>Código</th><th>Cliente</th><th>Método</th><th>Hora</th><th>Total</th></tr></thead>
+                    <thead><tr><th>Código</th><th>Cliente</th><th>Método</th><th>Fecha</th><th>Total</th></tr></thead>
                     <tbody>
-                        <?php foreach ($ventasHoy as $venta): ?>
+                        <?php foreach ($ventas as $venta): ?>
                             <tr>
                                 <td><?= h((string) $venta['codigo']) ?></td>
                                 <td><?= h((string) $venta['cliente']) ?></td>
                                 <td><?= h((string) ($venta['metodo_pago'] ?? '—')) ?></td>
-                                <td><?= h(fechaBonita($venta['fecha_pago'] ?? null)) ?></td>
+                                <td><?= h(fechaBonita($venta['fecha'] ?? null)) ?></td>
                                 <td><?= h(moneda((float) $venta['total'])) ?></td>
                             </tr>
                         <?php endforeach; ?>
@@ -172,7 +173,7 @@ cabeceraHtml('Reportes | CoffeeAndtea', 'reportes');
     </section>
 
     <section class="panel">
-        <h2>Top productos (30 días)</h2>
+        <h2>Top productos</h2>
         <?php if ($topProductos === []): ?>
             <p class="texto-suave">Sin ventas en el periodo.</p>
         <?php else: ?>
@@ -194,7 +195,7 @@ cabeceraHtml('Reportes | CoffeeAndtea', 'reportes');
     </section>
 
     <section class="panel">
-        <h2>Ingresos por categoría (30 días)</h2>
+        <h2>Ingresos por categoría</h2>
         <?php if ($ingresosCategoria === []): ?>
             <p class="texto-suave">Sin ventas en el periodo.</p>
         <?php else: ?>
@@ -211,6 +212,29 @@ cabeceraHtml('Reportes | CoffeeAndtea', 'reportes');
                     </li>
                 <?php endforeach; ?>
             </ul>
+        <?php endif; ?>
+    </section>
+
+    <section class="panel">
+        <h2>Clientes con mayor consumo</h2>
+        <?php if ($clientes === []): ?>
+            <p class="texto-suave">Sin clientes con pedidos en el periodo.</p>
+        <?php else: ?>
+            <div class="tabla-scroll">
+                <table class="tabla">
+                    <thead><tr><th>Cliente</th><th>Correo</th><th>Pedidos</th><th>Total</th></tr></thead>
+                    <tbody>
+                        <?php foreach ($clientes as $cliente): ?>
+                            <tr>
+                                <td><strong><?= h((string) $cliente['cliente']) ?></strong></td>
+                                <td><?= h((string) $cliente['correo']) ?></td>
+                                <td><?= (int) $cliente['pedidos'] ?></td>
+                                <td><?= h(moneda((float) $cliente['total'])) ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         <?php endif; ?>
     </section>
 

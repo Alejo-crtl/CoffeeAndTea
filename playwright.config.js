@@ -21,5 +21,15 @@ module.exports = defineConfig({
             name: 'chromium',
             use: { ...devices['Desktop Chrome'] },
         },
+        {
+            name: 'movil-320',
+            testMatch: /responsive\.spec\.js/,
+            use: { ...devices['Desktop Chrome'], viewport: { width: 320, height: 568 } },
+        },
+        {
+            name: 'movil-390',
+            testMatch: /responsive\.spec\.js/,
+            use: { ...devices['Desktop Chrome'], viewport: { width: 390, height: 844 } },
+        },
     ],
 });
