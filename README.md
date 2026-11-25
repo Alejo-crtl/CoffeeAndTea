@@ -115,7 +115,7 @@ CoffeeAndTea/
 │  ├─ asignar-imagenes.sql  Asigna fotos a productos existentes
 │  └─ migraciones/          Migración desde la base anterior
 ├─ docs/                    Manuales (md y Word), guía de Laragon y LEEME
-├─ tools/                   Capturas, diagramas y generación de los manuales
+├─ tools/                   Capturas, diagramas, contraste y generación de los manuales
 ├─ qa/                      Plan, casos, matriz RBAC e informe
 ├─ tests/                   Unitarias, integración y E2E
 ├─ scripts/iniciar.bat      Servidor local de respaldo
@@ -327,7 +327,7 @@ el correo existe.
 - Contraseñas con `password_hash()` (bcrypt).
 - Sesiones con `HttpOnly`, `SameSite=Lax`, regeneración de ID y expiración.
 - Token CSRF en todos los formularios POST.
-- Límite de 8 intentos fallidos de login por 10 minutos.
+- Límite de 8 intentos fallidos por cuenta, con bloqueo de 10 minutos persistente en la base.
 - RBAC en cada página y acción sensible.
 - Auditoría de login, pagos, cancelaciones, caja, stock y cambios de usuario.
 - `APP_DEBUG=false` y `APP_ENV=production` en producción.
@@ -366,6 +366,10 @@ $env:E2E_BASE_URL='http://coffeeandtea.test'
 npx playwright test
 ```
 
+La suite incluye los perfiles móviles de 320 y 390 px
+(`tests/e2e/responsive.spec.js`) y las verificaciones de checkout y
+consentimiento (`tests/e2e/checkout.spec.js`).
+
 ### Composer (opcional)
 
 ```powershell
@@ -384,7 +388,7 @@ matriz RBAC, checklist de release e informe de resultados.
 
 - Casos QA: **55/55 aprobados**.
 - Pruebas PHP: **15/15 aprobadas**.
-- Pruebas E2E: **16/16 aprobadas**.
+- Pruebas E2E: **34/34 aprobadas** (24 pruebas en 3 perfiles: escritorio, 320 y 390).
 - Migración: 6 categorías, 11 clientes, 15 productos, 12 pedidos y 22 detalles.
 
 El detalle está en [`qa/07-informe-resultados.md`](qa/07-informe-resultados.md).
@@ -503,8 +507,8 @@ Solo existen si se cargó `db/seed-demo.sql`. **No usarlas en producción.**
 - [`qa/07-informe-resultados.md`](qa/07-informe-resultados.md) — resultados de QA.
 - [`anexos/SRS_CoffeeAndTea_v1.3.docx`](anexos/SRS_CoffeeAndTea_v1.3.docx) — especificación de requisitos.
 - [`anexos/PAC_Plan_Aseguramiento_Calidad_Coffeeandtea_v1.2.docx`](anexos/PAC_Plan_Aseguramiento_Calidad_Coffeeandtea_v1.2.docx) — plan de aseguramiento de calidad.
-- [`anexos/Documentacion_MER_CoffeeAndTea_v1.2.docx`](anexos/Documentacion_MER_CoffeeAndTea_v1.2.docx) — modelo entidad-relación.
-- [`anexos/Diagrama_MER_CoffeeAndTea_v1.2.drawio`](anexos/Diagrama_MER_CoffeeAndTea_v1.2.drawio) — diagrama editable v1.2.
+- [`anexos/Documentacion_MER_CoffeeAndTea_v1.3.docx`](anexos/Documentacion_MER_CoffeeAndTea_v1.3.docx) — modelo entidad-relación.
+- [`anexos/Diagrama_MER_CoffeeAndTea_v1.3.drawio`](anexos/Diagrama_MER_CoffeeAndTea_v1.3.drawio) — diagrama editable v1.3.
 - [`anexos/script_bd.sql`](anexos/script_bd.sql) — script de base de datos.
 
 ---
@@ -514,4 +518,5 @@ Solo existen si se cargó `db/seed-demo.sql`. **No usarlas en producción.**
 Uso académico. Código propiedad del autor.
 
 ---
+
  **Año:** 2026

@@ -30,15 +30,15 @@ function listaAnexos(): array
         ],
         'mer' => [
             'titulo'      => 'MER — Modelo entidad-relación',
-            'descripcion' => 'Entidades, relaciones, diccionario de datos, índices y triggers v1.2.',
-            'archivo'     => 'Documentacion_MER_CoffeeAndTea_v1.2.docx',
+            'descripcion' => 'Entidades, relaciones, diccionario de datos, índices y triggers v1.3.',
+            'archivo'     => 'Documentacion_MER_CoffeeAndTea_v1.3.docx',
             'tipo'        => 'Word',
             'mime'        => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         ],
         'diagrama' => [
             'titulo'      => 'Diagrama MER editable',
             'descripcion' => 'Diagrama de las 14 tablas y 19 relaciones FK para abrir en diagrams.net / draw.io.',
-            'archivo'     => 'Diagrama_MER_CoffeeAndTea_v1.2.drawio',
+            'archivo'     => 'Diagrama_MER_CoffeeAndTea_v1.3.drawio',
             'tipo'        => 'Draw.io',
             'mime'        => 'application/xml',
         ],
@@ -52,7 +52,7 @@ function listaAnexos(): array
         'log' => [
             'titulo'      => 'Log de errores y sugerencias',
             'descripcion' => 'Errores corregidos, limitaciones actuales y propuestas de mejora.',
-            'archivo'     => 'Log_Errores_Sugerencias_Coffeeandtea_v1.0.docx',
+            'archivo'     => 'Log_Errores_Sugerencias_Coffeeandtea_v1.2.docx',
             'tipo'        => 'Word',
             'mime'        => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         ],
